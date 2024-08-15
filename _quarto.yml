@@ -1,0 +1,23 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: SeekingVega Journal
+  favicon: assets/images/sv-favicon-v1.png
+  navbar:
+    background: primary
+    logo: assets/images/sv-favicon-v1-white.png
+    left:
+      - href: index.qmd
+        text: Home
+  page-footer:
+    left: Code licensed under MIT. Blog posts © SeekingVega 2024, licensed under [CC BY-NC-SA 4.0.](https://creativecommons.org/licenses/by-nc-sa/4.0/) #https://gitlab.com/Nowaker/nowaker-blog/blob/master/LICENSE.md
+    right:
+      - icon: github
+        href: https://github.com/seekingvega/sv-journal
+    border: true
+    background: secondary
+theme: solar #https://bootswatch.com/solar/
+execute:
+  freeze: true

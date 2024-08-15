@@ -1,0 +1,11 @@
+---
+title: "Research"
+listing:
+    type: default
+    contents:
+        - "notebooks/*.ipynb"
+---
+<!--
+    # this is a listing page
+    # referece: https://quarto.org/docs/websites/website-listings.html#listing-contents
+-->
