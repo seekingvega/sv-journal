@@ -4,20 +4,20 @@
     "href": "notebooks/notebook_template.html",
     "title": "notebook template for authoring in quarto",
     "section": "",
-    "text": "the inclusion or exclusion of this page in the listing (see index.qmd) can be controlled like this\n\n\nthe table of content for each page is controlled in the raw cell in this notebook with the YAML front matter\n\n\nnotebook are never executed by default but can be configured per here\n\n\nthe code block below are quarto specific imports to pay attention to\n\n\nCode\nimport plotly.express as px\n\n# need this for plotly charts to render properly: https://stackoverflow.com/a/78749656\nimport plotly.io as pio\npio.renderers.default = \"notebook\""
+    "text": "the inclusion or exclusion of this page in the listing (see index.qmd) can be controlled like this\n\n\nthe table of content for each page is controlled in the raw cell in this notebook with the YAML front matter\n\n\nnotebook are never executed by default but can be configured per here\n\n\nthe code block below are quarto specific imports to pay attention to\n\n\nCode\nimport plotly.express as px\n\n# need this for plotly charts to render properly: https://stackoverflow.com/a/78749656\nimport plotly.io as pio\npio.renderers.default = \"notebook\"\n\n\noutput of cells can be suppressed\n\n\nCode\nprint(f'pray to your Father who is in secret...')\n\n\nor you can show the outputs but not the cell (further documentations can be found here)\n\n\nand your Father who sees what is done in secret will reward you.\n\n\n\n\nCode\nprint(\"the width of your content is also adjustable like this image (see [doc](https://quarto.org/docs/authoring/article-layout.html))\")\nprint(\"![](https://www.quoteswishesmsg.com/wp-content/uploads/2020/05/Best-Rumi-quotes-1.jpg)\")\n\nthe width of your content is also adjustable like this image (see doc) \n\nand there’s more! figures and charts can be displayed side-by-side in columns and rows, read the docs for more!"
   },
   {
     "objectID": "notebooks/notebook_template.html#this-is-a-header-2",
     "href": "notebooks/notebook_template.html#this-is-a-header-2",
     "title": "notebook template for authoring in quarto",
     "section": "",
-    "text": "the table of content for each page is controlled in the raw cell in this notebook with the YAML front matter\n\n\nnotebook are never executed by default but can be configured per here\n\n\nthe code block below are quarto specific imports to pay attention to\n\n\nCode\nimport plotly.express as px\n\n# need this for plotly charts to render properly: https://stackoverflow.com/a/78749656\nimport plotly.io as pio\npio.renderers.default = \"notebook\""
+    "text": "the table of content for each page is controlled in the raw cell in this notebook with the YAML front matter\n\n\nnotebook are never executed by default but can be configured per here\n\n\nthe code block below are quarto specific imports to pay attention to\n\n\nCode\nimport plotly.express as px\n\n# need this for plotly charts to render properly: https://stackoverflow.com/a/78749656\nimport plotly.io as pio\npio.renderers.default = \"notebook\"\n\n\noutput of cells can be suppressed\n\n\nCode\nprint(f'pray to your Father who is in secret...')\n\n\nor you can show the outputs but not the cell (further documentations can be found here)\n\n\nand your Father who sees what is done in secret will reward you.\n\n\n\n\nCode\nprint(\"the width of your content is also adjustable like this image (see [doc](https://quarto.org/docs/authoring/article-layout.html))\")\nprint(\"![](https://www.quoteswishesmsg.com/wp-content/uploads/2020/05/Best-Rumi-quotes-1.jpg)\")\n\nthe width of your content is also adjustable like this image (see doc) \n\nand there’s more! figures and charts can be displayed side-by-side in columns and rows, read the docs for more!"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Research",
     "section": "",
-    "text": "notebook template for authoring in quarto\n\n\n\n\n\n\n\n\n\n\n\nAug 15, 2024\n\n\npapa john\n\n\n\n\n\n\nNo matching items"
+    "text": "notebook template for authoring in quarto\n\n\n\n\n\n\nhow-to\n\n\ntemplate\n\n\n\n\n\n\n\n\n\nAug 15, 2024\n\n\npapa john\n\n\n\n\n\n\nNo matching items"
   }
 ]

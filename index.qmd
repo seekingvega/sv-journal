@@ -2,6 +2,7 @@
 title: "Research"
 listing:
     type: default
+    categories: true
     contents:
         - "notebooks/*.ipynb"
 ---
