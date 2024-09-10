@@ -152,6 +152,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#this-is-a-header-3" id="toc-this-is-a-header-3" class="nav-link" data-scroll-target="#this-is-a-header-3">This is a header 3</a></li>
   </ul></li>
+  <li><a href="#starting-notebook" id="toc-starting-notebook" class="nav-link" data-scroll-target="#starting-notebook">Starting Notebook</a></li>
+  <li><a href="#notebook-extension" id="toc-notebook-extension" class="nav-link" data-scroll-target="#notebook-extension">Notebook Extension</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -213,24 +215,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="this-is-a-header-3" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="this-is-a-header-3">This is a header 3</h3>
 <p>notebook are <strong>never executed by default</strong> but can be configured per <a href="https://quarto.org/docs/tools/vscode-notebook.html#cell-execution">here</a></p>
+<p>And despite the <a href="https://quarto.org/docs/projects/code-execution.html#notebooks">execution feature of freeze</a>, and the <a href="https://www.perplexity.ai/search/in-quarto-how-do-you-skip-a-ju-6QmWp8NpQ2ufAOuBnBqd4A#0">various ways</a> to control it; according to this <a href="https://github.com/quarto-dev/quarto-cli/discussions/3661#discussioncomment-4403945">github issue</a>: &gt; think we have a misconception about what freeze is about. Regardless of the presence of code cells, all files needed for the website are rendered from what I’ve seen. … If I am not mistaken, this means there is a “missing” feature allowing the user to not render at all to HTML if there is no reason, i.e., not only the content of the “page” but any Quarto component involved in that page such as navbar, footer, etc.</p>
+<p>So basically when you have computationally expensive notebooks and various collaboraters, it’s best to just render only the notebook you have updated (it’s dependences, like the listing page, will also be rendered):</p>
+<pre><code>quarto render notebooks/only_notebook_with_changes.ipynb
+
+# if changes are not with notebooks
+quarto render index.qmd</code></pre>
 <section id="this-is-a-header-4" class="level4 page-columns page-full">
 <h4 class="anchored" data-anchor-id="this-is-a-header-4">This is a header 4</h4>
 <p>the code block below are quarto specific imports to pay attention to</p>
 <div id="506c4383" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># need this for plotly charts to render properly: https://stackoverflow.com/a/78749656</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.io <span class="im">as</span> pio</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>pio.renderers.default <span class="op">=</span> <span class="st">"notebook"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># need this for plotly charts to render properly: https://stackoverflow.com/a/78749656</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.io <span class="im">as</span> pio</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>pio.renderers.default <span class="op">=</span> <span class="st">"notebook"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>output of cells can be suppressed</p>
 <div id="b5be3ef0-a205-46ad-a7c5-086661243dd2" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'pray to your Father who is in secret...'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'pray to your Father who is in secret...'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>or you can show the outputs but not the cell (further documentations can be found <a href="https://quarto.org/docs/computations/execution-options.html#raw-output">here</a>)</p>
@@ -242,16 +250,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="22b015e4" class="cell column-page" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"the width of your content is also adjustable like this image (see [doc](https://quarto.org/docs/authoring/article-layout.html))"</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"![](https://www.quoteswishesmsg.com/wp-content/uploads/2020/05/Best-Rumi-quotes-1.jpg)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"the width of your content is also adjustable like this image (see [doc](https://quarto.org/docs/authoring/article-layout.html))"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"![](https://www.quoteswishesmsg.com/wp-content/uploads/2020/05/Best-Rumi-quotes-1.jpg)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <p>the width of your content is also adjustable like this image (see <a href="https://quarto.org/docs/authoring/article-layout.html">doc</a>) <img src="https://www.quoteswishesmsg.com/wp-content/uploads/2020/05/Best-Rumi-quotes-1.jpg" class="img-fluid"></p>
 </div>
 <p>and there’s more! figures and charts can be displayed <a href="https://quarto.org/docs/authoring/figures.html#subcaptions">side-by-side in columns and rows</a>, read the docs for more!</p>
-
-
 </section>
 </section>
+</section>
+<section id="starting-notebook" class="level2">
+<h2 class="anchored" data-anchor-id="starting-notebook">Starting Notebook</h2>
+<p><a href="https://stackoverflow.com/a/47509274">this method</a> might not be the safest but running locally should be okay:</p>
+<pre><code>jupyter notebook --ip='*' --NotebookApp.token='' --NotebookApp.password=''</code></pre>
+<p>or</p>
+<pre><code>jupyter nbclassic</code></pre>
+</section>
+<section id="notebook-extension" class="level2">
+<h2 class="anchored" data-anchor-id="notebook-extension">Notebook Extension</h2>
+<p><a href="https://medium.com/@maxtingle/10-jupyter-notebook-extensions-making-my-lyfe-easier-f40139a334ce">this post</a> talks about a list of great extension that might help with writing notebooks</p>
+<p>However, making these extension configurable in a virtualenv might require <a href="https://github.com/Jupyter-contrib/jupyter_nbextensions_configurator?tab=readme-ov-file#installation">different installation steps</a></p>
+<p>And it <a href="https://stackoverflow.com/a/75669901">might not be compatible</a> with some version of notebooks.</p>
+<p>So to uninstall the extensions follow <a href="https://github.com/ipython-contrib/jupyter_contrib_nbextensions/issues/1012#issuecomment-309448477">these steps</a></p>
+
+
 </section>
 </section>
 
