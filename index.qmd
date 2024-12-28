@@ -5,6 +5,7 @@ listing:
     categories: true
     contents:
         - "notebooks/*.ipynb"
+        - "notebooks/*.qmd"
 ---
 <!--
     # this is a listing page

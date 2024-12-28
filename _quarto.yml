@@ -4,10 +4,10 @@ project:
 
 website:
   title: SeekingVega Journal
-  favicon: assets/images/sv-favicon-v1.png
+  favicon: assets/images/sv-favicon-v2.png
   navbar:
     background: primary
-    logo: assets/images/sv-favicon-v1-white.png
+    logo: assets/images/sv-favicon-v2-white.png
     left:
       - href: index.qmd
         text: Home

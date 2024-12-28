@@ -2,7 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
-      "/notebooks/notebook_template.html"
+      "/notebooks/RAG_langchain_huggingface.html"
     ]
   }
 ]
