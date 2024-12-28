@@ -1,0 +1,61 @@
+---
+title: "OpenAI Whisper"
+abstract: an open-source speech recognition model CLI (and python package) that actually works
+date: 12/28/2024
+date-format: full
+author: im@johnho.ca
+license: "CC BY-NC-SA"
+categories:
+    - speech recognition
+    - CLI
+format:
+    html:
+        mermaid:
+            theme: forest
+            securityLevel: loose
+        toc: true
+        toc-depth: 3
+        toc-expand: 2
+        toc-title: Contents
+        toc-location: left
+draft: false
+execute:
+  echo: false
+---
+
+## introduction
+
+With the treasure trove of data that's getting created daily in the form of podcast,
+audio transcription is major in making the content acccessible to LLMs
+(and therefore downstream tasks). In the absence of audio transcript, speech recognition
+plays a major role.
+
+Today I got to test out
+[OpenAI's Whisper](https://github.com/openai/whisper?tab=readme-ov-file)
+and it works even on Cantonese audio!
+
+## The Setup
+In my python 3.12 virtual environment, I installed version `20240930` by:
+```bash
+pip install -U openai-whisper      # could probably also use pipx
+```
+Note that I already have `ffmpeg` installed (required, and it's so useful
+you should probably have it anyways). And I started with a fresh virtual env,
+so `torch==2.5.1` and `tiktoken==0.8.0` are automatically installed as dependencies!
+
+## Quick Start
+for my cantonese audio file, the follow command will output the transcription in subtitle track and/or text files:
+```bash
+whisper path/to/cantonese.mp3 --language Cantonese
+```
+
+* you might want to provide a `output_dir`, otherwise all the `output_format` (txt,vtt,srt,tsv,json) will be saved to `.`
+* for all the possible options use the `--help` flag
+* and for all the supported languages, see [here](https://github.com/openai/whisper/blob/main/whisper/tokenizer.py)
+* for mac users, it seems that setting `--device mps` does not work but there are [work arounds](https://github.com/openai/whisper/discussions/984#discussioncomment-5078938) using the python package
+    * for reference, running whisper on a 51m09s cantonese podcast took about 30m56s
+
+## Conclusion
+OpenAI's Whisper is awesome and now a must have in my toolchain.
+
+Might do some further digging around in the [OpenAI Cookbook repo](https://github.com/openai/openai-cookbook/tree/main) to see what other nuggets I can find!

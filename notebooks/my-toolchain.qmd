@@ -1,0 +1,36 @@
+---
+title: "Toolchain of a GADA Scientist"
+abstract: digital EDC of a GADA scientist
+date: last-modified
+date-format: full
+author: im@johnho.ca
+license: "CC BY-NC-SA"
+categories:
+    - guide
+format:
+    html:
+        mermaid:
+            theme: forest
+            securityLevel: loose
+        toc: true
+        toc-depth: 3
+        toc-expand: 2
+        toc-title: Contents
+        toc-location: left
+draft: false
+execute:
+  echo: false
+---
+
+## introduction
+* hardware: MBP 2023 with M2 Max & 32GB RAM
+* python environments managed using `pyenv` and the `virtualenvwrapper` but
+for python based cli I use `pipx`. See [here](https://gist.github.com/ohjho/8e2556d786b132d724b3914728c7c82f)
+for details on full setup
+
+## The Toolchain
+
+* docker: `brew install --cask docker`
+    * you will need to follow [this guide here](https://stackoverflow.com/a/43365425)
+    * and you do want the cask version because the [official version for Mac is a GUI](https://stackoverflow.com/a/40523608)... i.e. there are no headless version
+    * my [docker cheatsheet](https://gist.github.com/ohjho/af86af1c1dfab4979f6d0543000351cd)

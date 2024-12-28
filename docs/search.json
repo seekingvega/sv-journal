@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Research",
     "section": "",
-    "text": "Chat with Backtrader\n\n\n\n\n\n\nRAG\n\n\nbacktrader\n\n\n\nbuilding a RAG using langchain and ollama\n\n\n\n\n\nDec 21, 2024\n\n\nim@johnho.ca\n\n\n\n\n\n\nNo matching items"
+    "text": "Chat with Backtrader\n\n\n\n\n\n\nRAG\n\n\nbacktrader\n\n\n\nbuilding a RAG using langchain and ollama\n\n\n\n\n\nDec 21, 2024\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nOpenAI Whisper\n\n\n\n\n\n\nspeech recognition\n\n\nCLI\n\n\n\nan open-source speech recognition model CLI (and python package) that actually works\n\n\n\n\n\nDec 28, 2024\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nToolchain of a GADA Scientist\n\n\n\n\n\n\nguide\n\n\n\ndigital EDC of a GADA scientist\n\n\n\n\n\nDec 28, 2024\n\n\nim@johnho.ca\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "notebooks/RAG_langchain_huggingface.html",
@@ -40,5 +40,96 @@
     "title": "Chat with Backtrader",
     "section": "",
     "text": "this post show how a RAG assistant can easily be build to let you interact directly with the backtrader’s documentation using langchain, sqlite for vector database, and ollama for LLM\nnext we might look at how to deploy a web UI chatbot using streamlit and openrouter’s hosted LLMs while following the DeepLearning.ai’s LangChain course: Chat with your Data"
+  },
+  {
+    "objectID": "notebooks/backtrader-RandomEntry.html",
+    "href": "notebooks/backtrader-RandomEntry.html",
+    "title": "backtrader’s Random Entry",
+    "section": "",
+    "text": "What makes a algotrading system? People always say it’s about “discipline and risk management”.\n\n\n\n\n\n\n\nExperiment’s Intention\n\n\n\nrun some zero-cost experiments using backtrader to figure out how impactful the following components are to an trading system:\n\nexits\nsizing\nprofit-taking\n\n\n\n\nAlso, backtrader’s example is a bit dated and it’s output a bit flat.\nSo we also aim to add the following output to the backtest:\n\nMetrics\n\ntime invested: average trade duration\nfrequency: how often trades are enter into (per day)\nmax draw-down\naverage annual compounded return\nwin-rate\nadjusted Sortino Ratio\nGain-to-Pain Ratio (GPR)\n\ncompare against\n\nbuy-and-hold\n\nvisualize:\n\non chart of our chosen time-frame to allow visual confirmation that the strategy is doing what we expect\n\n\nOnce we have these in place, we can run the simulation on:\n\nvariety of different stocks\ndifferent timeframe\nvarious market conditions"
+  },
+  {
+    "objectID": "notebooks/backtrader-RandomEntry.html#introduction",
+    "href": "notebooks/backtrader-RandomEntry.html#introduction",
+    "title": "backtrader’s Random Entry",
+    "section": "",
+    "text": "What makes a algotrading system? People always say it’s about “discipline and risk management”.\n\n\n\n\n\n\n\nExperiment’s Intention\n\n\n\nrun some zero-cost experiments using backtrader to figure out how impactful the following components are to an trading system:\n\nexits\nsizing\nprofit-taking\n\n\n\n\nAlso, backtrader’s example is a bit dated and it’s output a bit flat.\nSo we also aim to add the following output to the backtest:\n\nMetrics\n\ntime invested: average trade duration\nfrequency: how often trades are enter into (per day)\nmax draw-down\naverage annual compounded return\nwin-rate\nadjusted Sortino Ratio\nGain-to-Pain Ratio (GPR)\n\ncompare against\n\nbuy-and-hold\n\nvisualize:\n\non chart of our chosen time-frame to allow visual confirmation that the strategy is doing what we expect\n\n\nOnce we have these in place, we can run the simulation on:\n\nvariety of different stocks\ndifferent timeframe\nvarious market conditions"
+  },
+  {
+    "objectID": "notebooks/backtrader-RandomEntry.html#dual-macd-in-backtrader",
+    "href": "notebooks/backtrader-RandomEntry.html#dual-macd-in-backtrader",
+    "title": "backtrader’s Random Entry",
+    "section": "Dual-MACD in Backtrader",
+    "text": "Dual-MACD in Backtrader\non python 3.9.19 : pip install backtrader~=1.9.78.123\nas for date handling, while pendulum is awesome, I’m really loving the simplicity of Businessdate\nthe use of MACD is documented here and the setup of multiple timeframes is documented here\n\n\n\n\n\n\n\nbacktrader’s plotting\n\n\n\nthe plotting offered by Backtrader using matplotlib is shit, so there’s no need to import nor install matplotlib here.\n\n\n\n\nCoding up the Strategy\nkey components to any part of the system are:\n\nentry:\nexit:\nrisk-management (stops):\nposition sizing:\n\n\n\nCode\nimport backtrader as bt\nfrom datetime import datetime\n\nclass PercentSizer(bt.Sizer):\n    params = (\n        ('percents', 1),  # Percentage of portfolio to risk\n    )\n\n    def _getsizing(self, comminfo, cash, data, isbuy):\n        if isbuy:\n            position = cash * (self.params.percents / 100)\n            return position / data[0]\n        return self.broker.getposition(data).size\n    \nclass MultiTimeframeMACD(bt.Strategy):\n    params = (\n        ('fast_period', 12),\n        ('slow_period', 26),\n        ('signal_period', 9),\n        ('atr_period', 14),\n        ('atr_multiplier', 2),\n    )\n\n    def __init__(self):\n        # Get the data feeds by name\n        self.weekly = self.getdatabyname('weekly')\n        self.monthly = self.getdatabyname('monthly')\n        self.daily = self.getdatabyname('daily')\n\n        # Monthly MACD\n        self.monthly_macd = bt.indicators.MACD(\n            self.monthly,\n            period_me1=self.p.fast_period,\n            period_me2=self.p.slow_period,\n            period_signal=self.p.signal_period\n        )\n        \n        # Weekly MACD\n        self.weekly_macd = bt.indicators.MACD(\n            self.weekly,\n            period_me1=self.p.fast_period,\n            period_me2=self.p.slow_period,\n            period_signal=self.p.signal_period\n        )\n        \n        # Weekly MACD crossover\n        self.weekly_crossover = bt.indicators.CrossOver(\n            self.weekly_macd.macd, \n            self.weekly_macd.signal\n        )\n\n        # ATR for stop-loss calculation\n        self.atr = bt.indicators.ATR(\n            self.daily,\n            period=self.p.atr_period\n        )\n\n        # Keep track of stop loss\n        self.stop_loss = None\n\n    def notify_order(self, order):\n        if order.status in [order.Submitted, order.Accepted]:\n            return\n\n        if order.status in [order.Completed]:\n            if order.isbuy():\n                self.stop_loss = order.executed.price - self.atr[0] * self.p.atr_multiplier\n            elif order.issell():\n                self.stop_loss = None\n\n        elif order.status in [order.Canceled, order.Margin, order.Rejected]:\n            print(f'Order Canceled/Margin/Rejected: {order.status}')\n\n    def next(self):\n        # Check if we should exit based on stop loss\n        if self.position and self.daily.close[0] &lt; self.stop_loss:\n            self.close()\n            return\n\n        if not self.position:  # If we're not in the market\n            if self.monthly_macd.macd &gt; 0 and self.weekly_crossover &gt; 0:\n                # Enter long if monthly MACD is positive and weekly MACD just turned positive\n                self.buy()\n        \n        elif self.weekly_crossover &lt; 0:  # If we're in the market and weekly MACD turns negative\n            self.close()  # Exit the position\n\n\n\n\nloading up our custom data from yfinance\naccording to Jason from PyQuantNews, there’s a data downloading issue in Backtrader but can be worked around with OpenBB\n\n\nCode\nimport os, sys, datetime\nfrom businessdate import BusinessDate\ncwdir = os.path.dirname(os.path.realpath(\"__file__\"))\nsys.path.insert(1, os.path.join(cwdir, \"../\"))\nfrom toolbox.yf_utils import get_stocks_ohlc\nfrom toolbox.plotly_utils import plotly_ohlc_chart\n\n\n\n\nCode\ngld = get_stocks_ohlc(tickers = \"gld\", interval = '1d',\n                      start_date = BusinessDate(datetime.date.today()) - \"10Y6m\", \n                      end_date = BusinessDate(datetime.date.today()) - \"6M\" # let's leave an out of sample period here\n                     )\nfig = plotly_ohlc_chart(df = gld, )\nfig.update_layout(\n    {'height': 800, 'title': \"OHLC data for GLD\"} #,'template': 'plotly_dark'}\n)\nfig\n\n\n                                                \n\n\n\n\nRunning the Backtest\n\n\nCode\ndef run_strategy(do_plot: bool = False):\n    cerebro = bt.Cerebro()\n\n    # Add data feeds\n    data = bt.feeds.PandasData(dataname = gld)\n    cerebro.adddata(data, name=\"daily\")\n    \n    # Resample to weekly timeframe\n    cerebro.resampledata(data, timeframe=bt.TimeFrame.Weeks, name=\"weekly\")\n    \n    # Resample to monthly timeframe\n    cerebro.resampledata(data, timeframe=bt.TimeFrame.Months, name=\"monthly\")\n\n    # Add strategy\n    cerebro.addstrategy(MultiTimeframeMACD)\n\n    # Set initial cash\n    cerebro.broker.setcash(100000.0)\n\n    # Run the strategy\n    result = cerebro.run()\n\n    # Print final portfolio value\n    print(f'Final Portfolio Value: ${cerebro.broker.getvalue():.2f}')\n\n    if do_plot:\n        cerebro.plot()\n    return result\n\n\n\n\nCode\nr = run_strategy(do_plot= True)\n\n\nFinal Portfolio Value: $100108.79\n\n\n\n\n\n\n\n\n\n\nCode\nr[0].observers.buysell[0].\n\n\n&lt;backtrader.observers.buysell.BuySell at 0x146947910&gt;\n\n\n\n\nAnalyzing the Results\n\ngetting the trades dataframe out\nvalidate that the equity curve is correct (basically checking that the sizer is implemented correctly)\nvisualize the trades: to make sure the logic (entry-exit-stop) is implemented correctly\ncompute the metrics\n\noutput of cells can be suppressed\n\n\nCode\nprint(f'pray to your Father who is in secret...')\n\n\nor you can show the outputs but not the cell (further documentations can be found here)\n\n\nand your Father who sees what is done in secret will reward you.\n\n\n\n\nCode\nprint(\"the width of your content is also adjustable like this image (see [doc](https://quarto.org/docs/authoring/article-layout.html))\")\nprint(\"![](https://www.quoteswishesmsg.com/wp-content/uploads/2020/05/Best-Rumi-quotes-1.jpg)\")\n\nthe width of your content is also adjustable like this image (see doc) \n\nand there’s more! figures and charts can be displayed side-by-side in columns and rows, read the docs for more!"
+  },
+  {
+    "objectID": "notebooks/backtrader-RandomEntry.html#starting-notebook",
+    "href": "notebooks/backtrader-RandomEntry.html#starting-notebook",
+    "title": "backtrader’s Random Entry",
+    "section": "Starting Notebook",
+    "text": "Starting Notebook\nthis method might not be the safest but running locally should be okay:\njupyter notebook --ip='*' --NotebookApp.token='' --NotebookApp.password=''\nor\njupyter nbclassic"
+  },
+  {
+    "objectID": "notebooks/backtrader-RandomEntry.html#notebook-extension",
+    "href": "notebooks/backtrader-RandomEntry.html#notebook-extension",
+    "title": "backtrader’s Random Entry",
+    "section": "Notebook Extension",
+    "text": "Notebook Extension\nthis post talks about a list of great extension that might help with writing notebooks\nHowever, making these extension configurable in a virtualenv might require different installation steps\nAnd it might not be compatible with some version of notebooks.\nSo to uninstall the extensions follow these steps"
+  },
+  {
+    "objectID": "notebooks/openai-whisper.html",
+    "href": "notebooks/openai-whisper.html",
+    "title": "OpenAI Whisper",
+    "section": "",
+    "text": "With the treasure trove of data that’s getting created daily in the form of podcast, audio transcription is major in making the content acccessible to LLMs (and therefore downstream tasks). In the absence of audio transcript, speech recognition plays a major role.\nToday I got to test out OpenAI’s Whisper and it works even on Cantonese audio!"
+  },
+  {
+    "objectID": "notebooks/openai-whisper.html#introduction",
+    "href": "notebooks/openai-whisper.html#introduction",
+    "title": "OpenAI Whisper",
+    "section": "",
+    "text": "With the treasure trove of data that’s getting created daily in the form of podcast, audio transcription is major in making the content acccessible to LLMs (and therefore downstream tasks). In the absence of audio transcript, speech recognition plays a major role.\nToday I got to test out OpenAI’s Whisper and it works even on Cantonese audio!"
+  },
+  {
+    "objectID": "notebooks/openai-whisper.html#the-setup",
+    "href": "notebooks/openai-whisper.html#the-setup",
+    "title": "OpenAI Whisper",
+    "section": "The Setup",
+    "text": "The Setup\nIn my python 3.12 virtual environment, I installed version 20240930 by:\npip install -U openai-whisper      # could probably also use pipx\nNote that I already have ffmpeg installed (required, and it’s so useful you should probably have it anyways). And I started with a fresh virtual env, so torch==2.5.1 and tiktoken==0.8.0 are automatically installed as dependencies!"
+  },
+  {
+    "objectID": "notebooks/openai-whisper.html#quick-start",
+    "href": "notebooks/openai-whisper.html#quick-start",
+    "title": "OpenAI Whisper",
+    "section": "Quick Start",
+    "text": "Quick Start\nfor my cantonese audio file, the follow command will output the transcription in subtitle track and/or text files:\nwhisper path/to/cantonese.mp3 --language Cantonese\n\nyou might want to provide a output_dir, otherwise all the output_format (txt,vtt,srt,tsv,json) will be saved to .\nfor all the possible options use the --help flag\nand for all the supported languages, see here\nfor mac users, it seems that setting --device mps does not work but there are work arounds using the python package\n\nfor reference, running whisper on a 51m09s cantonese podcast took about 30m56s"
+  },
+  {
+    "objectID": "notebooks/openai-whisper.html#conclusion",
+    "href": "notebooks/openai-whisper.html#conclusion",
+    "title": "OpenAI Whisper",
+    "section": "Conclusion",
+    "text": "Conclusion\nOpenAI’s Whisper is awesome and now a must have in my toolchain.\nMight do some further digging around in the OpenAI Cookbook repo to see what other nuggets I can find!"
+  },
+  {
+    "objectID": "notebooks/my-toolchain.html",
+    "href": "notebooks/my-toolchain.html",
+    "title": "Toolchain of a GADA Scientist",
+    "section": "",
+    "text": "hardware: MBP 2023 with M2 Max & 32GB RAM\npython environments managed using pyenv and the virtualenvwrapper but for python based cli I use pipx. See here for details on full setup"
+  },
+  {
+    "objectID": "notebooks/my-toolchain.html#introduction",
+    "href": "notebooks/my-toolchain.html#introduction",
+    "title": "Toolchain of a GADA Scientist",
+    "section": "",
+    "text": "hardware: MBP 2023 with M2 Max & 32GB RAM\npython environments managed using pyenv and the virtualenvwrapper but for python based cli I use pipx. See here for details on full setup"
+  },
+  {
+    "objectID": "notebooks/my-toolchain.html#the-toolchain",
+    "href": "notebooks/my-toolchain.html#the-toolchain",
+    "title": "Toolchain of a GADA Scientist",
+    "section": "The Toolchain",
+    "text": "The Toolchain\n\ndocker: brew install --cask docker\n\nyou will need to follow this guide here\nand you do want the cask version because the official version for Mac is a GUI… i.e. there are no headless version\nmy docker cheatsheet"
   }
 ]

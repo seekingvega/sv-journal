@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="im@johnho.ca">
 
-<title>SeekingVega Journal - Research</title>
+<title>SeekingVega Journal - OpenAI Whisper</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,28 +21,60 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./assets/images/sv-favicon-v2.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../assets/images/sv-favicon-v2.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,79 +102,21 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
-<body class="nav-fixed">
+<body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./assets/images/sv-favicon-v2-white.png" alt="" class="navbar-logo">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../assets/images/sv-favicon-v2-white.png" alt="" class="navbar-logo">
     </a>
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">SeekingVega Journal</span>
     </a>
   </div>
@@ -152,7 +127,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
 </ul>
@@ -165,152 +140,100 @@ window.Quarto = {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">introduction</a></li>
+  <li><a href="#the-setup" id="toc-the-setup" class="nav-link" data-scroll-target="#the-setup">The Setup</a></li>
+  <li><a href="#quick-start" id="toc-quick-start" class="nav-link" data-scroll-target="#quick-start">Quick Start</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(3)</span></div><div class="category" data-category="CLI">CLI <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RAG">RAG <span class="quarto-category-count">(1)</span></div><div class="category" data-category="backtrader">backtrader <span class="quarto-category-count">(1)</span></div><div class="category" data-category="guide">guide <span class="quarto-category-count">(1)</span></div><div class="category" data-category="speech recognition">speech recognition <span class="quarto-category-count">(1)</span></div></div></div>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Research</h1>
-</div>
+<h1 class="title">OpenAI Whisper</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">speech recognition</div>
+    <div class="quarto-category">CLI</div>
+  </div>
+  </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>im@johnho.ca </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Saturday, December 28, 2024</p>
+    </div>
+  </div>
   
     
   </div>
   
+<div>
+  <div class="abstract">
+    <div class="block-title">Abstract</div>
+    an open-source speech recognition model CLI (and python package) that actually works
+  </div>
+</div>
 
 
 </header>
 
 
-<!--
-    # this is a listing page
-    # referece: https://quarto.org/docs/websites/website-listings.html#listing-contents
--->
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">introduction</h2>
+<p>With the treasure trove of data that’s getting created daily in the form of podcast, audio transcription is major in making the content acccessible to LLMs (and therefore downstream tasks). In the absence of audio transcript, speech recognition plays a major role.</p>
+<p>Today I got to test out <a href="https://github.com/openai/whisper?tab=readme-ov-file">OpenAI’s Whisper</a> and it works even on Cantonese audio!</p>
+</section>
+<section id="the-setup" class="level2">
+<h2 class="anchored" data-anchor-id="the-setup">The Setup</h2>
+<p>In my python 3.12 virtual environment, I installed version <code>20240930</code> by:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-U</span> openai-whisper      <span class="co"># could probably also use pipx</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Note that I already have <code>ffmpeg</code> installed (required, and it’s so useful you should probably have it anyways). And I started with a fresh virtual env, so <code>torch==2.5.1</code> and <code>tiktoken==0.8.0</code> are automatically installed as dependencies!</p>
+</section>
+<section id="quick-start" class="level2">
+<h2 class="anchored" data-anchor-id="quick-start">Quick Start</h2>
+<p>for my cantonese audio file, the follow command will output the transcription in subtitle track and/or text files:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">whisper</span> path/to/cantonese.mp3 <span class="at">--language</span> Cantonese</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>you might want to provide a <code>output_dir</code>, otherwise all the <code>output_format</code> (txt,vtt,srt,tsv,json) will be saved to <code>.</code></li>
+<li>for all the possible options use the <code>--help</code> flag</li>
+<li>and for all the supported languages, see <a href="https://github.com/openai/whisper/blob/main/whisper/tokenizer.py">here</a></li>
+<li>for mac users, it seems that setting <code>--device mps</code> does not work but there are <a href="https://github.com/openai/whisper/discussions/984#discussioncomment-5078938">work arounds</a> using the python package
+<ul>
+<li>for reference, running whisper on a 51m09s cantonese podcast took about 30m56s</li>
+</ul></li>
+</ul>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>OpenAI’s Whisper is awesome and now a must have in my toolchain.</p>
+<p>Might do some further digging around in the <a href="https://github.com/openai/openai-cookbook/tree/main">OpenAI Cookbook repo</a> to see what other nuggets I can find!</p>
 
 
+</section>
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="RAG,backtrader" data-listing-date-sort="1734757200000" data-listing-file-modified-sort="1735402145842" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="782">
-<div class="thumbnail">
-<p><a href="./notebooks/RAG_langchain_huggingface.html" class="no-external"></a></p><a href="./notebooks/RAG_langchain_huggingface.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./notebooks/RAG_langchain_huggingface.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./notebooks/RAG_langchain_huggingface.html" class="no-external">Chat with Backtrader</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./notebooks/RAG_langchain_huggingface.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('RAG'); return false;">
-RAG
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('backtrader'); return false;">
-backtrader
-</div>
-</div>
-<div class="listing-description">
-<a href="./notebooks/RAG_langchain_huggingface.html" class="no-external">building a RAG using langchain and ollama</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./notebooks/RAG_langchain_huggingface.html" class="no-external">
-<div class="listing-date">
-Dec 21, 2024
-</div>
-<div class="listing-author">
-im@johnho.ca
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="speech recognition,CLI" data-listing-date-sort="1735362000000" data-listing-file-modified-sort="1735429236156" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="232">
-<div class="thumbnail">
-<p><a href="./notebooks/openai-whisper.html" class="no-external"></a></p><a href="./notebooks/openai-whisper.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./notebooks/openai-whisper.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./notebooks/openai-whisper.html" class="no-external">OpenAI Whisper</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./notebooks/openai-whisper.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('speech recognition'); return false;">
-speech recognition
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('CLI'); return false;">
-CLI
-</div>
-</div>
-<div class="listing-description">
-<a href="./notebooks/openai-whisper.html" class="no-external">an open-source speech recognition model CLI (and python package) that actually works</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./notebooks/openai-whisper.html" class="no-external">
-<div class="listing-date">
-Dec 28, 2024
-</div>
-<div class="listing-author">
-im@johnho.ca
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="guide" data-listing-date-sort="1735428984000" data-listing-file-modified-sort="1735428984804" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="83">
-<div class="thumbnail">
-<p><a href="./notebooks/my-toolchain.html" class="no-external"></a></p><a href="./notebooks/my-toolchain.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./notebooks/my-toolchain.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./notebooks/my-toolchain.html" class="no-external">Toolchain of a GADA Scientist</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./notebooks/my-toolchain.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('guide'); return false;">
-guide
-</div>
-</div>
-<div class="listing-description">
-<a href="./notebooks/my-toolchain.html" class="no-external">digital EDC of a GADA scientist</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./notebooks/my-toolchain.html" class="no-external">
-<div class="listing-date">
-Dec 28, 2024
-</div>
-<div class="listing-author">
-im@johnho.ca
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
