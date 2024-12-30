@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Research",
     "section": "",
-    "text": "Chat with Backtrader\n\n\n\n\n\n\nRAG\n\n\nbacktrader\n\n\n\nbuilding a RAG using langchain and ollama\n\n\n\n\n\nDec 21, 2024\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nOpenAI Whisper\n\n\n\n\n\n\nspeech recognition\n\n\nCLI\n\n\n\nan open-source speech recognition model CLI (and python package) that actually works\n\n\n\n\n\nDec 28, 2024\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nToolchain of a GADA Scientist\n\n\n\n\n\n\nguide\n\n\n\ndigital EDC of a GADA scientist\n\n\n\n\n\nDec 28, 2024\n\n\nim@johnho.ca\n\n\n\n\n\n\nNo matching items"
+    "text": "Chat with Backtrader\n\n\n\n\n\n\nRAG\n\n\nbacktrader\n\n\n\nbuilding a RAG using langchain and ollama\n\n\n\n\n\nDec 21, 2024\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nHosting Your Own ChatGPT\n\n\n\n\n\n\nguide\n\n\nLLM\n\n\n\nrunning Ollama and it’s WebUI locally\n\n\n\n\n\nDec 29, 2024\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nOpenAI Whisper\n\n\n\n\n\n\nspeech recognition\n\n\nCLI\n\n\n\nan open-source speech recognition model CLI (and python package) that actually works\n\n\n\n\n\nDec 28, 2024\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nToolchain of a GADA Scientist\n\n\n\n\n\n\nguide\n\n\n\ndigital EDC of a GADA scientist\n\n\n\n\n\nDec 28, 2024\n\n\nim@johnho.ca\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "notebooks/RAG_langchain_huggingface.html",
@@ -131,5 +131,40 @@
     "title": "Toolchain of a GADA Scientist",
     "section": "The Toolchain",
     "text": "The Toolchain\n\ndocker: brew install --cask docker\n\nyou will need to follow this guide here\nand you do want the cask version because the official version for Mac is a GUI… i.e. there are no headless version\nmy docker cheatsheet"
+  },
+  {
+    "objectID": "notebooks/ollama.html",
+    "href": "notebooks/ollama.html",
+    "title": "Hosting Your Own ChatGPT",
+    "section": "",
+    "text": "ollama is amazing at running these resource intensive LLM locally! It integrates well with langchain and llamaindex but to directly interact with it like ChatGPT, they offered the WebUI"
+  },
+  {
+    "objectID": "notebooks/ollama.html#introduction",
+    "href": "notebooks/ollama.html#introduction",
+    "title": "Hosting Your Own ChatGPT",
+    "section": "",
+    "text": "ollama is amazing at running these resource intensive LLM locally! It integrates well with langchain and llamaindex but to directly interact with it like ChatGPT, they offered the WebUI"
+  },
+  {
+    "objectID": "notebooks/ollama.html#setup",
+    "href": "notebooks/ollama.html#setup",
+    "title": "Hosting Your Own ChatGPT",
+    "section": "Setup",
+    "text": "Setup\nfirst you’ll need to have ollama installed:\nbrew update\nbrew install ollama\nollama serve            # might want to run this in a screen\nollama pull llama3.1\nFor the WebUI I prefer to run with Docker (make sure you have that installed also):\ndocker pull ghcr.io/open-webui/open-webui:main\ndocker run --rm -p 3000:8080 -e WEBUI_AUTH=False -v open-webui:/app/backend/data \\\n    --name open-webui ghcr.io/open-webui/open-webui:main\nA few notes:\n\nrun it in the background: I like to see what goes on in the container and would run the above command in a screen. You could add -d to run it in detached mode.\nport mapping: here we mapped the local port 3000 to the WebUI, you can access it by going to http://localhost:3000\nsingle-user mode: if you are running it in your personal laptop, there’s no need for accounts management. The -e WEBUI_AUTH=False turns that off.\nVolume Mount: this will mount the docker volumne open-webui to make sure data (like chat history) persist across sessions"
+  },
+  {
+    "objectID": "notebooks/ollama.html#ollam-webui-in-2-simple-steps",
+    "href": "notebooks/ollama.html#ollam-webui-in-2-simple-steps",
+    "title": "Hosting Your Own ChatGPT",
+    "section": "Ollam + WebUI in 2 simple steps",
+    "text": "Ollam + WebUI in 2 simple steps\nfirst you’ll need to have ollama installed:\nbrew update\nbrew install ollama\nollama serve            # might want to run this in a screen\nollama pull llama3.1\nSecondly for the WebUI I prefer to run with Docker (make sure you have that installed also):\ndocker pull ghcr.io/open-webui/open-webui:main\ndocker run --rm -p 3000:8080 -e WEBUI_AUTH=False -v open-webui:/app/backend/data \\\n    --name open-webui ghcr.io/open-webui/open-webui:main\nA few notes:\n\nrun it in the background: I like to see what goes on in the container and would run the above command in a screen. You could add -d to run it in detached mode.\nport mapping: here we mapped the local port 3000 to the WebUI, you can access it by going to http://localhost:3000\nsingle-user mode: if you are running it in your personal laptop, there’s no need for accounts management. The -e WEBUI_AUTH=False turns that off.\nVolume Mount: this will mount the docker volumne open-webui to make sure data (like chat history) persist across sessions"
+  },
+  {
+    "objectID": "notebooks/ollama.html#learn-more",
+    "href": "notebooks/ollama.html#learn-more",
+    "title": "Hosting Your Own ChatGPT",
+    "section": "Learn More",
+    "text": "Learn More\n\nConfiguring Ollama for Local Environments by Arsturn (chatbot platform)\nOllama as local alternative for Github Copilot by Bjorn Peters\nSelf-Hosting LLaMA 3.1 70B (or any ~70B LLM) Affordably a huggingface community article shows that running LLM is non-trivial"
   }
 ]

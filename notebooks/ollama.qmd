@@ -1,0 +1,63 @@
+---
+title: "Hosting Your Own ChatGPT"
+abstract: running Ollama and it's WebUI locally
+date: 12/29/2024
+date-format: full
+author: im@johnho.ca
+license: "CC BY-NC-SA"
+categories:
+    - guide
+    - LLM
+format:
+    html:
+        mermaid:
+            theme: forest
+            securityLevel: loose
+        toc: true
+        toc-depth: 3
+        toc-expand: 2
+        toc-title: Contents
+        toc-location: left
+draft: false
+execute:
+  echo: false
+---
+
+## introduction
+ollama is amazing at running these resource intensive LLM locally!
+It integrates well with [`langchain`](https://python.langchain.com/docs/introduction/)
+and [`llamaindex`](https://docs.llamaindex.ai/en/stable/)
+but to directly interact with it
+like ChatGPT, they offered the [WebUI](https://docs.openwebui.com/getting-started/quick-start/)
+
+## Ollam + WebUI in 2 simple steps
+first you'll need to have [ollama installed](https://blog.stackademic.com/installing-and-using-ollama-on-macos-acabe185fa3a):
+```bash
+brew update
+brew install ollama
+ollama serve            # might want to run this in a screen
+ollama pull llama3.1
+```
+
+Secondly for the WebUI I prefer to run with Docker ([make sure you have that installed also](my-toolchain.qmd)):
+```bash
+docker pull ghcr.io/open-webui/open-webui:main
+docker run --rm -p 3000:8080 -e WEBUI_AUTH=False -v open-webui:/app/backend/data \
+    --name open-webui ghcr.io/open-webui/open-webui:main
+```
+A few notes:
+
+* **run it in the background**: I like to see what goes on in the container and would
+run the above command in a screen. You could add `-d` to run it in detached mode.
+* **port mapping**: here we mapped the local port `3000` to the WebUI, you can access it
+by going to `http://localhost:3000`
+* **single-user mode**: if you are running it in your personal laptop, there's no need
+for accounts management. The `-e WEBUI_AUTH=False` turns that off.
+* **Volume Mount**: this will mount the docker volumne `open-webui` to make sure
+data (like chat history) persist across sessions
+
+## Learn More
+* [Configuring Ollama for Local Environments](https://www.arsturn.com/blog/configuring-ollama-for-local-environments) by Arsturn (chatbot platform)
+* [Ollama as local alternative for Github Copilot](https://bjornpeters.com/ai/ollama-as-a-local-alternative-for-github-copilot/) by Bjorn Peters
+* [Self-Hosting LLaMA 3.1 70B (or any ~70B LLM) Affordably](https://huggingface.co/blog/abhinand/self-hosting-llama3-1-70b-affordably?utm_source=flipboard&utm_content=jho85%2Fmagazine%2FStrength+in+Numbers)
+a huggingface community article shows that running LLM is non-trivial
