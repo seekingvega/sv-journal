@@ -3,6 +3,7 @@ title: "Research"
 listing:
     type: default
     categories: true
+    sort: date desc
     contents:
         - "notebooks/*.ipynb"
         - "notebooks/*.qmd"

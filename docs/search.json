@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Research",
     "section": "",
-    "text": "Chat with Backtrader\n\n\n\n\n\n\nRAG\n\n\nbacktrader\n\n\n\nbuilding a RAG using langchain and ollama\n\n\n\n\n\nDec 21, 2024\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nHosting Your Own ChatGPT\n\n\n\n\n\n\nguide\n\n\nLLM\n\n\n\nrunning Ollama and it’s WebUI locally\n\n\n\n\n\nDec 29, 2024\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nOpenAI Whisper\n\n\n\n\n\n\nspeech recognition\n\n\nCLI\n\n\n\nan open-source speech recognition model CLI (and python package) that actually works\n\n\n\n\n\nDec 28, 2024\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nToolchain of a GADA Scientist\n\n\n\n\n\n\nguide\n\n\n\ndigital EDC of a GADA scientist\n\n\n\n\n\nDec 28, 2024\n\n\nim@johnho.ca\n\n\n\n\n\n\nNo matching items"
+    "text": "LLM app with langchain\n\n\n\n\n\n\nllm\n\n\nlangchain\n\n\nollama\n\n\n\nbeginner guide on loading up a LLM for app development\n\n\n\n\n\nJan 9, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nHosting Your Own ChatGPT\n\n\n\n\n\n\nguide\n\n\nLLM\n\n\nOllama\n\n\n\nrunning Ollama and it’s WebUI locally\n\n\n\n\n\nDec 29, 2024\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nToolchain of a GADA Scientist\n\n\n\n\n\n\nguide\n\n\n\ndigital EDC of a GADA scientist\n\n\n\n\n\nDec 28, 2024\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nOpenAI Whisper\n\n\n\n\n\n\nspeech recognition\n\n\nCLI\n\n\n\nan open-source speech recognition model CLI (and python package) that actually works\n\n\n\n\n\nDec 28, 2024\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nChat with Backtrader\n\n\n\n\n\n\nRAG\n\n\nbacktrader\n\n\n\nbuilding a RAG using langchain and ollama\n\n\n\n\n\nDec 21, 2024\n\n\nim@johnho.ca\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "notebooks/RAG_langchain_huggingface.html",
@@ -166,5 +166,68 @@
     "title": "Hosting Your Own ChatGPT",
     "section": "Learn More",
     "text": "Learn More\n\nConfiguring Ollama for Local Environments by Arsturn (chatbot platform)\nOllama as local alternative for Github Copilot by Bjorn Peters\nSelf-Hosting LLaMA 3.1 70B (or any ~70B LLM) Affordably a huggingface community article shows that running LLM is non-trivial"
+  },
+  {
+    "objectID": "notebooks/fastest_way_to_moon.html#the-goal",
+    "href": "notebooks/fastest_way_to_moon.html#the-goal",
+    "title": "Fastest Way to Make Money Trading",
+    "section": "the goal",
+    "text": "the goal\n\nautomated algorithmic strategy\nbeating the riskfree rate: &gt;5%\nstrech goal: second income trading profit of 50k"
+  },
+  {
+    "objectID": "notebooks/llm_with_langchain.html",
+    "href": "notebooks/llm_with_langchain.html",
+    "title": "LLM app with langchain",
+    "section": "",
+    "text": "for this post, we are going to use the multi-modal LVLM model by meta: llama3.2-vision\nAnd we are going to load it up in 3 difference ways!!!\nlet’s import all the packages we need and load an image to test the model!\n\nimport os, sys, base64, httpx\nfrom PIL import Image\nfrom io import BytesIO\n\nimport warnings\nwarnings.filterwarnings('ignore') # make blog post pretty ;)\n\nimage_url = \"https://images2.9c9media.com/image_asset/2025_1_11_0c10be59-dad3-4f90-a1bd-087133dea6d2_jpg_1920x1080.jpg?width=320&height=180\"\nimage_data = base64.b64encode(httpx.get(image_url).content).decode(\"utf-8\")\npil_im = Image.open(BytesIO(httpx.get(image_url).content))\npil_im\n\n\n\n\n\n\n\n\n\n\nlet’s create a prompt template that will be shared across the three different instances of the model\n\nfrom langchain_core.prompts import ChatPromptTemplate\n\ntemplate_message = [\n        (\"user\",\n            [\n                {'type': 'text', \n                 'text': \"please describe this image and list out all the numbers and name seen. \\\n                         no need to identify the person, just tell me what can be read on their jersey\"\n                },\n                {\n                    \"type\": \"image_url\",\n                    \"image_url\": {\"url\": \"data:image/jpeg;base64,{image_data}\"},\n                }\n            ],\n        ),\n    ]\nprompt_template = ChatPromptTemplate.from_messages(template_message)\nimage_messages = prompt_template.format_messages(image_data = image_data)"
+  },
+  {
+    "objectID": "notebooks/llm_with_langchain.html#intro",
+    "href": "notebooks/llm_with_langchain.html#intro",
+    "title": "LLM app with langchain",
+    "section": "",
+    "text": "for this post, we are going to use the multi-modal LVLM model by meta: llama3.2-vision\nAnd we are going to load it up in 3 difference ways!!!\nlet’s import all the packages we need and load an image to test the model!\n\nimport os, sys, base64, httpx\nfrom PIL import Image\nfrom io import BytesIO\n\nimport warnings\nwarnings.filterwarnings('ignore') # make blog post pretty ;)\n\nimage_url = \"https://images2.9c9media.com/image_asset/2025_1_11_0c10be59-dad3-4f90-a1bd-087133dea6d2_jpg_1920x1080.jpg?width=320&height=180\"\nimage_data = base64.b64encode(httpx.get(image_url).content).decode(\"utf-8\")\npil_im = Image.open(BytesIO(httpx.get(image_url).content))\npil_im\n\n\n\n\n\n\n\n\n\n\nlet’s create a prompt template that will be shared across the three different instances of the model\n\nfrom langchain_core.prompts import ChatPromptTemplate\n\ntemplate_message = [\n        (\"user\",\n            [\n                {'type': 'text', \n                 'text': \"please describe this image and list out all the numbers and name seen. \\\n                         no need to identify the person, just tell me what can be read on their jersey\"\n                },\n                {\n                    \"type\": \"image_url\",\n                    \"image_url\": {\"url\": \"data:image/jpeg;base64,{image_data}\"},\n                }\n            ],\n        ),\n    ]\nprompt_template = ChatPromptTemplate.from_messages(template_message)\nimage_messages = prompt_template.format_messages(image_data = image_data)"
+  },
+  {
+    "objectID": "notebooks/llm_with_langchain.html#ollama-local",
+    "href": "notebooks/llm_with_langchain.html#ollama-local",
+    "title": "LLM app with langchain",
+    "section": "Ollama (local)",
+    "text": "Ollama (local)\nfor how to setup ollama, see this post. Also make sure you have ran pip install langchain-ollama\nthen we can pull our VLM using the CLI with ollama pull llama3.2-vision\nwhich should install the 11b params version. For all available versions, see here\n\nfrom langchain_ollama import ChatOllama\nchat_ollama = ChatOllama(model = 'llama3.2-vision',temperature = 0.0)\n\nthe first time loading up the model from a cold start will be a bit slower, expect subsequent load to be noticably faster\n\n%%time\nr_ollama = chat_ollama(image_messages)\n\nCPU times: user 16.3 ms, sys: 12.2 ms, total: 28.4 ms\nWall time: 1min 10s\n\n\n\nresults\n\nprint(r_ollama.content)\n\nThe image shows a basketball player standing on the court with his hands on his hips.\n\n* The number 4 is visible on the back of one player's jersey.\n* The name \"Westbrook\" is written across the top of that same jersey.\n* The number 15 is visible on the back of another player's jersey.\n* The name \"Jokic\" is written across the top of that same jersey."
+  },
+  {
+    "objectID": "notebooks/llm_with_langchain.html#openrouter-hosted",
+    "href": "notebooks/llm_with_langchain.html#openrouter-hosted",
+    "title": "LLM app with langchain",
+    "section": "OpenRouter (hosted)",
+    "text": "OpenRouter (hosted)\nOpenRouter is a hosted models aggregated and offers a list of free models!\nthey are nicely integrated into LangChain using the OpenAI framework, so make sure you also pip install langchain-openai\n\nfrom langchain.chat_models import ChatOpenAI\nchat_llama = ChatOpenAI(\n    openai_api_key= os.environ.get(\"OPENROUTER_KEY\"),\n    openai_api_base= \"https://openrouter.ai/api/v1\",\n    model_name=\"meta-llama/llama-3.2-11b-vision-instruct:free\",\n    temperature = 0.0\n)\n\n\n%%time\nr_openrouter = chat_llama(image_messages)\n\nCPU times: user 44.4 ms, sys: 16.6 ms, total: 60.9 ms\nWall time: 1.73 s\n\n\n\nresults\nnoticibly different from ollama version’s output\n\nprint(r_openrouter.content)\n\nThe image depicts a basketball game in progress, with two players standing on the court. The player on the left is wearing a jersey with the number \"4\" and the name \"WESTBROOK\" in yellow letters. The player on the right is wearing a jersey with the number \"15\" and the name \"JOKIC\" in yellow letters.\n\nHere is a list of the numbers and names visible on the jerseys:\n\n* 4 (on the left player's jersey)\n* WESTBROOK (on the left player's jersey)\n* 15 (on the right player's jersey)\n* JOKIC (on the right player's jersey)\n\nNote: The numbers and names are written in yellow letters on the jerseys."
+  },
+  {
+    "objectID": "notebooks/llm_with_langchain.html#huggingface-hosted",
+    "href": "notebooks/llm_with_langchain.html#huggingface-hosted",
+    "title": "LLM app with langchain",
+    "section": "HuggingFace (hosted)",
+    "text": "HuggingFace (hosted)\nhuggingface actually offers a serverless inference API which made literally thousands of models available, and all you need is a free API key!\nThis makes them solid choice for any Data Scientist doing experiments!!!\nmake sure you first pip install langchain-huggingface and follow the official docs here\nNote that llama-3.2 is a gated model. You will have to give up your personal information first on the model card’s page before you could load the model.\n\n%%time\nfrom langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint\n\nllm = HuggingFaceEndpoint(\n    repo_id=\"meta-llama/Llama-3.2-11B-Vision-Instruct\",\n    task=\"text-generation\",\n    do_sample=False,\n    repetition_penalty=1.03,\n    temperature = 0.0,\n    huggingfacehub_api_token = os.environ.get(\"HUGGINGFACEHUB_API_TOKEN\")\n)\n\nchat_hf_llama = ChatHuggingFace(llm=llm)\n\nCPU times: user 246 ms, sys: 35.5 ms, total: 281 ms\nWall time: 391 ms\n\n\n\n%%time\nr_hf_llama = chat_hf_llama(image_messages)\n\nCPU times: user 7.15 ms, sys: 2.82 ms, total: 9.97 ms\nWall time: 4.94 s\n\n\n\nresults\nagain different from ollama’s and OpenRouter’s\n\nprint(r_hf_llama.content)\n\nThe image is a photograph of two top NBA player (Russell Westbrook & Nikola Jokic) with their backs to the camera. \n\nKey elements of the jerseys include:\n- \"Westbrook\" (last name) and the number \"4\"\n- \"Jokic\" ( last name) and the number \"15\"\n\nIn the background crowd of people are sitting attending the game. \n\nThe image conveys a sense of professional superiority due to fact that it captures the two top NBA players."
+  },
+  {
+    "objectID": "notebooks/llm_with_langchain.html#starting-notebook",
+    "href": "notebooks/llm_with_langchain.html#starting-notebook",
+    "title": "LLM app with langchain",
+    "section": "Starting Notebook",
+    "text": "Starting Notebook\nthis method might not be the safest but running locally should be okay:\njupyter notebook --ip='*' --NotebookApp.token='' --NotebookApp.password=''\nor\njupyter nbclassic"
+  },
+  {
+    "objectID": "notebooks/llm_with_langchain.html#notebook-extension",
+    "href": "notebooks/llm_with_langchain.html#notebook-extension",
+    "title": "LLM app with langchain",
+    "section": "Notebook Extension",
+    "text": "Notebook Extension\nthis post talks about a list of great extension that might help with writing notebooks\nHowever, making these extension configurable in a virtualenv might require different installation steps\nAnd it might not be compatible with some version of notebooks.\nSo to uninstall the extensions follow these steps"
+  },
+  {
+    "objectID": "notebooks/llm_with_langchain.html#conclusion",
+    "href": "notebooks/llm_with_langchain.html#conclusion",
+    "title": "LLM app with langchain",
+    "section": "Conclusion",
+    "text": "Conclusion\n\nLLM are huge (llama3.2-vision-11b used in this example is about 7.9GB on disk) but they can be made to run locally with ollama\nwe also explored 2 additional ways to load hosted (Open-Sourced) model as well. Both options are free and offer lower latency (just a simple API call).\nnote that results for the same prompt do vary even when using the same underlying model and with temperature=0.0; The contextual difference is not big for the given image example but could be significant given specific image-type or prompt. So make sure you test out your model’s results qualitatively across different providers when developing your application!"
   }
 ]

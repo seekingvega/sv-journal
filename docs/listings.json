@@ -2,10 +2,11 @@
   {
     "listing": "/index.html",
     "items": [
-      "/notebooks/RAG_langchain_huggingface.html",
+      "/notebooks/llm_with_langchain.html",
       "/notebooks/ollama.html",
+      "/notebooks/my-toolchain.html",
       "/notebooks/openai-whisper.html",
-      "/notebooks/my-toolchain.html"
+      "/notebooks/RAG_langchain_huggingface.html"
     ]
   }
 ]
