@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Research",
     "section": "",
-    "text": "No OpenAI API key, No Problem!\n\n\n\n\n\n\nLLM\n\n\nlangchain\n\n\nOllama\n\n\n\nthree different ways to load up a ChatOpenAI model in Langchain without an OpenAI API Key\n\n\n\n\n\nJan 24, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nToolchain of a GADA Scientist\n\n\n\n\n\n\nguide\n\n\n\ndigital EDC of a GADA scientist\n\n\n\n\n\nJan 13, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nLLM app with langchain\n\n\n\n\n\n\nLLM\n\n\nlangchain\n\n\nOllama\n\n\n\nbeginner guide on loading up a LLM for app development\n\n\n\n\n\nJan 9, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nHosting Your Own ChatGPT\n\n\n\n\n\n\nguide\n\n\nLLM\n\n\nOllama\n\n\n\nrunning Ollama and it’s WebUI locally\n\n\n\n\n\nDec 29, 2024\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nOpenAI Whisper\n\n\n\n\n\n\nspeech recognition\n\n\nCLI\n\n\n\nan open-source speech recognition model CLI (and python package) that actually works\n\n\n\n\n\nDec 28, 2024\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nChat with Backtrader\n\n\n\n\n\n\nRAG\n\n\nbacktrader\n\n\nlangchain\n\n\nLLM\n\n\nOllama\n\n\n\nbuilding a RAG using langchain and ollama\n\n\n\n\n\nDec 21, 2024\n\n\nim@johnho.ca\n\n\n\n\n\n\nNo matching items"
+    "text": "No OpenAI API key, No Problem!\n\n\n\n\n\n\nLLM\n\n\nlangchain\n\n\nOllama\n\n\n\nthree different ways to load up a ChatOpenAI model in Langchain without an OpenAI API Key\n\n\n\n\n\nJan 24, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nToolchain of a GADA Scientist\n\n\n\n\n\n\nguide\n\n\n\ndigital EDC of a GADA scientist\n\n\n\n\n\nJan 13, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nLLM app with langchain\n\n\n\n\n\n\nLLM\n\n\nlangchain\n\n\nOllama\n\n\n\nbeginner guide on loading up a LLM for app development\n\n\n\n\n\nJan 9, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nWhisper vs Youtube Transcript API\n\n\n\n\n\n\nspeech recognition\n\n\nCLI\n\n\nYoutube\n\n\n\ncomparing Youtube Transcript API vs OpenAI Whisper in Speech Recognition accuracy\n\n\n\n\n\nJan 4, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nHosting Your Own ChatGPT\n\n\n\n\n\n\nguide\n\n\nLLM\n\n\nOllama\n\n\n\nrunning Ollama and it’s WebUI locally\n\n\n\n\n\nDec 29, 2024\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nOpenAI Whisper\n\n\n\n\n\n\nspeech recognition\n\n\nCLI\n\n\n\nan open-source speech recognition model CLI (and python package) that actually works\n\n\n\n\n\nDec 28, 2024\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nChat with Backtrader\n\n\n\n\n\n\nRAG\n\n\nbacktrader\n\n\nlangchain\n\n\nLLM\n\n\nOllama\n\n\n\nbuilding a RAG using langchain and ollama\n\n\n\n\n\nDec 21, 2024\n\n\nim@johnho.ca\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "notebooks/RAG_langchain_huggingface.html",
@@ -271,5 +271,40 @@
     "title": "No OpenAI API key, No Problem!",
     "section": "Conclusion",
     "text": "Conclusion\nthere you go, three ways to create the ChatOpenAI runnable in langchain that’s completely zero-cost!\n\nwith Ollama, everything runs locally and you can access basically most (if not all) open-source models\nHuggingFace Serverless Inference API is a great option if you don’t have decent hardware but still want the vast options of models\nand lastly OpenRouter, is great if you want faster inference and okay with a slimmer list of available models\n\nWith all these models now at your disposal, making sure that you choose the right model for the right task becomes the real challenge.\nAs this blog post illustrated, not all models are trained for agentic work, so consult with LLM leaderboards such as this HuggingFace one, this one, or ScaleAI (which literally test LLM for a living)."
+  },
+  {
+    "objectID": "notebooks/whisper_vs_ytranscript.html",
+    "href": "notebooks/whisper_vs_ytranscript.html",
+    "title": "Whisper vs Youtube Transcript API",
+    "section": "",
+    "text": "For the task of video/ audio understanding, and if that video’s available on Youtube, it seems pretty logical to just use the zero-cost Youtube Transcript right?\nIn this post, we do a quality comparsion between Youtube Transcript and Whisper’s outputs.\nTo use Whisper, see the previous post here.\nFor Youtube Transcript, we’ll install the unofficial youtube-transcript-api that everybody uses: pip install youtube-transcript-api\n\n\nthe source used to demo the STT capability is this video taking about DeepSeekV3:"
+  },
+  {
+    "objectID": "notebooks/whisper_vs_ytranscript.html#introduction",
+    "href": "notebooks/whisper_vs_ytranscript.html#introduction",
+    "title": "Whisper vs Youtube Transcript API",
+    "section": "",
+    "text": "For the task of video/ audio understanding, and if that video’s available on Youtube, it seems pretty logical to just use the zero-cost Youtube Transcript right?\nIn this post, we do a quality comparsion between Youtube Transcript and Whisper’s outputs.\nTo use Whisper, see the previous post here.\nFor Youtube Transcript, we’ll install the unofficial youtube-transcript-api that everybody uses: pip install youtube-transcript-api\n\n\nthe source used to demo the STT capability is this video taking about DeepSeekV3:"
+  },
+  {
+    "objectID": "notebooks/whisper_vs_ytranscript.html#using-youtube-transcript-api",
+    "href": "notebooks/whisper_vs_ytranscript.html#using-youtube-transcript-api",
+    "title": "Whisper vs Youtube Transcript API",
+    "section": "using youtube-transcript-api",
+    "text": "using youtube-transcript-api\nvery simple and fast, this CLI command will show the transcript for the last 75 seconds of the video:\nyoutube_transcript_api NJljq429cGk --languages en --format text | tail -n 24\nwhich look like this:\n\nto do this which essentially just means that these models are becoming more commoditized than ever as that progress the technological progress stalls it’s all about what can you build with the existing Frontier models and this is a perfect example of what a company that doesn’t have to have built all the architecture doesn’t need those high-end GPS is able to do simply by taking existing out it also raises questions between open and closed Source models right they were able to do so this is an open source models that was always the fear here with meta’s llama is that it gives the Chinese an advantage it turns out the Chinese didn’t even need llama they just needed stuff that was already put out there by chat GPT and others now wow dear I feel like this is going to be a huge story in 2025 and the geopolitical ramifications of all of this as well uh really appreciate it dear jaosa"
+  },
+  {
+    "objectID": "notebooks/whisper_vs_ytranscript.html#conclusion",
+    "href": "notebooks/whisper_vs_ytranscript.html#conclusion",
+    "title": "Whisper vs Youtube Transcript API",
+    "section": "Conclusion",
+    "text": "Conclusion\nreading both transcripts, whisper is the clear winner; however, quality here comes at a cost of local inference time. So if you are picky about quality and have only a few videos to analyze, use whisper. If you worried about performance and processing a large number of videos, go for youtube-transcript-api.\nJust note that whisper can do a lot more tricks as discussed here."
+  },
+  {
+    "objectID": "notebooks/whisper_vs_ytranscript.html#using-whisper",
+    "href": "notebooks/whisper_vs_ytranscript.html#using-whisper",
+    "title": "Whisper vs Youtube Transcript API",
+    "section": "using whisper",
+    "text": "using whisper\nTwo steps…\nfirst we need to download the audio with pytubefix:\npytubefix \"https://www.youtube.com/watch?v=NJljq429cGk\" -a\nthen a simple CLI command to transcrible the downloaded audio file (audio.m4a), which will produce a list of transcripts in different formats in the output_dir:\nwhisper downloaded/audio.m4a --output_dir whisper_transcript/\ntail -n10 whisper_transcript/audio.txt\nthe output looks like:\n\nis a dumbed-down version of the H100s. They’ve been able to do this, which essentially just means that these models are becoming more commoditized than ever. As that progress, the technological progress stalls, it’s all about what can you build with the existing frontier models. And this is a perfect example of what a company that doesn’t have to have built all the architecture, doesn’t need those high-end GPs, is able to do simply by taking existing outputs. It also raises questions between open and closed source models, right? They were able to do so. This is an open source model. That was always the fear here with Meta’s llama, is that it gives the Chinese an advantage. It turns out the Chinese didn’t even need llama. They just needed stuff that was already put out there by ChatGPT and others. Now, wow, Deirdre, I feel like this is going to be a huge story in 2025 and the geopolitical ramifications of all of this as well. Really appreciate it. Deirdre Bosa."
   }
 ]

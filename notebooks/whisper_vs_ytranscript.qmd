@@ -1,0 +1,112 @@
+---
+title: "Whisper vs Youtube Transcript API"
+abstract: comparing Youtube Transcript API vs OpenAI Whisper in Speech Recognition accuracy
+date: 1/04/2025
+date-format: full
+author: im@johnho.ca
+license: "CC BY-NC-SA"
+categories:
+    - speech recognition
+    - CLI
+    - Youtube
+format:
+    html:
+        mermaid:
+            theme: forest
+            securityLevel: loose
+        toc: true
+        toc-depth: 3
+        toc-expand: 2
+        toc-title: Contents
+        toc-location: left
+draft: false
+execute:
+  echo: false
+---
+
+## introduction
+
+For the task of video/ audio understanding, and if that video's available on Youtube,
+it seems pretty logical to just use the zero-cost Youtube Transcript right?
+
+In this post, we do a quality comparsion between Youtube Transcript and Whisper's outputs.
+
+To use Whisper, see the previous post [here](openai-whisper.qmd).
+
+For Youtube Transcript, we'll install the [unofficial youtube-transcript-api](https://github.com/jdepoix/youtube-transcript-api)
+that everybody uses:
+`pip install youtube-transcript-api`
+
+### Example Youtube Video
+the source used to demo the STT capability is this video taking about DeepSeekV3:
+{{< video https://youtu.be/NJljq429cGk start="217" >}}
+
+## using `youtube-transcript-api`
+very simple and fast, this CLI command
+will show the transcript for the last 75 seconds of the video:
+```
+youtube_transcript_api NJljq429cGk --languages en --format text | tail -n 24
+```
+
+which look like this:
+
+> to do this which essentially just means
+that these models are becoming more
+commoditized than ever as that progress
+the technological progress stalls it's
+all about what can you build with the
+existing Frontier models and this is a
+perfect example of what a company that
+doesn't have to have built all the
+architecture doesn't need those high-end
+GPS is able to do simply by taking
+existing out it also raises questions
+between open and closed Source models
+right they were able to do so this is an
+open source models that was always the
+fear here with meta's llama is that it
+gives the Chinese an advantage it turns
+out the Chinese didn't even need llama
+they just needed stuff that was already
+put out there by chat GPT and others now
+wow dear I feel like this is going to be
+a huge story in 2025 and the
+geopolitical ramifications of all of
+this as well uh really appreciate it
+dear jaosa
+
+## using `whisper`
+Two steps...
+
+first we need to download the audio with [`pytubefix`](https://pytubefix.readthedocs.io/en/latest/user/cli.html):
+```
+pytubefix "https://www.youtube.com/watch?v=NJljq429cGk" -a
+```
+
+then a simple CLI command to transcrible the downloaded audio file (`audio.m4a`), which will produce
+a list of transcripts in different formats in the `output_dir`:
+```
+whisper downloaded/audio.m4a --output_dir whisper_transcript/
+tail -n10 whisper_transcript/audio.txt
+```
+the output looks like:
+
+> is a dumbed-down version of the H100s. They've been able to do this, which essentially just means that
+these models are becoming more commoditized than ever. As that progress, the technological progress
+stalls, it's all about what can you build with the existing frontier models. And this is a perfect
+example of what a company that doesn't have to have built all the architecture, doesn't need those
+high-end GPs, is able to do simply by taking existing outputs. It also raises questions between
+open and closed source models, right? They were able to do so. This is an open source model.
+That was always the fear here with Meta's llama, is that it gives the Chinese an advantage. It turns
+out the Chinese didn't even need llama. They just needed stuff that was already put out there by
+ChatGPT and others. Now, wow, Deirdre, I feel like this is going to be a huge story in 2025 and the
+geopolitical ramifications of all of this as well. Really appreciate it. Deirdre Bosa.
+
+## Conclusion
+reading both transcripts, **whisper is the clear winner**;
+however, quality here comes at a cost of local inference time.
+So if you are picky about quality and have only a few videos to analyze,
+use whisper. If you worried about performance and processing a large
+number of videos, go for `youtube-transcript-api`.
+
+Just note that whisper can do a lot more tricks as discussed [here](openai-whisper.qmd).
