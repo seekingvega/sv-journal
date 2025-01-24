@@ -8,7 +8,7 @@
 
 <meta name="author" content="im@johnho.ca">
 
-<title>Toolchain of a GADA Scientist – SeekingVega Journal</title>
+<title>No OpenAI API key, No Problem! – SeekingVega Journal</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -111,8 +145,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">introduction</a></li>
-  <li><a href="#the-toolchain" id="toc-the-toolchain" class="nav-link" data-scroll-target="#the-toolchain">The Toolchain</a></li>
+  <li><a href="#intro" id="toc-intro" class="nav-link active" data-scroll-target="#intro">Intro</a></li>
+  <li><a href="#ollama-local" id="toc-ollama-local" class="nav-link" data-scroll-target="#ollama-local">1. Ollama (local)</a></li>
+  <li><a href="#huggingface" id="toc-huggingface" class="nav-link" data-scroll-target="#huggingface">2. HuggingFace</a></li>
+  <li><a href="#openrouter" id="toc-openrouter" class="nav-link" data-scroll-target="#openrouter">3. OpenRouter</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
 </nav>
 </nav>
@@ -125,9 +162,11 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Toolchain of a GADA Scientist</h1>
+<h1 class="title">No OpenAI API key, No Problem!</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">guide</div>
+    <div class="quarto-category">LLM</div>
+    <div class="quarto-category">langchain</div>
+    <div class="quarto-category">Ollama</div>
   </div>
   </div>
 
@@ -145,7 +184,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Monday, January 13, 2025</p>
+      <p class="date">Friday, January 24, 2025</p>
     </div>
   </div>
   
@@ -155,7 +194,7 @@ ul.task-list li input[type="checkbox"] {
 <div>
   <div class="abstract">
     <div class="block-title">Abstract</div>
-    digital EDC of a GADA scientist
+    three different ways to load up a ChatOpenAI model in Langchain without an OpenAI API Key
   </div>
 </div>
 
@@ -163,29 +202,183 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">introduction</h2>
-<ul>
-<li>hardware: MBP 2023 with M2 Max &amp; 32GB RAM</li>
-<li>python environments managed using <code>pyenv</code> and the <code>virtualenvwrapper</code> but for python based cli I use <code>pipx</code>. See <a href="https://gist.github.com/ohjho/8e2556d786b132d724b3914728c7c82f">here</a> for details on full setup</li>
-</ul>
+<section id="intro" class="level2">
+<h2 class="anchored" data-anchor-id="intro">Intro</h2>
+<p>when developing LLM applications, most examples use <code>ChatOpenAI</code> as the default. While token cost is rapidly going down, there are actually 3 options that’s completely free (API key required but no credit card needed at sign-up). But more importantly, this offers the ability to switch and test between the vast offering of models which is growing even more rapidly!!!</p>
+<p>All three of the following examples use the same interface, <code>ChatOpenAI</code>, so you are just one <code>pip install langchain_openai</code> away from building your own LLM application!</p>
 </section>
-<section id="the-toolchain" class="level2">
-<h2 class="anchored" data-anchor-id="the-toolchain">The Toolchain</h2>
+<section id="ollama-local" class="level2">
+<h2 class="anchored" data-anchor-id="ollama-local">1. Ollama (local)</h2>
+<p>first option is to run the model locally! Thanks to Ollama, these large model can actually run pretty fast locally on any Apple Silicon Macbook. <a href="../notebooks/ollama.html">This post</a> covers how to setup Ollama, which literally opens the door too all the latest open-sourced LLM in the universe! See the entire offering <a href="https://ollama.com/library/">here</a></p>
+<p>For our first example, let’s get a small-language-model to tell some dad jokes!</p>
+<div id="506c4383" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>time</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> langchain_openai <span class="im">import</span> ChatOpenAI</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>chat_model <span class="op">=</span> ChatOpenAI(model<span class="op">=</span><span class="st">"llama3.2:1b"</span>, api_key<span class="op">=</span><span class="st">"ollama"</span>, base_url <span class="op">=</span> <span class="st">"http://localhost:11434/v1"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>prompt <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="st">    You are a dad in his 40s which a very intellegent six year-old daughter </span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="st">    and a loving wife with a great sense of humor! </span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="st">    </span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="st">    Imagine you are at your daughter's birthday party, please tell 3 of your funniest dad jokes"</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> chat_model.invoke(prompt)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(r.content)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(laughs) Ahahahaha, oh man... I'm glad my little girl is having so much fun today! You know, as a dad, it's great to have someone to share the love and silliness with. Okay, here are three of my favorite dad jokes that might make you groan (and maybe even laugh):
+
+1. Why did the scarecrow win an award? Because he was outstanding in his field! (get it?)
+
+And then I told her, "I'm so proud of you for being an 'ear-resistible' child!" (wink)
+
+2. What do you call a fake noodle? An impasta!
+
+She giggled so hard that she snorted her juice box out her nose. (laughs) Okay, okay, I'll stop now...
+
+3. Why did the mushroom get invited to all the parties? Because he's fun-gi! (heh)
+
+My daughter just rolled her eyes and said, "Daaaad, that one was so cheesy!" And then she proceeded to make a funny face at me, like this... (makes a silly face)
+CPU times: user 26.3 ms, sys: 5.58 ms, total: 31.8 ms
+Wall time: 2.29 s</code></pre>
+</div>
+</div>
+<p>This <code>llama3.2:1b</code> model weight is only 1.3GB can tell better jokes faster (&lt;3 seconds) than I could even!</p>
+<p>before trying out some of the bigger and “better” models with the following two providers, let’s load up those API keys from our <code>secrets.env</code> into environment variables</p>
+<div id="bbfa6cfe-cbf9-4369-b56b-ea997f432724" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dotenv <span class="im">import</span> load_dotenv</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>load_dotenv(<span class="st">'./secrets.env'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="huggingface" class="level2">
+<h2 class="anchored" data-anchor-id="huggingface">2. HuggingFace</h2>
+<p><a href="https://huggingface.co/learn/cookbook/en/enterprise_hub_serverless_inference_api">HuggingFace Serverless Inference API</a> literally open up a world of models to do anything from Text Completion to Image Generation! While there are some <a href="https://huggingface.co/docs/api-inference/en/supported-models">limitations</a>, you still have access to thousands of <a href="https://huggingface.co/models?inference=warm&amp;sort=trending">“warm” models</a> just an API call away (that’s right! no need for GPUs).</p>
+<p>Using their <a href="https://huggingface.co/docs/api-inference/en/tasks/chat-completion#using-the-api">Chat Completion API</a>, we can directly create an <code>ChatOpenAI</code> runnable with HuggingFace as the “backend”.</p>
+<p>Let’s try the Deepseek R1 that’s all the rage these days and see how good its jokes are…</p>
+<div id="9454d6f9-db7b-43b6-8e76-04fe7d713474" class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>time</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>chat_model <span class="op">=</span> ChatOpenAI(model<span class="op">=</span><span class="st">"deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"</span>, </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                        base_url <span class="op">=</span> <span class="st">"https://api-inference.huggingface.co/v1/"</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                        api_key <span class="op">=</span> os.environ[<span class="st">'HUGGINGFACEHUB_API_TOKEN'</span>]</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                       )</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> chat_model.invoke(prompt)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(r.content)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;think&gt;
+Okay, so I need to come up with three funny dad jokes for a six-year-old birthday party. The dad is in his 40s, very intelligent, and the daughter is six. The wife is loving with a great sense of humor. The setting is a birthday party, so the jokes should be appropriate, maybe a bit playful, and something that a child would find funny.
+
+First, I should think about what makes dad jokes funny. They usually play on words, puns, or simple misunderstandings. They're often corny but in a way that's endearing. Since it's for a six-year-old, the jokes should be simple, easy to understand, and maybe involve some repetition or funny sounds.
+
+I should also consider the context of the birthday party. Maybe incorporating elements like parties, birthdays, or presents could make the jokes more relevant. The jokes should be clean and not too complex, so that the child can get the humor without needing too much background knowledge.
+
+Let me think of some common themes for dad jokes: animals, food, everyday objects, maybe colors. For a birthday, maybe something with cake, presents, or parties.
+
+First joke idea: Maybe something about cake because it's a birthday. Why did the cake go to school? Because it wanted to improve its icing! That's a play on "icing" and "schooling" or "educating." It's simple and relates to the party.
+
+Second joke: Why don't skeletons fight each other? Because they don't have the guts! That's a classic dad joke, using "guts" as both courage and the internal organs. It's a bit morbid, but in a funny way, and appropriate for a child.
+
+Third joke: Maybe something about presents. Why don't eggs fight in the fridge? Because they might end up in a yolky situation! Play on "yolky" and "icky," which is a fun sound. It's related to the party theme and presents, as eggs can be part of gifts or Easter, but maybe not directly. Alternatively, maybe why did the balloon go to school? Because it wanted to blow! That's another simple one, but maybe too similar.
+
+Wait, another idea: Why did the clock go to school? Because it wanted to improve its timing! That's another play on words, and it's about school, which ties into the birthday party's educational aspect or just the idea of learning.
+
+Alternatively, maybe why did the computer go to school? Because it wanted to improve its RAM! That's a bit more techy, but maybe the child would find it funny.
+
+Wait, maybe something with the number six since the daughter is six. Why was six scared of seven? Because seven ate nine! That's a classic, but maybe a bit too abstract for a six-year-old.
+
+Alternatively, why did the math book look so sad? Because it had too many problems! That's another play on words, but again, maybe a bit abstract.
+
+Hmm, perhaps I should stick with the first three ideas: cake, skeletons, and presents. Alternatively, I can think of more related to the party.
+
+Another idea: Why did the party hat go to school? Because it wanted to be a topper! That's a play on "topper" as both the hat and someone who tops in school.
+
+Wait, maybe the first joke is good, then the skeleton, then maybe something with the number six. Or another one about the cake: Why did the cake go to the party? Because it was a hit at the last party, so it came back for more! That's a play on "hit" meaning both the dessert and the success.
+
+Wait, perhaps the first three I thought of are better:
+
+1. Why did the cake go to school? Because it wanted to improve its icing!
+2. Why don't skeletons fight each other? Because they don't have the guts!
+3. Why don't eggs fight in the fridge? Because they might end up in a yolky situation!
+
+Alternatively, maybe the third joke is a bit more complex, so perhaps a simpler one. Maybe why did the present go to school? Because it wanted to wrap things up! That's a play on "wrap" meaning both the present wrapping and concluding something.
+
+So, maybe the three jokes are:
+
+1. Why did the cake go to school? Because it wanted to improve its icing!
+2. Why don't skeletons fight each other? Because they don't have the guts!
+3. Why did the present go to school? Because it wanted to wrap things up!
+
+Alternatively, the third one could be about the party hat: Why did the party hat go to school? Because it wanted to be a topper!
+
+I think the first three I thought of are good. They're simple, relate to the party, and use wordplay that a child can grasp. The skeleton joke is a classic, and the others tie into the party theme. The wife with a great sense of humor would appreciate the puns, and the six-year-old would find them funny without needing deep context.
+&lt;/think&gt;
+
+Here are three dad jokes perfect for a six-year-old's birthday party, crafted to be fun, simple, and relevant to the celebration:
+
+1. **Why did the cake go to school?**  
+   Because it wanted to improve its icing!
+
+2. **Why don't skeletons fight each other?**  
+   Because they don't have the guts!
+
+3. **Why did the present go to school?**  
+   Because it wanted to wrap things up!
+
+These jokes are designed to be light-hearted, using wordplay that a child can enjoy while also being appropriate for the birthday theme.
+CPU times: user 34 ms, sys: 5.74 ms, total: 39.8 ms
+Wall time: 56.1 s</code></pre>
+</div>
+</div>
+<p>it’s a little slow (almost a full minute) but that’s a 32 Billion Parameters model… and it’s free. For tinkering and development purposes, it’s acceptable IMO!</p>
+</section>
+<section id="openrouter" class="level2">
+<h2 class="anchored" data-anchor-id="openrouter">3. OpenRouter</h2>
+<p>Last contender on the list, OpenRouter, aggregates and offers a <a href="https://openrouter.ai/models?max_price=0">list of free models</a>!</p>
+<p>They have paid models as well, and in general, their inference time is noticeably faster. When using their free model, there is a 20 requests per minute and 200 requests per day <a href="https://openrouter.ai/docs/limits#rate-limits-and-credits-remaining">limit</a>.</p>
+<p>To compare, let’s try the new Rogue Rose model that’s trained for roleplaying and storytelling capabilities with 103 billion parameters!</p>
+<div id="b5be3ef0-a205-46ad-a7c5-086661243dd2" class="cell" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>time</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>chat_model <span class="op">=</span> ChatOpenAI(</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    openai_api_key<span class="op">=</span>os.environ[<span class="st">"OpenRouter_key"</span>],</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    openai_api_base<span class="op">=</span> <span class="st">"https://openrouter.ai/api/v1"</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    model_name<span class="op">=</span><span class="st">"sophosympatheia/rogue-rose-103b-v0.2:free"</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> chat_model.invoke(prompt)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(r.content)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> As the dad in this scenario, I'd be happy to share three of my funniest dad jokes at my daughter's birthday party! Here goes:
+
+1. Why did the tomato turn red?
+
+Answer: Because it saw the salad dressing!
+
+(I know, I know, it's a classic groaner, but kids love puns!)
+
+1. What did the zero say to the eight?
+
+Answer: "Nice belt!"
+
+(This one is a bit more subtle, but I think the adults might appreciate it more. The number 8 looks like a zero wearing a belt around its waist.)
+
+1. Why do we tell actors to "break a leg"?
+
+Answer: Because every play has a cast!
+
+(This is a pun that combines the old theater superstition of wishing an actor to "break a leg" (meaning to have a successful performance) with the idea of a play having a cast of characters. It's a bit more sophisticated, but I think the adults would enjoy the wordplay.)
+CPU times: user 78.7 ms, sys: 32 ms, total: 111 ms
+Wall time: 4.73 s</code></pre>
+</div>
+</div>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>there you go, three ways to create the <code>ChatOpenAI</code> runnable in <code>langchain</code> that’s completely zero-cost!</p>
 <ul>
-<li>docker: <code>brew install --cask docker</code>
-<ul>
-<li>you will need to follow <a href="https://stackoverflow.com/a/43365425">this guide here</a></li>
-<li>and you do want the cask version because the <a href="https://stackoverflow.com/a/40523608">official version for Mac is a GUI</a>… i.e.&nbsp;there are no headless version</li>
-<li>my <a href="https://gist.github.com/ohjho/af86af1c1dfab4979f6d0543000351cd">docker cheatsheet</a></li>
-</ul></li>
-<li><a href="https://medium.com/@vladkens/mac-usage-monitor-in-terminal-meet-macmon-3a3391995224">macmon</a>:
-<ul>
-<li>TUI for monitoring resource use on Apple’s ARM architecture MacBook</li>
-<li>like a much better version of <code>htop</code></li>
-<li>install: <code>brew update &amp;&amp; brew install macmon</code></li>
-</ul></li>
+<li>with Ollama, everything runs locally and you can access basically most (if not all) open-source models</li>
+<li>HuggingFace Serverless Inference API is a great option if you don’t have decent hardware but still want the vast options of models</li>
+<li>and lastly OpenRouter, is great if you want faster inference and okay with a slimmer list of available models</li>
 </ul>
+<p>With all these models now at your disposal, making sure that you choose the right model for the right task becomes the real challenge.</p>
+<p>As this <a href="https://huggingface.co/blog/open-source-llms-as-agents">blog post</a> illustrated, not all models are trained for agentic work, so consult with LLM leaderboards such as <a href="https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard#/?filters=is_not_available_on_hub">this HuggingFace one</a>, <a href="https://llm-stats.com">this one</a>, or <a href="https://scale.com/leaderboard">ScaleAI</a> (which literally test LLM for a living).</p>
 
 
 </section>
@@ -295,6 +488,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         if (link.dataset.originalHref !== undefined) {
           link.href = link.dataset.originalHref;
         }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+          // default icon
+          link.classList.add("external");
       }
     }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {

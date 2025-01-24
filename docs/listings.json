@@ -2,9 +2,10 @@
   {
     "listing": "/index.html",
     "items": [
+      "/notebooks/ChatOpenAI_alternatives.html",
+      "/notebooks/my-toolchain.html",
       "/notebooks/llm_with_langchain.html",
       "/notebooks/ollama.html",
-      "/notebooks/my-toolchain.html",
       "/notebooks/openai-whisper.html",
       "/notebooks/RAG_langchain_huggingface.html"
     ]

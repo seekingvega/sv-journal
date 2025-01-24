@@ -34,3 +34,8 @@ for details on full setup
     * you will need to follow [this guide here](https://stackoverflow.com/a/43365425)
     * and you do want the cask version because the [official version for Mac is a GUI](https://stackoverflow.com/a/40523608)... i.e. there are no headless version
     * my [docker cheatsheet](https://gist.github.com/ohjho/af86af1c1dfab4979f6d0543000351cd)
+
+* [macmon](https://medium.com/@vladkens/mac-usage-monitor-in-terminal-meet-macmon-3a3391995224):
+    * TUI for monitoring resource use on Apple's ARM architecture MacBook
+    * like a much better version of `htop`
+    * install: `brew update && brew install macmon`
