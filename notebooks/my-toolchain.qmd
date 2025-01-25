@@ -17,6 +17,8 @@ format:
         toc-expand: 2
         toc-title: Contents
         toc-location: left
+        link-external-icon: true
+        link-external-newwindow: true
 draft: false
 execute:
   echo: false
