@@ -1,0 +1,66 @@
+---
+title: "Video Keyframe Extraction using FFMPEG"
+abstract: using ffmpeg for fast and effective keyframe extraction
+date: 1/30/2025
+date-format: full
+author: im@johnho.ca
+categories:
+    - ffmpeg
+    - CLI
+format:
+    html:
+        mermaid:
+            theme: forest
+            securityLevel: loose
+        toc: true
+        toc-depth: 3
+        toc-expand: 2
+        toc-title: Contents
+        toc-location: left
+        link-external-icon: true
+        link-external-newwindow: true
+draft: false
+execute:
+  echo: false
+---
+
+## introduction
+
+Processing videos are costly because of the large amount of images it contains.
+But luckily, thanks to video compression algorithm
+(as explained in much better details in [this post](https://jdhao.github.io/2021/12/25/ffmpeg-extract-key-frame-video/))
+we can use `ffmpeg` to quickly get out the keyframes (aka I-frames).
+
+I-frames are basically the highest quality images in a video. The frames
+surrounding them only stores the "differences" w.r.t. the I-frames.
+
+## I-frames Extraction
+```
+ffmpeg -skip_frame nokey -i your_video.mp4 \
+    -vsync 0 -frame_pts true output/dir/iframe_%d.jpg
+```
+
+* `skip_frame` tells the decoder to process only keyframes
+* `-vsync 0` preserves timestamps
+* `-frame_pts` set the output file's `%d` to each keyframe's presentation timestamp (PTS)
+    * so to compute the actual timestamp, for example `iframe_75.jpg` with a fps of 30, the iframe's timestamp would be 2.50 seconds
+    * you can read more about it [here](https://superuser.com/a/1421195) and [here](https://stackoverflow.com/a/56999262)
+
+## using a filter to select "Contextual Scene Change"
+no need for OpenCV, ffmpeg can do this too with a little filter action:
+```
+ffmpeg -i your_video.mp4 \
+    -vf "select='gt(scene,0.3)'"
+    -vsync 0 -frame_pts true output/dir/kframe_%d.jpg
+```
+
+* the value for `scene` should be a float between 0 and 1 and it measures the pixel level difference between two frames. So here our threshold is 30%
+
+:::{.callout-tip}
+## i-frames already have "Contextual Scene Changing" frames
+from personal testing, there are a lot more i-frames than there are "Contextual Scene Changing" frames
+but they also include them. So there are no need to run both.
+
+If your want to save downstream processing time, then filter for "Contextual Scene Changing" Frames.
+Otherwise, just use i-frames to be as inclusive as possible!
+:::

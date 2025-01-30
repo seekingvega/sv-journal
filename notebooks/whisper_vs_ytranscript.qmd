@@ -4,7 +4,6 @@ abstract: comparing Youtube Transcript API vs OpenAI Whisper in Speech Recogniti
 date: 1/04/2025
 date-format: full
 author: im@johnho.ca
-license: "CC BY-NC-SA"
 categories:
     - speech recognition
     - CLI

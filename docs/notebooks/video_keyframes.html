@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="im@johnho.ca">
 
-<title>Research – SeekingVega Journal</title>
+<title>Video Keyframe Extraction using FFMPEG – SeekingVega Journal</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,25 +24,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./assets/images/sv-favicon-v2.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d166b450ba5a8e9f7a0ab969bf6592c1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-4269e840bcd88bfa1d6dfbf7a7d2c053.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../assets/images/sv-favicon-v2.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-d166b450ba5a8e9f7a0ab969bf6592c1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-4269e840bcd88bfa1d6dfbf7a7d2c053.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,79 +68,21 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
-<body class="nav-fixed">
+<body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./assets/images/sv-favicon-v2-white.png" alt="" class="navbar-logo">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../assets/images/sv-favicon-v2-white.png" alt="" class="navbar-logo">
     </a>
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">SeekingVega Journal</span>
     </a>
   </div>
@@ -152,7 +93,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
 </ul>
@@ -165,353 +106,112 @@ window.Quarto = {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">introduction</a></li>
+  <li><a href="#i-frames-extraction" id="toc-i-frames-extraction" class="nav-link" data-scroll-target="#i-frames-extraction">I-frames Extraction</a></li>
+  <li><a href="#using-a-filter-to-select-contextual-scene-change" id="toc-using-a-filter-to-select-contextual-scene-change" class="nav-link" data-scroll-target="#using-a-filter-to-select-contextual-scene-change">using a filter to select “Contextual Scene Change”</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(8)</span></div><div class="category" data-category="Q0xJ">CLI <span class="quarto-category-count">(3)</span></div><div class="category" data-category="TExN">LLM <span class="quarto-category-count">(4)</span></div><div class="category" data-category="T2xsYW1h">Ollama <span class="quarto-category-count">(4)</span></div><div class="category" data-category="UkFH">RAG <span class="quarto-category-count">(1)</span></div><div class="category" data-category="WW91dHViZQ==">Youtube <span class="quarto-category-count">(1)</span></div><div class="category" data-category="YmFja3RyYWRlcg==">backtrader <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZmZtcGVn">ffmpeg <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Z3VpZGU=">guide <span class="quarto-category-count">(2)</span></div><div class="category" data-category="bGFuZ2NoYWlu">langchain <span class="quarto-category-count">(3)</span></div><div class="category" data-category="c3BlZWNoJTIwcmVjb2duaXRpb24=">speech recognition <span class="quarto-category-count">(2)</span></div></div></div>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Research</h1>
-</div>
+<h1 class="title">Video Keyframe Extraction using FFMPEG</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">ffmpeg</div>
+    <div class="quarto-category">CLI</div>
+  </div>
+  </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>im@johnho.ca </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Thursday, January 30, 2025</p>
+    </div>
+  </div>
   
     
   </div>
   
+<div>
+  <div class="abstract">
+    <div class="block-title">Abstract</div>
+    using ffmpeg for fast and effective keyframe extraction
+  </div>
+</div>
 
 
 </header>
 
 
-<!--
-    # this is a listing page
-    # referece: https://quarto.org/docs/websites/website-listings.html#listing-contents
--->
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">introduction</h2>
+<p>Processing videos are costly because of the large amount of images it contains. But luckily, thanks to video compression algorithm (as explained in much better details in <a href="https://jdhao.github.io/2021/12/25/ffmpeg-extract-key-frame-video/">this post</a>) we can use <code>ffmpeg</code> to quickly get out the keyframes (aka I-frames).</p>
+<p>I-frames are basically the highest quality images in a video. The frames surrounding them only stores the “differences” w.r.t. the I-frames.</p>
+</section>
+<section id="i-frames-extraction" class="level2">
+<h2 class="anchored" data-anchor-id="i-frames-extraction">I-frames Extraction</h2>
+<pre><code>ffmpeg -skip_frame nokey -i your_video.mp4 \
+    -vsync 0 -frame_pts true output/dir/iframe_%d.jpg</code></pre>
+<ul>
+<li><code>skip_frame</code> tells the decoder to process only keyframes</li>
+<li><code>-vsync 0</code> preserves timestamps</li>
+<li><code>-frame_pts</code> set the output file’s <code>%d</code> to each keyframe’s presentation timestamp (PTS)
+<ul>
+<li>so to compute the actual timestamp, for example <code>iframe_75.jpg</code> with a fps of 30, the iframe’s timestamp would be 2.50 seconds</li>
+<li>you can read more about it <a href="https://superuser.com/a/1421195">here</a> and <a href="https://stackoverflow.com/a/56999262">here</a></li>
+</ul></li>
+</ul>
+</section>
+<section id="using-a-filter-to-select-contextual-scene-change" class="level2">
+<h2 class="anchored" data-anchor-id="using-a-filter-to-select-contextual-scene-change">using a filter to select “Contextual Scene Change”</h2>
+<p>no need for OpenCV, ffmpeg can do this too with a little filter action:</p>
+<pre><code>ffmpeg -i your_video.mp4 \
+    -vf "select='gt(scene,0.3)'"
+    -vsync 0 -frame_pts true output/dir/kframe_%d.jpg</code></pre>
+<ul>
+<li>the value for <code>scene</code> should be a float between 0 and 1 and it measures the pixel level difference between two frames. So here our threshold is 30%</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+i-frames already have “Contextual Scene Changing” frames
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>from personal testing, there are a lot more i-frames than there are “Contextual Scene Changing” frames but they also include them. So there are no need to run both.</p>
+<p>If your want to save downstream processing time, then filter for “Contextual Scene Changing” Frames. Otherwise, just use i-frames to be as inclusive as possible!</p>
+</div>
+</div>
 
 
+</section>
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="ZmZtcGVnJTJDQ0xJ" data-listing-date-sort="1738213200000" data-listing-file-modified-sort="1738267552887" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="256">
-<div class="thumbnail">
-<p><a href="./notebooks/video_keyframes.html" class="no-external"></a></p><a href="./notebooks/video_keyframes.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./notebooks/video_keyframes.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./notebooks/video_keyframes.html" class="no-external">Video Keyframe Extraction using FFMPEG</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./notebooks/video_keyframes.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('ZmZtcGVn'); return false;">
-ffmpeg
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Q0xJ'); return false;">
-CLI
-</div>
-</div>
-<div class="listing-description">
-<a href="./notebooks/video_keyframes.html" class="no-external">using ffmpeg for fast and effective keyframe extraction</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./notebooks/video_keyframes.html" class="no-external">
-<div class="listing-date">
-Jan 30, 2025
-</div>
-<div class="listing-author">
-im@johnho.ca
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="Z3VpZGU=" data-listing-date-sort="1737820224000" data-listing-file-modified-sort="1737820224611" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="120">
-<div class="thumbnail">
-<p><a href="./notebooks/my-toolchain.html" class="no-external"></a></p><a href="./notebooks/my-toolchain.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./notebooks/my-toolchain.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./notebooks/my-toolchain.html" class="no-external">Toolchain of a GADA Scientist</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./notebooks/my-toolchain.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Z3VpZGU='); return false;">
-guide
-</div>
-</div>
-<div class="listing-description">
-<a href="./notebooks/my-toolchain.html" class="no-external">digital EDC of a GADA scientist</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./notebooks/my-toolchain.html" class="no-external">
-<div class="listing-date">
-Jan 25, 2025
-</div>
-<div class="listing-author">
-im@johnho.ca
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="TExNJTJDbGFuZ2NoYWluJTJDT2xsYW1h" data-listing-date-sort="1737694800000" data-listing-file-modified-sort="1737755557931" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="491">
-<div class="thumbnail">
-<p><a href="./notebooks/ChatOpenAI_alternatives.html" class="no-external"></a></p><a href="./notebooks/ChatOpenAI_alternatives.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./notebooks/ChatOpenAI_alternatives.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./notebooks/ChatOpenAI_alternatives.html" class="no-external">No OpenAI API key, No Problem!</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./notebooks/ChatOpenAI_alternatives.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('TExN'); return false;">
-LLM
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('bGFuZ2NoYWlu'); return false;">
-langchain
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('T2xsYW1h'); return false;">
-Ollama
-</div>
-</div>
-<div class="listing-description">
-<a href="./notebooks/ChatOpenAI_alternatives.html" class="no-external">three different ways to load up a ChatOpenAI model in Langchain without an OpenAI API Key</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./notebooks/ChatOpenAI_alternatives.html" class="no-external">
-<div class="listing-date">
-Jan 24, 2025
-</div>
-<div class="listing-author">
-im@johnho.ca
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="TExNJTJDbGFuZ2NoYWluJTJDT2xsYW1h" data-listing-date-sort="1736398800000" data-listing-file-modified-sort="1737755506894" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="345">
-<div class="thumbnail">
-<p><a href="./notebooks/llm_with_langchain.html" class="no-external"></a></p><a href="./notebooks/llm_with_langchain.html" class="no-external">
-<p class="card-img-top"><img src="notebooks/llm_with_langchain_files/figure-html/cell-2-output-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./notebooks/llm_with_langchain.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./notebooks/llm_with_langchain.html" class="no-external">LLM app with langchain</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./notebooks/llm_with_langchain.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('TExN'); return false;">
-LLM
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('bGFuZ2NoYWlu'); return false;">
-langchain
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('T2xsYW1h'); return false;">
-Ollama
-</div>
-</div>
-<div class="listing-description">
-<a href="./notebooks/llm_with_langchain.html" class="no-external">beginner guide on loading up a LLM for app development</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./notebooks/llm_with_langchain.html" class="no-external">
-<div class="listing-date">
-Jan 9, 2025
-</div>
-<div class="listing-author">
-im@johnho.ca
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="c3BlZWNoJTIwcmVjb2duaXRpb24lMkNDTEklMkNZb3V0dWJl" data-listing-date-sort="1735966800000" data-listing-file-modified-sort="1737820180463" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="514">
-<div class="thumbnail">
-<p><a href="./notebooks/whisper_vs_ytranscript.html" class="no-external"></a></p><a href="./notebooks/whisper_vs_ytranscript.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./notebooks/whisper_vs_ytranscript.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./notebooks/whisper_vs_ytranscript.html" class="no-external">Whisper vs Youtube Transcript API</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./notebooks/whisper_vs_ytranscript.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('c3BlZWNoJTIwcmVjb2duaXRpb24='); return false;">
-speech recognition
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Q0xJ'); return false;">
-CLI
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('WW91dHViZQ=='); return false;">
-Youtube
-</div>
-</div>
-<div class="listing-description">
-<a href="./notebooks/whisper_vs_ytranscript.html" class="no-external">comparing Youtube Transcript API vs OpenAI Whisper in Speech Recognition accuracy</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./notebooks/whisper_vs_ytranscript.html" class="no-external">
-<div class="listing-date">
-Jan 4, 2025
-</div>
-<div class="listing-author">
-im@johnho.ca
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="Z3VpZGUlMkNMTE0lMkNPbGxhbWE=" data-listing-date-sort="1735448400000" data-listing-file-modified-sort="1737820213872" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="230">
-<div class="thumbnail">
-<p><a href="./notebooks/ollama.html" class="no-external"></a></p><a href="./notebooks/ollama.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./notebooks/ollama.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./notebooks/ollama.html" class="no-external">Hosting Your Own ChatGPT</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./notebooks/ollama.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Z3VpZGU='); return false;">
-guide
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('TExN'); return false;">
-LLM
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('T2xsYW1h'); return false;">
-Ollama
-</div>
-</div>
-<div class="listing-description">
-<a href="./notebooks/ollama.html" class="no-external">running Ollama and it’s WebUI locally</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./notebooks/ollama.html" class="no-external">
-<div class="listing-date">
-Dec 29, 2024
-</div>
-<div class="listing-author">
-im@johnho.ca
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-categories="c3BlZWNoJTIwcmVjb2duaXRpb24lMkNDTEk=" data-listing-date-sort="1735362000000" data-listing-file-modified-sort="1737820204185" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="232">
-<div class="thumbnail">
-<p><a href="./notebooks/openai-whisper.html" class="no-external"></a></p><a href="./notebooks/openai-whisper.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./notebooks/openai-whisper.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./notebooks/openai-whisper.html" class="no-external">OpenAI Whisper</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./notebooks/openai-whisper.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('c3BlZWNoJTIwcmVjb2duaXRpb24='); return false;">
-speech recognition
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Q0xJ'); return false;">
-CLI
-</div>
-</div>
-<div class="listing-description">
-<a href="./notebooks/openai-whisper.html" class="no-external">an open-source speech recognition model CLI (and python package) that actually works</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./notebooks/openai-whisper.html" class="no-external">
-<div class="listing-date">
-Dec 28, 2024
-</div>
-<div class="listing-author">
-im@johnho.ca
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="7" data-categories="UkFHJTJDYmFja3RyYWRlciUyQ2xhbmdjaGFpbiUyQ0xMTSUyQ09sbGFtYQ==" data-listing-date-sort="1734757200000" data-listing-file-modified-sort="1736620069326" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="782">
-<div class="thumbnail">
-<p><a href="./notebooks/RAG_langchain_huggingface.html" class="no-external"></a></p><a href="./notebooks/RAG_langchain_huggingface.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./notebooks/RAG_langchain_huggingface.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./notebooks/RAG_langchain_huggingface.html" class="no-external">Chat with Backtrader</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./notebooks/RAG_langchain_huggingface.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('UkFH'); return false;">
-RAG
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('YmFja3RyYWRlcg=='); return false;">
-backtrader
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('bGFuZ2NoYWlu'); return false;">
-langchain
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('TExN'); return false;">
-LLM
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('T2xsYW1h'); return false;">
-Ollama
-</div>
-</div>
-<div class="listing-description">
-<a href="./notebooks/RAG_langchain_huggingface.html" class="no-external">building a RAG using langchain and ollama</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./notebooks/RAG_langchain_huggingface.html" class="no-external">
-<div class="listing-date">
-Dec 21, 2024
-</div>
-<div class="listing-author">
-im@johnho.ca
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -616,6 +316,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         if (link.dataset.originalHref !== undefined) {
           link.href = link.dataset.originalHref;
         }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+          // default icon
+          link.classList.add("external");
       }
     }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
