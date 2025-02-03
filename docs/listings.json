@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/notebooks/HuggingFace-Freebies-ASR.html",
       "/notebooks/video_keyframes.html",
       "/notebooks/my-toolchain.html",
       "/notebooks/ChatOpenAI_alternatives.html",
