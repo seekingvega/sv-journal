@@ -18,6 +18,11 @@ website:
         href: https://github.com/seekingvega/sv-journal
     border: true
     background: secondary
+  comments:
+    giscus:
+      repo: seekingvega/sv-journal
+      theme: noborder_gray
+
 theme: solar #https://bootswatch.com/solar/
 execute:
   freeze: true

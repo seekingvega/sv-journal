@@ -1,5 +1,6 @@
 ---
 title: "Research"
+comments: false
 listing:
     type: default
     categories: true
