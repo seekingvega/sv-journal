@@ -41,3 +41,6 @@ for details on full setup
     * TUI for monitoring resource use on Apple's ARM architecture MacBook
     * like a much better version of `htop`
     * install: `brew update && brew install macmon`
+* [Sequel-Ace](https://github.com/Sequel-Ace/Sequel-Ace?tab=readme-ov-file):
+    * MySQL management for macOS
+    * install: `brew update && brew install --cask sequel-ace`

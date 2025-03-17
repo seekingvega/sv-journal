@@ -2,11 +2,12 @@
   {
     "listing": "/index.html",
     "items": [
+      "/notebooks/simple_interpolation.html",
+      "/notebooks/my-toolchain.html",
       "/notebooks/px_timeline.html",
       "/notebooks/TVScreener.html",
       "/notebooks/HuggingFace-Freebies-ASR.html",
       "/notebooks/video_keyframes.html",
-      "/notebooks/my-toolchain.html",
       "/notebooks/ChatOpenAI_alternatives.html",
       "/notebooks/llm_with_langchain.html",
       "/notebooks/whisper_vs_ytranscript.html",
