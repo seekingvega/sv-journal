@@ -214,7 +214,7 @@
     "href": "index.html",
     "title": "Research",
     "section": "",
-    "text": "interpolation made easy\n\n\n\n\n\n\nPandas\n\n\ntutorial\n\n\n\nusing Pandas to simple interplate data\n\n\n\n\n\nMar 17, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nToolchain of a GADA Scientist\n\n\n\n\n\n\nguide\n\n\n\ndigital EDC of a GADA scientist\n\n\n\n\n\nMar 12, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nPlotly Timeline for non-date-type series\n\n\n\n\n\n\nplotly\n\n\ndata visualization\n\n\n\nhighly customizable timeline/ gantt chart for small time-scale events\n\n\n\n\n\nFeb 17, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nTradingView Screener in Python\n\n\n\n\n\n\ntradingview\n\n\n\nPythonic TradingView Screener as pandas dataframe using tradingview-screener\n\n\n\n\n\nFeb 4, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nHuggingFace Freebie: Automatic Speech Recognition\n\n\n\n\n\n\nHuggingFace\n\n\nspeech recognition\n\n\n\nzero-cost Automatic Speech Recognition using HuggingFace’s serverless inference API\n\n\n\n\n\nFeb 3, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nVideo Keyframe Extraction using FFMPEG\n\n\n\n\n\n\nffmpeg\n\n\nCLI\n\n\n\nusing ffmpeg for fast and effective keyframe extraction\n\n\n\n\n\nJan 30, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nNo OpenAI API key, No Problem!\n\n\n\n\n\n\nLLM\n\n\nlangchain\n\n\nOllama\n\n\n\nthree different ways to load up a ChatOpenAI model in Langchain without an OpenAI API Key\n\n\n\n\n\nJan 24, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nLLM app with langchain\n\n\n\n\n\n\nLLM\n\n\nlangchain\n\n\nOllama\n\n\n\nbeginner guide on loading up a LLM for app development\n\n\n\n\n\nJan 9, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nWhisper vs Youtube Transcript API\n\n\n\n\n\n\nspeech recognition\n\n\nCLI\n\n\nYoutube\n\n\n\ncomparing Youtube Transcript API vs OpenAI Whisper in Speech Recognition accuracy\n\n\n\n\n\nJan 4, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nHosting Your Own ChatGPT\n\n\n\n\n\n\nguide\n\n\nLLM\n\n\nOllama\n\n\n\nrunning Ollama and it’s WebUI locally\n\n\n\n\n\nDec 29, 2024\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nOpenAI Whisper\n\n\n\n\n\n\nspeech recognition\n\n\nCLI\n\n\n\nan open-source speech recognition model CLI (and python package) that actually works\n\n\n\n\n\nDec 28, 2024\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nChat with Backtrader\n\n\n\n\n\n\nRAG\n\n\nbacktrader\n\n\nlangchain\n\n\nLLM\n\n\nOllama\n\n\n\nbuilding a RAG using langchain and ollama\n\n\n\n\n\nDec 21, 2024\n\n\nim@johnho.ca\n\n\n\n\n\n\nNo matching items"
+    "text": "interpolation (and data smoothing) made easy\n\n\n\n\n\n\nPandas\n\n\ntutorial\n\n\n\nusing Pandas to easily interplate and smooth data\n\n\n\n\n\nMar 17, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nToolchain of a GADA Scientist\n\n\n\n\n\n\nguide\n\n\n\ndigital EDC of a GADA scientist\n\n\n\n\n\nMar 12, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nPlotly Timeline for non-date-type series\n\n\n\n\n\n\nplotly\n\n\ndata visualization\n\n\n\nhighly customizable timeline/ gantt chart for small time-scale events\n\n\n\n\n\nFeb 17, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nTradingView Screener in Python\n\n\n\n\n\n\ntradingview\n\n\n\nPythonic TradingView Screener as pandas dataframe using tradingview-screener\n\n\n\n\n\nFeb 4, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nHuggingFace Freebie: Automatic Speech Recognition\n\n\n\n\n\n\nHuggingFace\n\n\nspeech recognition\n\n\n\nzero-cost Automatic Speech Recognition using HuggingFace’s serverless inference API\n\n\n\n\n\nFeb 3, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nVideo Keyframe Extraction using FFMPEG\n\n\n\n\n\n\nffmpeg\n\n\nCLI\n\n\n\nusing ffmpeg for fast and effective keyframe extraction\n\n\n\n\n\nJan 30, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nNo OpenAI API key, No Problem!\n\n\n\n\n\n\nLLM\n\n\nlangchain\n\n\nOllama\n\n\n\nthree different ways to load up a ChatOpenAI model in Langchain without an OpenAI API Key\n\n\n\n\n\nJan 24, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nLLM app with langchain\n\n\n\n\n\n\nLLM\n\n\nlangchain\n\n\nOllama\n\n\n\nbeginner guide on loading up a LLM for app development\n\n\n\n\n\nJan 9, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nWhisper vs Youtube Transcript API\n\n\n\n\n\n\nspeech recognition\n\n\nCLI\n\n\nYoutube\n\n\n\ncomparing Youtube Transcript API vs OpenAI Whisper in Speech Recognition accuracy\n\n\n\n\n\nJan 4, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nHosting Your Own ChatGPT\n\n\n\n\n\n\nguide\n\n\nLLM\n\n\nOllama\n\n\n\nrunning Ollama and it’s WebUI locally\n\n\n\n\n\nDec 29, 2024\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nOpenAI Whisper\n\n\n\n\n\n\nspeech recognition\n\n\nCLI\n\n\n\nan open-source speech recognition model CLI (and python package) that actually works\n\n\n\n\n\nDec 28, 2024\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nChat with Backtrader\n\n\n\n\n\n\nRAG\n\n\nbacktrader\n\n\nlangchain\n\n\nLLM\n\n\nOllama\n\n\n\nbuilding a RAG using langchain and ollama\n\n\n\n\n\nDec 21, 2024\n\n\nim@johnho.ca\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "notebooks/my-toolchain.html",
@@ -394,43 +394,50 @@
   {
     "objectID": "notebooks/simple_interpolation.html",
     "href": "notebooks/simple_interpolation.html",
-    "title": "interpolation made easy",
+    "title": "interpolation (and data smoothing) made easy",
     "section": "",
     "text": "my first “real” job was a derivative analyst right at the start of the Global Financial Crisis in 2008. Back then, interpolating volatility surfaces (for derivative pricing) was a real skill to have… something you could write on your resume or maybe even do a PhD on.\nBut nowadays we got pandas!\nhere’s a quick tutorial on how to interpolate things!"
   },
   {
     "objectID": "notebooks/simple_interpolation.html#intro",
     "href": "notebooks/simple_interpolation.html#intro",
-    "title": "interpolation made easy",
+    "title": "interpolation (and data smoothing) made easy",
     "section": "",
     "text": "my first “real” job was a derivative analyst right at the start of the Global Financial Crisis in 2008. Back then, interpolating volatility surfaces (for derivative pricing) was a real skill to have… something you could write on your resume or maybe even do a PhD on.\nBut nowadays we got pandas!\nhere’s a quick tutorial on how to interpolate things!"
   },
   {
     "objectID": "notebooks/simple_interpolation.html#native-dataframe-support",
     "href": "notebooks/simple_interpolation.html#native-dataframe-support",
-    "title": "interpolation made easy",
+    "title": "interpolation (and data smoothing) made easy",
     "section": "Native Dataframe support",
-    "text": "Native Dataframe support\njust have all your data in a dataframe\n\n\n\n\n\n\n\n\n\nframe\ntrack_id\nx\ny\nw\nh\nconf\n\n\n\n\n0\n2709\n214\n0.639550\n0.268333\n0.020692\n0.123889\n0.753418\n\n\n1\n2710\n214\n0.638468\n0.271697\n0.019997\n0.119380\n0.865234\n\n\n2\n2711\n214\n0.638790\n0.278320\n0.019653\n0.116792\n0.851074\n\n\n3\n2712\n214\n0.637761\n0.280170\n0.019486\n0.115447\n0.829590\n\n\n4\n2713\n214\n0.638763\n0.281258\n0.018929\n0.111729\n0.919922\n\n\n\n\n\n\n\n\n\nCode\npio.renderers.default = \"notebook\"\nfig = px.line(df, x = 'frame', y = ['x','y','w','h', 'conf'], title = \"Example of some variables to interpolate\")\nfig"
+    "text": "Native Dataframe support\njust have all your data in a dataframe\n\n\n\n\n\n\n\n\n\nframe\ntrack_id\nx\ny\nw\nh\nconf\n\n\n\n\n0\n2709\n214\n0.639550\n0.268333\n0.020692\n0.123889\n0.753418\n\n\n1\n2710\n214\n0.638468\n0.271697\n0.019997\n0.119380\n0.865234\n\n\n2\n2711\n214\n0.638790\n0.278320\n0.019653\n0.116792\n0.851074\n\n\n3\n2712\n214\n0.637761\n0.280170\n0.019486\n0.115447\n0.829590\n\n\n4\n2713\n214\n0.638763\n0.281258\n0.018929\n0.111729\n0.919922\n\n\n\n\n\n\n\n\n\nCode\n# pio.renderers.default = \"notebook\"\nfig = px.line(df, x = 'frame', y = ['x','y','w','h', 'conf'], title = \"Example of some variables to interpolate\")\nfig"
   },
   {
     "objectID": "notebooks/simple_interpolation.html#missing-values",
     "href": "notebooks/simple_interpolation.html#missing-values",
-    "title": "interpolation made easy",
+    "title": "interpolation (and data smoothing) made easy",
     "section": "missing values",
     "text": "missing values\n\n\nCode\nall_frames = list(range(df['frame'].min(), df['frame'].max()+1))\ndf_all = pd.DataFrame({'frame': all_frames}).merge(df, on = 'frame', how = 'left')\nfig = px.line(df_all, x = 'frame', y = ['x','y','w','h', 'conf'], title = \"missing values to interpolate\")\nfig"
   },
   {
     "objectID": "notebooks/simple_interpolation.html#large-selection-of-methods",
     "href": "notebooks/simple_interpolation.html#large-selection-of-methods",
-    "title": "interpolation made easy",
+    "title": "interpolation (and data smoothing) made easy",
     "section": "large selection of methods",
     "text": "large selection of methods\nthe interpolate function offers many methods! The more complex methods are handled by scipy under the hood.\nHere’s a demo of now the interpolation look like:\n\ndf_all['x'] = df_all['x'].interpolate(method = 'linear') # only consider adjacent points\ndf_all['y'] = df_all['y'].interpolate(method = 'slinear') # spline-linear consider more surrounding points \ndf_all['w'] = df_all['w'].interpolate(method = 'quadratic')\ndf_all['h'] = df_all['h'].interpolate(method = 'cubic')\ndf_all['conf'] = df_all['conf'].interpolate(method = 'cubicspline')\n\nfig = px.line(df_all, x = 'frame', y = ['x','y','w','h', 'conf'], title = \"interpolated data\")\nfig"
   },
   {
     "objectID": "notebooks/simple_interpolation.html#smoothing",
     "href": "notebooks/simple_interpolation.html#smoothing",
-    "title": "interpolation made easy",
+    "title": "interpolation (and data smoothing) made easy",
     "section": "smoothing",
-    "text": "smoothing\ninstead of interpolating missing points, what if I want to “smooth out” a data series?\nThere are two ways:\n\nwith numpy, we can run a linear regression with just one line of code.\nin pandas we can use the function cummax() or cummin() to enforce a strictly increasing or decreasing series\n\nLet’s smooth out the y and h line for example:\n\ndf_fitted = df_all.copy(deep = True)\n\n# linear regression of y\nslope, intercept = np.polyfit(df_fitted['frame'], df_fitted['y'], deg = 1)\ndf_fitted['y_hat'] = slope * df_fitted['frame'] + intercept\n\n# straigthly increasing value for h\ndf_fitted['h_hat'] = df_fitted['h'].cummax()\n\nfig = px.line(df_fitted, x = 'frame', y = ['y', 'y_hat','h', 'h_hat'], title = \"fitted line example\")\nfig"
+    "text": "smoothing\ninstead of interpolating missing points, what if I want to “smooth out” a data series?\nThere are two ways:\n\nwith numpy, we can run a linear regression with just one line of code.\nwith numpy, we can also run a polynomial regression for non-linear relationship\nin pandas we can use the function cummax() or cummin() to enforce a strictly increasing or decreasing series\n\nLet’s smooth out the y and h line for example:\n\ndf_fitted = df_all.copy(deep = True)\n\n# linear regression of y\nslope, intercept = np.polyfit(df_fitted['frame'], df_fitted['y'], deg = 1)\ndf_fitted['y_hat'] = slope * df_fitted['frame'] + intercept\n\n# quadratic fit of y\ncoeffs = np.polyfit(df_fitted['frame'], df_fitted['y'], deg = 2)\ndf_fitted['y_prime'] = np.polyval(coeffs, df_fitted['frame'])\n\n# straigthly increasing value for h\ndf_fitted['h_hat'] = df_fitted['h'].cummax()\n\nfig = px.line(df_fitted, x = 'frame', y = ['y', 'y_hat','y_prime','h', 'h_hat'], title = \"fitted line example\")\nfig"
+  },
+  {
+    "objectID": "notebooks/simple_interpolation.html#interpolation",
+    "href": "notebooks/simple_interpolation.html#interpolation",
+    "title": "interpolation (and data smoothing) made easy",
+    "section": "interpolation",
+    "text": "interpolation\nthe interpolate function offers many methods! The more complex methods are handled by scipy under the hood.\nHere’s a demo of now the interpolation look like:\n\ndf_all['x'] = df_all['x'].interpolate(method = 'linear') # only consider adjacent points\ndf_all['y'] = df_all['y'].interpolate(method = 'slinear') # spline-linear consider more surrounding points \ndf_all['w'] = df_all['w'].interpolate(method = 'quadratic')\ndf_all['h'] = df_all['h'].interpolate(method = 'cubic')\ndf_all['conf'] = df_all['conf'].interpolate(method = 'cubicspline')\n\nfig = px.line(df_all, x = 'frame', y = ['x','y','w','h', 'conf'], title = \"interpolated data\")\nfig"
   }
 ]
