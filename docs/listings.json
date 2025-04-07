@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/notebooks/EquityCurve.html",
       "/notebooks/simple_interpolation.html",
       "/notebooks/my-toolchain.html",
       "/notebooks/px_timeline.html",
