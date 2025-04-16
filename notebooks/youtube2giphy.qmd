@@ -1,0 +1,120 @@
+---
+title: "Youtube Video to Giphy"
+abstract: how to use `yt-dlp` with `ffmpeg` to create a gif and host it for free
+date: 4/16/2025
+date-format: full
+author: im@johnho.ca
+categories:
+    - ffmpeg
+    - Youtube
+    - CLI
+format:
+    html:
+        mermaid:
+            theme: forest
+            securityLevel: loose
+        toc: true
+        toc-depth: 3
+        toc-expand: 2
+        toc-title: Contents
+        toc-location: left
+        link-external-icon: true
+        link-external-newwindow: true
+draft: false
+execute:
+  echo: false
+---
+
+# introduction
+
+Back in 2020 Firefox write a [blog post](https://blog.mozilla.org/en/firefox/relaxing-videos/)
+which introduced a series of relaxing video meant to be played in a loop
+in the (then) new "picture-in-picture" mode.
+
+Here's an example:
+
+::: {#fig-source}
+{{<video https://youtu.be/r45aZe_OtuM >}}
+Source Video: Relaxing Forest
+:::
+
+# [`yt-dlp`](https://github.com/yt-dlp/yt-dlp?tab=readme-ov-file#installation)
+`yt-dlp` is a CLI to download video but you could also
+[pipe the video as stream](https://trycatchdebug.net/news/1337720/python-yt-dlp-and-ffmpeg-piping-issue)
+straight into `ffmpeg`:
+
+```bash
+yt-dlp -f "bv*[ext=mp4][height<1080]" "https://youtu.be/r45aZe_OtuM?si=Ta58dCZTI4QCrerG" -o - \
+    | ffmpeg -i pipe:0 -c copy output.mp4
+```
+
+* one of the best thing about `yt-dlp` is the filter for expressively
+picking the right stream to download[^1]. Here with `-f "bv*[ext=mp4][height<1080]"`
+we are selecting the best quality mp4 stream that's less than 1080 pixel in height
+* the `-o -` option tells `yt-dlp` to write the outputs to stdout
+* to read the output from `yt-dlp` in `ffmpeg`, we need the option `-i pipe:0`
+
+
+[^1]: there's bit of a learning curve, best to start with their
+examples [here](https://github.com/yt-dlp/yt-dlp?tab=readme-ov-file#format-selection-examples)
+
+# [`gifski`](https://github.com/ImageOptim/gifski/)
+`gifski` makes the highest quality GIFs. Think of it as the opposite of
+[gifsicle](https://github.com/kohler/gifsicle) which is great for compressing
+GIFs.
+
+How much better?
+
+::: {#fig-gifski layout-ncol=2}
+
+![without gifski](https://i.giphy.com/media/HdHjAX6WluCaA5DHLP/giphy.gif){#fig-before}
+
+![with gifski](https://i.giphy.com/media/IKTQaaw3qZYXcwJmbw/giphy.gif){#fig-after}
+
+`gifski` demo
+:::
+
+The best part is that `gifski` play nicely with `ffmpeg` also.
+Let's say I want to crop a gif while keeping the highest quality:
+```bash
+ffmpeg -i  source.gif -vf "crop=iw:ih*0.9:0:0" -pix_fmt yuv420p -f yuv4mpegpipe -
+    | gifski -o output.gif -
+```
+
+* in `ffmpeg` we use `-f yuv4mpegpipe -` to format the output properly to stdout
+for `gifski`
+* for gif input source, you will need to specify the pixel format with
+`-pix_fmt yuv420p` for `ffmpeg` to figure out how to combine with `-f yuv4mpegpipe -`
+
+# `yt-dlp` to `ffmpeg` to `gifski`
+okay so to create the highest quality 5-second gif
+from @fig-source without having to download the video:
+```bash
+yt-dlp -f "bv*[ext=mp4][height<1080]" "https://youtu.be/r45aZe_OtuM?si=Ta58dCZTI4QCrerG" -o - \
+    | ffmpeg -i pipe:0 -ss 10 -t 5 -vf "crop=iw:ih*0.85:0:0" -f yuv4mpegpipe - \
+    | gifski -o tree.gif -
+```
+
+* since the input to ffmpeg is a stream the `-ss 10` option
+has to come after the input, otherwise you might run into the "partial file" error
+* our filter `-vf "crop=iw:ih*0.85:0:0"` crop out the bottom 15% of the frame
+
+# "Hosting" on [giphy](https://giphy.com/)
+the last step is to "host" it on giphy.
+
+Our uploaded `tree.gif` lives at [https://giphy.com/gifs/da0KMpaD7t6psYvV3Y](https://giphy.com/gifs/da0KMpaD7t6psYvV3Y)
+
+But that's just a link to a page on giphy.
+To get the actual gif URL is more complicated, but thanks to [Eric's tip](https://eric.blog/2019/01/12/how-to-download-a-gif-from-giphy/)
+we know that the gif URL format is:
+```bash
+https://i.giphy.com/media/{gif_hash}/giphy.gif
+```
+
+So for our `tree.gif` it would be [https://i.giphy.com/media/`da0KMpaD7t6psYvV3Y`/giphy.gif](https://i.giphy.com/media/da0KMpaD7t6psYvV3Y/giphy.gif)
+
+::: {#fig-tree}
+![](https://i.giphy.com/media/da0KMpaD7t6psYvV3Y/giphy.gif){.preview-image}
+
+Our Tree GIF on giphy!
+:::

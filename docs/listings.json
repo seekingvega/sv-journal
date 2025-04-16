@@ -2,9 +2,10 @@
   {
     "listing": "/index.html",
     "items": [
+      "/notebooks/youtube2giphy.html",
+      "/notebooks/my-toolchain.html",
       "/notebooks/EquityCurve.html",
       "/notebooks/simple_interpolation.html",
-      "/notebooks/my-toolchain.html",
       "/notebooks/px_timeline.html",
       "/notebooks/TVScreener.html",
       "/notebooks/HuggingFace-Freebies-ASR.html",

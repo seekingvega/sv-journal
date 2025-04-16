@@ -185,7 +185,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#gpr-vs-sortino-ratio" id="toc-gpr-vs-sortino-ratio" class="nav-link" data-scroll-target="#gpr-vs-sortino-ratio">GPR vs Sortino Ratio</a></li>
   <li><a href="#tickers-that-stands-out" id="toc-tickers-that-stands-out" class="nav-link" data-scroll-target="#tickers-that-stands-out">tickers that stands out</a></li>
   </ul></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#conclusion-caveat" id="toc-conclusion-caveat" class="nav-link" data-scroll-target="#conclusion-caveat">Conclusion &amp; Caveat</a></li>
   </ul>
 </nav>
 </nav>
@@ -201,6 +201,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1 class="title">Evaluating Investment Performance</h1>
   <div class="quarto-categories">
     <div class="quarto-category">trading</div>
+    <div class="quarto-category">ETFs</div>
   </div>
   </div>
 
@@ -243,7 +244,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In the world of trading championships (for example, the <a href="https://financial-competitions.com/rules">US Investing Championship</a>) , there’s only one metric that matters: returns!</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://thequotes.me/wp-content/uploads/2020/03/wp-1583262067953.jpg" class="img-fluid figure-img" style="width:80.0%"></p>
+<p><img src="https://thequotes.me/wp-content/uploads/2020/03/wp-1583262067953.jpg" class="preview-image img-fluid figure-img" style="width:80.0%"></p>
 <figcaption>Winning is Winning</figcaption>
 </figure>
 </div>
@@ -1066,13 +1067,15 @@ Figure&nbsp;4: Winners and Loser
 </div>
 </section>
 </section>
-<section id="conclusion" class="level1">
-<h1>Conclusion</h1>
+<section id="conclusion-caveat" class="level1">
+<h1>Conclusion &amp; Caveat</h1>
 <ul>
-<li>Using Sortino and/or Gain-to-Pain ratio in addition to annualized return will help you identify investments that will let you sleep well at night.</li>
-<li>the comparsion above is not extensive and looking at one year’s performance alone is not enough<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, but it did serve the illustrative purpose of identifying risk vs returns.</li>
-<li>there are in fact many investments<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> to consider. With the <a href="../notebooks/TVScreener.html">TradingView Screener</a> we can apply the metrics to hundreds of ETFs and looking at years of data to find some high-performing investments in our next post!</li>
+<li><strong>None of these are investment advice</strong>… sure <code>MSTR</code> has higher sortino ratio and higher return than <code>SPY</code> but that doesn’t make it a good investment. After all, it’s a highly leveraged bet on bitcoin with a not so well defined strategy.</li>
+<li>Sortino and/or Gain-to-Pain ratio simply <strong>add another dimension (or two) to evaluating an investment in additional to annualized return</strong>. So that when considering investments of similiar returns, you can pick the one that also has the least downside risk so you can sleep well at night.</li>
+<li>looking at just one year of returns is probably not the best idea<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>… <strong>beating the benchmark for one year could be due to luck</strong> but consistently outperforming the benchmark requires skill; don’t be <a href="https://archive.jamesaltucher.com/blog/learned-about-investing/">fooled by randomness</a>!</li>
+<li>given constant flow of active and passive ETFs being launched<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> the metrics introduced in this post set the stage for an <a href="../notebooks/etf_search_party.html">ETF search party</a> for the ones that beat the market and doing so with significantly less risk.</li>
 </ul>
+<p>With the <a href="../notebooks/TVScreener.html">TradingView Screener</a> we can apply the metrics to hundreds of ETFs and looking at years of data to find some high-performing investments in our <a href="../notebooks/etf_search_party.html">next post</a>!</p>
 
 
 </section>

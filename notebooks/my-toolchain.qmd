@@ -41,6 +41,17 @@ for details on full setup
     * TUI for monitoring resource use on Apple's ARM architecture MacBook
     * like a much better version of `htop`
     * install: `brew update && brew install macmon`
+
 * [Sequel-Ace](https://github.com/Sequel-Ace/Sequel-Ace?tab=readme-ov-file):
     * MySQL management for macOS
     * install: `brew update && brew install --cask sequel-ace`
+
+* [yt-dlp](https://github.com/yt-dlp/yt-dlp?tab=readme-ov-file#installation)
+    * feature-rich CLI audio/video downloader with support for [thousand of sites](https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md),
+    including YouTube and Soundcloud
+    * it's a bit more advanced with the use of
+    [format selection](https://github.com/yt-dlp/yt-dlp?tab=readme-ov-file#format-selection)
+    for selecting the right stream but it also uses `ffmpeg` under the hood to
+    merge audio and video streams.
+    Format selection [examples are available](https://github.com/yt-dlp/yt-dlp?tab=readme-ov-file#format-selection-examples).
+    * install: `pipx install "yt-dlp[default]"`

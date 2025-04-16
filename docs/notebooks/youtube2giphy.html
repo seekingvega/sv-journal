@@ -8,7 +8,7 @@
 
 <meta name="author" content="im@johnho.ca">
 
-<title>Toolchain of a GADA Scientist – SeekingVega Journal</title>
+<title>Youtube Video to Giphy – SeekingVega Journal</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -112,7 +146,10 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">introduction</a></li>
-  <li><a href="#the-toolchain" id="toc-the-toolchain" class="nav-link" data-scroll-target="#the-toolchain">The Toolchain</a></li>
+  <li><a href="#yt-dlp" id="toc-yt-dlp" class="nav-link" data-scroll-target="#yt-dlp"><code>yt-dlp</code></a></li>
+  <li><a href="#gifski" id="toc-gifski" class="nav-link" data-scroll-target="#gifski"><code>gifski</code></a></li>
+  <li><a href="#yt-dlp-to-ffmpeg-to-gifski" id="toc-yt-dlp-to-ffmpeg-to-gifski" class="nav-link" data-scroll-target="#yt-dlp-to-ffmpeg-to-gifski"><code>yt-dlp</code> to <code>ffmpeg</code> to <code>gifski</code></a></li>
+  <li><a href="#hosting-on-giphy" id="toc-hosting-on-giphy" class="nav-link" data-scroll-target="#hosting-on-giphy">“Hosting” on giphy</a></li>
   </ul>
 </nav>
 </nav>
@@ -125,9 +162,11 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Toolchain of a GADA Scientist</h1>
+<h1 class="title">Youtube Video to Giphy</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">guide</div>
+    <div class="quarto-category">ffmpeg</div>
+    <div class="quarto-category">Youtube</div>
+    <div class="quarto-category">CLI</div>
   </div>
   </div>
 
@@ -145,7 +184,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Wednesday, April 9, 2025</p>
+      <p class="date">Wednesday, April 16, 2025</p>
     </div>
   </div>
   
@@ -155,7 +194,7 @@ ul.task-list li input[type="checkbox"] {
 <div>
   <div class="abstract">
     <div class="block-title">Abstract</div>
-    digital EDC of a GADA scientist
+    how to use <code>yt-dlp</code> with <code>ffmpeg</code> to create a gif and host it for free
   </div>
 </div>
 
@@ -163,45 +202,118 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">introduction</h2>
+<section id="introduction" class="level1">
+<h1>introduction</h1>
+<p>Back in 2020 Firefox write a <a href="https://blog.mozilla.org/en/firefox/relaxing-videos/">blog post</a> which introduced a series of relaxing video meant to be played in a loop in the (then) new “picture-in-picture” mode.</p>
+<p>Here’s an example:</p>
+<div id="fig-source" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-source-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<p></p><div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/r45aZe_OtuM" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div> Source Video: Relaxing Forest<p></p>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-source-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="yt-dlp" class="level1">
+<h1><a href="https://github.com/yt-dlp/yt-dlp?tab=readme-ov-file#installation"><code>yt-dlp</code></a></h1>
+<p><code>yt-dlp</code> is a CLI to download video but you could also <a href="https://trycatchdebug.net/news/1337720/python-yt-dlp-and-ffmpeg-piping-issue">pipe the video as stream</a> straight into <code>ffmpeg</code>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">yt-dlp</span> <span class="at">-f</span> <span class="st">"bv*[ext=mp4][height&lt;1080]"</span> <span class="st">"https://youtu.be/r45aZe_OtuM?si=Ta58dCZTI4QCrerG"</span> <span class="at">-o</span> <span class="at">-</span> <span class="dt">\</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">|</span> <span class="ex">ffmpeg</span> <span class="at">-i</span> pipe:0 <span class="at">-c</span> copy output.mp4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>hardware: MBP 2023 with M2 Max &amp; 32GB RAM</li>
-<li>python environments managed using <code>pyenv</code> and the <code>virtualenvwrapper</code> but for python based cli I use <code>pipx</code>. See <a href="https://gist.github.com/ohjho/8e2556d786b132d724b3914728c7c82f">here</a> for details on full setup</li>
+<li>one of the best thing about <code>yt-dlp</code> is the filter for expressively picking the right stream to download<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Here with <code>-f "bv*[ext=mp4][height&lt;1080]"</code> we are selecting the best quality mp4 stream that’s less than 1080 pixel in height</li>
+<li>the <code>-o -</code> option tells <code>yt-dlp</code> to write the outputs to stdout</li>
+<li>to read the output from <code>yt-dlp</code> in <code>ffmpeg</code>, we need the option <code>-i pipe:0</code></li>
 </ul>
 </section>
-<section id="the-toolchain" class="level2">
-<h2 class="anchored" data-anchor-id="the-toolchain">The Toolchain</h2>
+<section id="gifski" class="level1">
+<h1><a href="https://github.com/ImageOptim/gifski/"><code>gifski</code></a></h1>
+<p><code>gifski</code> makes the highest quality GIFs. Think of it as the opposite of <a href="https://github.com/kohler/gifsicle">gifsicle</a> which is great for compressing GIFs.</p>
+<p>How much better?</p>
+<div id="fig-gifski" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gifski-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-gifski" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-before" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-before-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://i.giphy.com/media/HdHjAX6WluCaA5DHLP/giphy.gif" class="img-fluid figure-img" data-ref-parent="fig-gifski">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-before-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) without gifski
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-gifski" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-after" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-after-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://i.giphy.com/media/IKTQaaw3qZYXcwJmbw/giphy.gif" class="img-fluid figure-img" data-ref-parent="fig-gifski">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-after-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) with gifski
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gifski-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: <code>gifski</code> demo
+</figcaption>
+</figure>
+</div>
+<p>The best part is that <code>gifski</code> play nicely with <code>ffmpeg</code> also. Let’s say I want to crop a gif while keeping the highest quality:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ffmpeg</span> <span class="at">-i</span>  source.gif <span class="at">-vf</span> <span class="st">"crop=iw:ih*0.9:0:0"</span> <span class="at">-pix_fmt</span> yuv420p <span class="at">-f</span> yuv4mpegpipe <span class="at">-</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">|</span> <span class="ex">gifski</span> <span class="at">-o</span> output.gif <span class="at">-</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>docker: <code>brew install --cask docker</code>
-<ul>
-<li>you will need to follow <a href="https://stackoverflow.com/a/43365425">this guide here</a></li>
-<li>and you do want the cask version because the <a href="https://stackoverflow.com/a/40523608">official version for Mac is a GUI</a>… i.e.&nbsp;there are no headless version</li>
-<li>my <a href="https://gist.github.com/ohjho/af86af1c1dfab4979f6d0543000351cd">docker cheatsheet</a></li>
-</ul></li>
-<li><a href="https://medium.com/@vladkens/mac-usage-monitor-in-terminal-meet-macmon-3a3391995224">macmon</a>:
-<ul>
-<li>TUI for monitoring resource use on Apple’s ARM architecture MacBook</li>
-<li>like a much better version of <code>htop</code></li>
-<li>install: <code>brew update &amp;&amp; brew install macmon</code></li>
-</ul></li>
-<li><a href="https://github.com/Sequel-Ace/Sequel-Ace?tab=readme-ov-file">Sequel-Ace</a>:
-<ul>
-<li>MySQL management for macOS</li>
-<li>install: <code>brew update &amp;&amp; brew install --cask sequel-ace</code></li>
-</ul></li>
-<li><a href="https://github.com/yt-dlp/yt-dlp?tab=readme-ov-file#installation">yt-dlp</a>
-<ul>
-<li>feature-rich CLI audio/video downloader with support for <a href="https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md">thousand of sites</a>, including YouTube and Soundcloud</li>
-<li>it’s a bit more advanced with the use of <a href="https://github.com/yt-dlp/yt-dlp?tab=readme-ov-file#format-selection">format selection</a> for selecting the right stream but it also uses <code>ffmpeg</code> under the hood to merge audio and video streams. Format selection <a href="https://github.com/yt-dlp/yt-dlp?tab=readme-ov-file#format-selection-examples">examples are available</a>.</li>
-<li>install: <code>pipx install "yt-dlp[default]"</code></li>
-</ul></li>
+<li>in <code>ffmpeg</code> we use <code>-f yuv4mpegpipe -</code> to format the output properly to stdout for <code>gifski</code></li>
+<li>for gif input source, you will need to specify the pixel format with <code>-pix_fmt yuv420p</code> for <code>ffmpeg</code> to figure out how to combine with <code>-f yuv4mpegpipe -</code></li>
 </ul>
+</section>
+<section id="yt-dlp-to-ffmpeg-to-gifski" class="level1">
+<h1><code>yt-dlp</code> to <code>ffmpeg</code> to <code>gifski</code></h1>
+<p>okay so to create the highest quality 5-second gif from <a href="#fig-source" class="quarto-xref">Figure&nbsp;1</a> without having to download the video:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">yt-dlp</span> <span class="at">-f</span> <span class="st">"bv*[ext=mp4][height&lt;1080]"</span> <span class="st">"https://youtu.be/r45aZe_OtuM?si=Ta58dCZTI4QCrerG"</span> <span class="at">-o</span> <span class="at">-</span> <span class="dt">\</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">|</span> <span class="ex">ffmpeg</span> <span class="at">-i</span> pipe:0 <span class="at">-ss</span> 10 <span class="at">-t</span> 5 <span class="at">-vf</span> <span class="st">"crop=iw:ih*0.85:0:0"</span> <span class="at">-f</span> yuv4mpegpipe <span class="at">-</span> <span class="dt">\</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">|</span> <span class="ex">gifski</span> <span class="at">-o</span> tree.gif <span class="at">-</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>since the input to ffmpeg is a stream the <code>-ss 10</code> option has to come after the input, otherwise you might run into the “partial file” error</li>
+<li>our filter <code>-vf "crop=iw:ih*0.85:0:0"</code> crop out the bottom 15% of the frame</li>
+</ul>
+</section>
+<section id="hosting-on-giphy" class="level1">
+<h1>“Hosting” on <a href="https://giphy.com/">giphy</a></h1>
+<p>the last step is to “host” it on giphy.</p>
+<p>Our uploaded <code>tree.gif</code> lives at <a href="https://giphy.com/gifs/da0KMpaD7t6psYvV3Y">https://giphy.com/gifs/da0KMpaD7t6psYvV3Y</a></p>
+<p>But that’s just a link to a page on giphy. To get the actual gif URL is more complicated, but thanks to <a href="https://eric.blog/2019/01/12/how-to-download-a-gif-from-giphy/">Eric’s tip</a> we know that the gif URL format is:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">https://i.giphy.com/media/{gif_hash}/giphy.gif</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>So for our <code>tree.gif</code> it would be <a href="https://i.giphy.com/media/da0KMpaD7t6psYvV3Y/giphy.gif">https://i.giphy.com/media/<code>da0KMpaD7t6psYvV3Y</code>/giphy.gif</a></p>
+<div id="fig-tree" class="preview-image quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-tree-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://i.giphy.com/media/da0KMpaD7t6psYvV3Y/giphy.gif" class="preview-image img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tree-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Our Tree GIF on giphy!
+</figcaption>
+</figure>
+</div>
 
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div></div></section></div></main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>there’s bit of a learning curve, best to start with their examples <a href="https://github.com/yt-dlp/yt-dlp?tab=readme-ov-file#format-selection-examples">here</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
