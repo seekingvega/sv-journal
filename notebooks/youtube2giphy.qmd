@@ -20,7 +20,7 @@ format:
         toc-location: left
         link-external-icon: true
         link-external-newwindow: true
-draft: true
+draft: false
 execute:
   echo: false
 ---
