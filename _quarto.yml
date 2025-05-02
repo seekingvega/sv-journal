@@ -23,6 +23,8 @@ website:
       repo: seekingvega/sv-journal
       theme: noborder_gray
 
-theme: solar #https://bootswatch.com/solar/
+theme:
+  - solar #https://bootswatch.com/solar/
+  - custom.scss
 execute:
   freeze: true

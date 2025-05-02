@@ -1,0 +1,9 @@
+/*-- scss:defaults --*/
+$code-bg: #78899a;     // rainy morning (color-hex) gray background for inline code
+$code-color: #ffd600;  // Yellow text for inline code
+
+/*-- scss:rules --*/
+code {
+  background-color: $code-bg;
+  color: $code-color;
+}
