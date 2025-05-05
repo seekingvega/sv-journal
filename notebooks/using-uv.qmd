@@ -1,0 +1,95 @@
+---
+title: "UV for python dependencies"
+abstract: the GOAT of python dependencies management, at least as of 2025
+date: 2025/05/02
+date-format: full
+author: im@johnho.ca
+license: "CC BY-NC-SA"
+categories:
+    - guide
+    - Python
+format:
+    html:
+        mermaid:
+            theme: forest
+            securityLevel: loose
+        toc: true
+        toc-depth: 4
+        toc-expand: 3
+        toc-title: Contents
+        toc-location: left
+        link-external-icon: true
+        link-external-newwindow: true
+draft: false
+execute:
+  echo: false
+---
+
+# why [`uv`](https://docs.astral.sh/uv/)?
+three simple answers:
+
+1. it's fast[^uv-fast]
+2. if it's good enough for [streamlit cloud](https://streamlit.io/cloud) it's good enough for me
+3. good for packaging and virtual environments are stored in project directories
+
+[^uv-fast]: about [115x faster than `pip`](https://medium.com/@kacperwlodarczyk/uv-the-rust-powered-python-package-manager-thats-115x-faster-than-pip-4596785e40bc),
+in the time it takes to run `pip install` on your next project you can probabaly read
+this post and learn all the basics to get started.
+
+# installation
+macOS and Linux: `curl -LsSf https://astral.sh/uv/install.sh | sh`
+
+Or `pipx install uv`
+
+confirm the installation with `uv --version`
+
+# python versions
+uv [manages it's own python versions](https://docs.astral.sh/uv/concepts/python-versions/#managed-and-system-python-installations)
+much like `pyenv`
+
+use `uv python list` to view installed and available python version and
+`uv python install 3.8` to install a specific version[^uv-python-tip].
+
+[^uv-python-tip]: add `export UV_PYTHON_INSTALL_DIR=$HOME/your/custom/home/for/.uv/python/`
+to your `~/.bashrc` to control where those managed python versions get installed to
+
+# [Virtual Environments](https://docs.astral.sh/uv/pip/)
+unlike `pyenv`[^pyenv], when you run `uv venv`[^uv-venv] an environment will be created in
+your current working directory in `.venv` this allows you to keep each
+project's dependencies isolated. To activate the environment just
+`source .venv/bin/activate`. And to deactivate,
+just `deactivate`.
+
+To install just append `uv` in front of your standard `pip install` command.
+For example, `uv pip install -r requirements.txt` and to see what's installed,
+`uv pip list`. Commands such as these that mutates environments will always
+applied in the following order:
+
+1. the activated environment
+2. the environment at `.venv` in the current directory
+
+[^pyenv]: `pyenv`'s virutal environment are installed by default to `~/.pyenv/versions/<env-name>/`
+[^uv-venv]: or use `uv venv --python 3.12` to create a virtual environment with python 3.12
+
+# [Tools](https://docs.astral.sh/uv/concepts/tools/#execution-vs-installation)
+Tools are python packages with a CLI
+
+> In most cases, executing a tool with `uvx` is more appropriate than installing the tool.
+
+> When running a tool with `uvx`, a virtual environment is stored in the uv cache directory and is treated as disposable, i.e., if you run `uv cache clean` the environment will be deleted.
+
+# Existing Projects
+because of the [tools](#tools) feature, you can call the [migrate-to-uv](https://github.com/mkniewallner/migrate-to-uv)
+package on your existing project to have uv manage the dependencies
+(no installation required ;):
+```bash
+uvx migrate-to-uv
+```
+you can add the `--dry-run` flag to see what it would do but basically
+it will read your `requirements.txt` and create a `pyproject.toml`
+and a `uv.lock` file[^uv-lock] for your project.
+
+[^uv-lock]: the [lockfile](https://docs.astral.sh/uv/concepts/projects/layout/#the-lockfile)
+contains the exact resolved versions that are installed
+in the project environment and is meant to be checked into version control;
+So that it can be easily recreated else where with a [`uv sync`](https://docs.astral.sh/uv/reference/cli/#uv-sync)

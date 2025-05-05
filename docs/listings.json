@@ -2,9 +2,10 @@
   {
     "listing": "/index.html",
     "items": [
+      "/notebooks/my-toolchain.html",
+      "/notebooks/using-uv.html",
       "/notebooks/youtube2giphy.html",
       "/notebooks/etf_search_party.html",
-      "/notebooks/my-toolchain.html",
       "/notebooks/EquityCurve.html",
       "/notebooks/simple_interpolation.html",
       "/notebooks/px_timeline.html",

@@ -13,8 +13,8 @@ format:
             theme: forest
             securityLevel: loose
         toc: true
-        toc-depth: 3
-        toc-expand: 2
+        toc-depth: 4
+        toc-expand: 3
         toc-title: Contents
         toc-location: left
         link-external-icon: true
@@ -24,13 +24,10 @@ execute:
   echo: false
 ---
 
-## introduction
-* hardware: MBP 2023 with M2 Max & 32GB RAM
-* python environments managed using `pyenv` and the `virtualenvwrapper` but
-for python based cli I use `pipx`. See [here](https://gist.github.com/ohjho/8e2556d786b132d724b3914728c7c82f)
-for details on full setup
+# hardware
+MBP 2023 with M2 Max & 32GB RAM
 
-## The Toolchain
+# The Toolchain
 
 * docker: `brew install --cask docker`
     * you will need to follow [this guide here](https://stackoverflow.com/a/43365425)
@@ -55,3 +52,10 @@ for details on full setup
     merge audio and video streams.
     Format selection [examples are available](https://github.com/yt-dlp/yt-dlp?tab=readme-ov-file#format-selection-examples).
     * install: `pipx install "yt-dlp[default]"`
+
+# python environments
+use to managed using `pyenv` and the `virtualenvwrapper` but
+for python based cli I use `pipx`. See [here](https://gist.github.com/ohjho/8e2556d786b132d724b3914728c7c82f)
+for details on full setup.
+
+As of 2025 however, I manage both python versions and virtual environments with [uv](using-uv.qmd)
