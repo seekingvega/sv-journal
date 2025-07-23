@@ -74,7 +74,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-d166b450ba5a8e9f7a0ab969bf6592c1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-4269e840bcd88bfa1d6dfbf7a7d2c053.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-11c98a4cd10cbe71437da3257ed48a1e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -167,6 +167,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="quarto-category">LLM</div>
     <div class="quarto-category">langchain</div>
     <div class="quarto-category">Ollama</div>
+    <div class="quarto-category">HuggingFace</div>
   </div>
   </div>
 
@@ -252,6 +253,19 @@ Wall time: 2.29 s</code></pre>
 </section>
 <section id="huggingface" class="level2">
 <h2 class="anchored" data-anchor-id="huggingface">2. HuggingFace</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+HuggingFace’s Serverless Inference API has changed
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>see the update <a href="../notebooks/HuggingFace-models-tutorial.html#using-openai-compatible-endpoint">post from July 2025</a> on how to call the updated API</p>
+</div>
+</div>
 <p><a href="https://huggingface.co/learn/cookbook/en/enterprise_hub_serverless_inference_api">HuggingFace Serverless Inference API</a> literally open up a world of models to do anything from Text Completion to Image Generation! While there are some <a href="https://huggingface.co/docs/api-inference/en/supported-models">limitations</a>, you still have access to thousands of <a href="https://huggingface.co/models?inference=warm&amp;sort=trending">“warm” models</a> just an API call away (that’s right! no need for GPUs).</p>
 <p>Using their <a href="https://huggingface.co/docs/api-inference/en/tasks/chat-completion#using-the-api">Chat Completion API</a>, we can directly create an <code>ChatOpenAI</code> runnable with HuggingFace as the “backend”.</p>
 <p>Let’s try the Deepseek R1 that’s all the rage these days and see how good its jokes are…</p>

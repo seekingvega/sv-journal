@@ -4,6 +4,7 @@ abstract: digital EDC of a GADA scientist
 date: last-modified
 date-format: full
 author: im@johnho.ca
+image: https://i.giphy.com/media/gjb6WhwLtKTYxpIaJZ/giphy.gif
 license: "CC BY-NC-SA"
 categories:
     - guide
@@ -22,10 +23,25 @@ format:
 draft: false
 execute:
   echo: false
+code-annotations: hover
 ---
 
 # hardware
 MBP 2023 with M2 Max & 32GB RAM
+
+# Editor
+My weapon of choice is [zed](https://github.com/zed-industries/zed) which
+is actually pretty great for [agentic coding](https://zed.dev/agentic) and
+lots of flexibility in terms of choosing your own LLM[^zed-note].
+
+[^zed-note]: 50 Zed-hosted prompt per month using the latest Claude model.
+But you could also setup [OpenRouter or Ollama](https://zed.dev/docs/ai/configuration#llm-providers)
+or even use your [Co-pilot](https://zed.dev/docs/ai/configuration#github-copilot-chat) quota in zed.
+
+```bash
+brew install --cask zed # <1>
+```
+1. official brew formula is [here](https://formulae.brew.sh/cask/zed)
 
 # The Toolchain
 

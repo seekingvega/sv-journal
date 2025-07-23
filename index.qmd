@@ -8,6 +8,7 @@ listing:
     contents:
         - "notebooks/*.ipynb"
         - "notebooks/*.qmd"
+    image-height: auto # 150px
 ---
 <!--
     # this is a listing page

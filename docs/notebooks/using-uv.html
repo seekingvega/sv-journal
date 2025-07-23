@@ -75,6 +75,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-11c98a4cd10cbe71437da3257ed48a1e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -151,6 +154,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#virtual-environments" id="toc-virtual-environments" class="nav-link" data-scroll-target="#virtual-environments">Virtual Environments</a></li>
   <li><a href="#tools" id="toc-tools" class="nav-link" data-scroll-target="#tools">Tools</a></li>
   <li><a href="#existing-projects" id="toc-existing-projects" class="nav-link" data-scroll-target="#existing-projects">Existing Projects</a></li>
+  <li><a href="#new-projects" id="toc-new-projects" class="nav-link" data-scroll-target="#new-projects">New Projects</a>
+  <ul>
+  <li><a href="#a-minimal-project" id="toc-a-minimal-project" class="nav-link" data-scroll-target="#a-minimal-project">a minimal project</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
 </nav>
@@ -205,10 +213,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="why-uv" class="level1">
 <h1>why <a href="https://docs.astral.sh/uv/"><code>uv</code></a>?</h1>
 <p>three simple answers:</p>
+<div id="fig-bench" class="lightbox preview-image quarto-float quarto-figure quarto-figure-center anchored" style="float: right; margin: 10px;">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bench-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="https://raw.githubusercontent.com/astral-sh/uv/refs/heads/main/assets/svg/Benchmark-Dark.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1: installation time for the trio package"><img src="https://raw.githubusercontent.com/astral-sh/uv/refs/heads/main/assets/svg/Benchmark-Dark.svg" class="preview-image img-fluid figure-img" style="float: right; margin: 10px;" width="350"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bench-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: installation time for the <a href="https://trio.readthedocs.io/en/stable/"><code>trio</code> package</a>
+</figcaption>
+</figure>
+</div>
 <ol type="1">
 <li>it’s fast<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
-<li>if it’s good enough for <a href="https://streamlit.io/cloud">streamlit cloud</a> it’s good enough for me</li>
-<li>good for packaging and virtual environments are stored in project directories</li>
+<li>if it’s <a href="https://blog.streamlit.io/python-pip-vs-astral-uv/">good enough</a> for <a href="https://streamlit.io/cloud">streamlit cloud</a> it’s good enough for me</li>
+<li>good for packaging<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> and virtual environments are stored in project directories</li>
 </ol>
 </section>
 <section id="installation" class="level1">
@@ -220,11 +238,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="python-versions" class="level1">
 <h1>python versions</h1>
 <p>uv <a href="https://docs.astral.sh/uv/concepts/python-versions/#managed-and-system-python-installations">manages it’s own python versions</a> much like <code>pyenv</code></p>
-<p>use <code>uv python list</code> to view installed and available python version and <code>uv python install 3.8</code> to install a specific version<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+<p>use <code>uv python list</code> to view installed and available python version and <code>uv python install 3.8</code> to install a specific version<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
 </section>
 <section id="virtual-environments" class="level1">
 <h1><a href="https://docs.astral.sh/uv/pip/">Virtual Environments</a></h1>
-<p>unlike <code>pyenv</code><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, when you run <code>uv venv</code><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> an environment will be created in your current working directory in <code>.venv</code> this allows you to keep each project’s dependencies isolated. To activate the environment just <code>source .venv/bin/activate</code>. And to deactivate, just <code>deactivate</code>.</p>
+<p>unlike <code>pyenv</code><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>, when you run <code>uv venv</code><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> an environment will be created in your current working directory in <code>.venv</code> this allows you to keep each project’s dependencies isolated. To activate the environment just <code>source .venv/bin/activate</code>. And to deactivate, just <code>deactivate</code>.</p>
 <p>To install just append <code>uv</code> in front of your standard <code>pip install</code> command. For example, <code>uv pip install -r requirements.txt</code> and to see what’s installed, <code>uv pip list</code>. Commands such as these that mutates environments will always applied in the following order:</p>
 <ol type="1">
 <li>the activated environment</li>
@@ -245,7 +263,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Existing Projects</h1>
 <p>because of the <a href="#tools">tools</a> feature, you can call the <a href="https://github.com/mkniewallner/migrate-to-uv">migrate-to-uv</a> package on your existing project to have uv manage the dependencies (no installation required ;):</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uvx</span> migrate-to-uv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>you can add the <code>--dry-run</code> flag to see what it would do but basically it will read your <code>requirements.txt</code> and create a <code>pyproject.toml</code> and a <code>uv.lock</code> file<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> for your project.</p>
+<p>you can add the <code>--dry-run</code> flag to see what it would do but basically it will read your <code>requirements.txt</code> (and also removes it) and create a <code>pyproject.toml</code><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> and a <code>uv.lock</code> file<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> for your project.</p>
+<p>and if you need to export the environment back to <code>requirements.txt</code> you could<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> export <span class="at">--no-hashes</span> <span class="at">--format</span> requirements-txt <span class="op">&gt;</span> requirements.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="new-projects" class="level1">
+<h1>New Projects</h1>
+<p>you can run <a href="https://docs.astral.sh/uv/guides/projects/#creating-a-new-project"><code>uv init new-project</code></a> to have uv create everything for you.</p>
+<p>there are a few different variations:</p>
+<ul>
+<li>an <a href="https://docs.astral.sh/uv/concepts/projects/init/#applications">Application</a>
+<ul>
+<li>great for writing scripts, web services, and CLI tools</li>
+<li>it’s the default when you run <code>uv init example-app</code> (the <code>--app</code> flag is implied)</li>
+</ul></li>
+<li>a Package: for things that are mean to be “pip-installable”
+<ul>
+<li><a href="https://docs.astral.sh/uv/concepts/projects/init/#packaged-applications">Application</a>
+<ul>
+<li>running <code>uv init --package example-pkg</code> will create a setup with a build system and command definition.</li>
+</ul></li>
+<li><a href="https://docs.astral.sh/uv/concepts/projects/init/#libraries">Library</a>
+<ul>
+<li>library provides functions and objects for other projects to <code>import</code></li>
+<li>can be created with <code>uv init --lib example-lib</code> (<code>--lib</code> implies <code>--package</code>)</li>
+<li>a build system is defined but not a command definition</li>
+</ul></li>
+</ul></li>
+</ul>
+<section id="a-minimal-project" class="level2">
+<h2 class="anchored" data-anchor-id="a-minimal-project">a minimal project</h2>
+<p>using the <code>--bare</code> flag gives you the <a href="https://docs.astral.sh/uv/concepts/projects/init/#creating-a-minimal-project">most basic project structure</a>. Here’s an example:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> new-project</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> new-project</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> init <span class="at">--bare</span>              <span class="co"># this only creates pyproject.toml</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> venv <span class="at">--python</span> 3.12       <span class="co"># this creates an environment at .venv using python 3.12</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add awesome-package1     <span class="co"># add your project's requirements</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<ul>
+<li><a href="https://docs.astral.sh/uv/guides/projects/#next-steps">Working on Projects</a></li>
+</ul>
 
 
 </section>
@@ -255,10 +315,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <ol>
 <li id="fn1"><p>about <a href="https://medium.com/@kacperwlodarczyk/uv-the-rust-powered-python-package-manager-thats-115x-faster-than-pip-4596785e40bc">115x faster than <code>pip</code></a>, in the time it takes to run <code>pip install</code> on your next project you can probabaly read this post and learn all the basics to get started.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>add <code>export UV_PYTHON_INSTALL_DIR=$HOME/your/custom/home/for/.uv/python/</code> to your <code>~/.bashrc</code> to control where those managed python versions get installed to<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p><code>pyenv</code>’s virutal environment are installed by default to <code>~/.pyenv/versions/&lt;env-name&gt;/</code><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>or use <code>uv venv --python 3.12</code> to create a virtual environment with python 3.12<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p>the <a href="https://docs.astral.sh/uv/concepts/projects/layout/#the-lockfile">lockfile</a> contains the exact resolved versions that are installed in the project environment and is meant to be checked into version control; So that it can be easily recreated else where with a <a href="https://docs.astral.sh/uv/reference/cli/#uv-sync"><code>uv sync</code></a><a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>when you <code>uv remove</code> something, no dangling packages are left behind, you can inspect after with <code>uv tree</code><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>add <code>export UV_PYTHON_INSTALL_DIR=$HOME/your/custom/home/for/.uv/python/</code> to your <code>~/.bashrc</code> to control where those managed python versions get installed to<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p><code>pyenv</code>’s virutal environment are installed by default to <code>~/.pyenv/versions/&lt;env-name&gt;/</code><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>or use <code>uv venv --python 3.12</code> to create a virtual environment with python 3.12<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>for an existing project, you might want to update the value for <code>name</code> and also add the <code>requires-python</code> field (with a value like <code>&gt;=3.8</code>)<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>the <a href="https://docs.astral.sh/uv/concepts/projects/layout/#the-lockfile">lockfile</a> contains the exact resolved versions that are installed in the project environment and is meant to be checked into version control; So that it can be easily recreated else where with a <a href="https://docs.astral.sh/uv/reference/cli/#uv-sync"><code>uv sync</code></a><a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>see <a href="https://stackoverflow.com/a/79412852">this stackoverflow answer</a> for details<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -710,6 +773,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

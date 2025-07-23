@@ -28,13 +28,18 @@ execute:
 # why [`uv`](https://docs.astral.sh/uv/)?
 three simple answers:
 
+![installation time for the [`trio` package](https://trio.readthedocs.io/en/stable/)](https://raw.githubusercontent.com/astral-sh/uv/refs/heads/main/assets/svg/Benchmark-Dark.svg){style="float: right; margin: 10px;" width=350 .lightbox .preview-image #fig-bench}
+
 1. it's fast[^uv-fast]
-2. if it's good enough for [streamlit cloud](https://streamlit.io/cloud) it's good enough for me
-3. good for packaging and virtual environments are stored in project directories
+2. if it's [good enough](https://blog.streamlit.io/python-pip-vs-astral-uv/)
+for [streamlit cloud](https://streamlit.io/cloud) it's good enough for me
+3. good for packaging[^uv-pack] and virtual environments are stored in project directories
 
 [^uv-fast]: about [115x faster than `pip`](https://medium.com/@kacperwlodarczyk/uv-the-rust-powered-python-package-manager-thats-115x-faster-than-pip-4596785e40bc),
 in the time it takes to run `pip install` on your next project you can probabaly read
 this post and learn all the basics to get started.
+[^uv-pack]: when you `uv remove` something, no dangling packages are left behind,
+you can inspect after with `uv tree`
 
 # installation
 macOS and Linux: `curl -LsSf https://astral.sh/uv/install.sh | sh`
@@ -86,10 +91,51 @@ package on your existing project to have uv manage the dependencies
 uvx migrate-to-uv
 ```
 you can add the `--dry-run` flag to see what it would do but basically
-it will read your `requirements.txt` and create a `pyproject.toml`
+it will read your `requirements.txt` (and also removes it) and create a `pyproject.toml`[^pyproject]
 and a `uv.lock` file[^uv-lock] for your project.
+
+and if you need to export the environment back to `requirements.txt` you could[^ref-export]:
+```bash
+uv export --no-hashes --format requirements-txt > requirements.txt
+```
 
 [^uv-lock]: the [lockfile](https://docs.astral.sh/uv/concepts/projects/layout/#the-lockfile)
 contains the exact resolved versions that are installed
 in the project environment and is meant to be checked into version control;
 So that it can be easily recreated else where with a [`uv sync`](https://docs.astral.sh/uv/reference/cli/#uv-sync)
+
+[^pyproject]: for an existing project, you might want to update the value for `name`
+and also add the `requires-python` field (with a value like `>=3.8`)
+
+[^ref-export]: see [this stackoverflow answer](https://stackoverflow.com/a/79412852) for details
+
+# New Projects
+you can run [`uv init new-project`](https://docs.astral.sh/uv/guides/projects/#creating-a-new-project)
+to have uv create everything for you.
+
+there are a few different variations:
+
+* an [Application](https://docs.astral.sh/uv/concepts/projects/init/#applications)
+    * great for writing scripts, web services, and CLI tools
+    * it's the default when you run `uv init example-app` (the `--app` flag is implied)
+* a Package: for things that are mean to be "pip-installable"
+    * [Application](https://docs.astral.sh/uv/concepts/projects/init/#packaged-applications)
+        * running `uv init --package example-pkg` will create a setup with a build system and command definition.
+    * [Library](https://docs.astral.sh/uv/concepts/projects/init/#libraries)
+        * library provides functions and objects for other projects to `import`
+        * can be created with `uv init --lib example-lib` (`--lib` implies `--package`)
+        * a build system is defined but not a command definition
+
+## a minimal project
+using the `--bare` flag gives you the [most basic project structure](https://docs.astral.sh/uv/concepts/projects/init/#creating-a-minimal-project).
+Here's an example:
+```bash
+mkdir new-project
+cd new-project
+uv init --bare              # this only creates pyproject.toml
+uv venv --python 3.12       # this creates an environment at .venv using python 3.12
+uv add awesome-package1     # add your project's requirements
+```
+
+# References
+* [Working on Projects](https://docs.astral.sh/uv/guides/projects/#next-steps)
