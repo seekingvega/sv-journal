@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/notebooks/transformers-models.html",
       "/notebooks/my-toolchain.html",
       "/notebooks/HuggingFace-models-tutorial.html",
       "/notebooks/using-uv.html",

@@ -29,6 +29,32 @@ code-annotations: hover
 # hardware
 MBP 2023 with M2 Max & 32GB RAM
 
+# Browser
+some of the key features I look for in a browser are:
+
+* [workspaces](https://vivaldi.com/features/workspaces/) and
+[tab stacking](https://help.vivaldi.com/desktop/tabs/tab-stacks/)
+because I use tons of tabs.
+* [keyboard shortcuts](https://help.vivaldi.com/desktop/shortcuts/keyboard-shortcuts/)
+to quickly help me switch between all the workspaces
+* [Quick Commands](https://help.vivaldi.com/desktop/shortcuts/quick-commands/)
+because who got mental space to remember how to update a setting (like keyboard shortscuts)
+* [Sync across devices](https://vivaldi.com/blog/tips/desktop-tips/tip-23/): mobile, desktop(s)
+
+And so therefore I use:
+
+* Vivaldi[^vivaldi-grieve] : `brew install --cask vivaldi`
+* Opera Air[^opera-air-note]: `brew install --cask opera-air`
+
+
+[^vivaldi-grieve]: the sync feature only started to work in 2024,
+the browser do crash unexpectedly on startup from time to time,
+and the RAM management is just okay... although I do use tons of tabs.
+The built in [ProtonVPN](https://vivaldi.com/protonvpn/) is kinda cool.
+[^opera-air-note]: because I ❤️ mindfulness, the built in
+[Aria AI](https://www.opera.com/nb/features/aria) is pretty good,
+and it basically have all the features above
+
 # Editor
 My weapon of choice is [zed](https://github.com/zed-industries/zed) which
 is actually pretty great for [agentic coding](https://zed.dev/agentic) and
