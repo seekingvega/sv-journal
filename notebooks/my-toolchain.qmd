@@ -95,9 +95,22 @@ brew install --cask zed # <1>
     Format selection [examples are available](https://github.com/yt-dlp/yt-dlp?tab=readme-ov-file#format-selection-examples).
     * install: `pipx install "yt-dlp[default]"`
 
-# python environments
-use to managed using `pyenv` and the `virtualenvwrapper` but
-for python based cli I use `pipx`. See [here](https://gist.github.com/ohjho/8e2556d786b132d724b3914728c7c82f)
-for details on full setup.
+* [asciinema](https://docs.asciinema.org/getting-started/)
+    * create recording of terminal sessions that's easy to share
+    * sharing can be done by embedding the asciinema player[^asciinema-note] or
+    converting the recording to gif using [`agg`](https://willschenk.com/labnotes/2025/asciinema_for_terminal_recordings/#headline-2)[^agg-note]
+    * install: `pipx install asciinema`
 
-As of 2025 however, I manage both python versions and virtual environments with [uv](using-uv.qmd)
+[^asciinema-note]: you will need to upload the created recording, and
+the [asciinema player](https://docs.asciinema.org/getting-started/#sharing)
+is purpose-built for sharing terminal sessions.
+[^agg-note]: you will need to install `agg` using `brew install agg`
+
+# python environments
+As of 2025[^pre-2024-note], I manage both python versions and virtual environments with [uv](using-uv.qmd)
+
+python based CLIs using [`pipx`](https://github.com/pypa/pipx).
+
+[^pre-2024-note]: I use to manage using `pyenv` and the `virtualenvwrapper`,
+see [here](https://gist.github.com/ohjho/8e2556d786b132d724b3914728c7c82f)
+for an archive of that setup.
