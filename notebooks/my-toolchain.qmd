@@ -4,7 +4,7 @@ abstract: digital EDC of a GADA scientist
 date: last-modified
 date-format: full
 author: im@johnho.ca
-image: https://i.giphy.com/media/gjb6WhwLtKTYxpIaJZ/giphy.gif
+image: https://i.giphy.com/media/XMkUvnXQXSWyN7upE3/giphy.gif
 license: "CC BY-NC-SA"
 categories:
     - guide
