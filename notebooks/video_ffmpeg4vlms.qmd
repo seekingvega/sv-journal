@@ -1,0 +1,138 @@
+---
+title: "Video Frames Extraction for VLM"
+abstract: using ffmpeg for fast and effective frames extraction for VLM
+date: 8/28/2025
+date-format: full
+author: im@johnho.ca
+categories:
+    - ffmpeg
+    - CLI
+    - LLM
+    - micro-project
+format:
+    html:
+        mermaid:
+            theme: forest
+            securityLevel: loose
+        toc: true
+        toc-depth: 3
+        toc-expand: 2
+        toc-title: Contents
+        toc-location: left
+        link-external-icon: true
+        link-external-newwindow: true
+draft: false
+execute:
+  echo: false
+code-annotations: hover
+---
+
+# introduction
+
+While some VLM now natively supports video like [Qwen2.5VL](https://huggingface.co/docs/transformers/main/en/model_doc/qwen2_5_vl#notes)
+and [InternVL3](https://huggingface.co/docs/transformers/main/en/model_doc/internvl#video-input)
+when using the [transformers library](https://huggingface.co/docs/transformers/main/en/index),
+using the same models via a third party provider still requires you to
+pass in the video frames individually as base64 encoded strings.
+
+Simon Willison recently added a [llm-video-frames plugin](https://simonwillison.net/2025/May/5/llm-video-frames/)
+to his popular [llm](https://github.com/simonw/llm) python package.
+
+The plugin basically uses ffmpeg to extract frames at the given fps
+and optionally overlay timestamp on top of each frame.
+The interesting part is that he built it using [o4-mini](https://simonwillison.net/2025/May/5/llm-video-frames/#how-i-built-the-plugin-with-o4-mini).
+
+In the spirit of his [bad vibe post](https://simonwillison.net/2025/Aug/20/bad-vibes/):
+
+> what’s the point of vibe coding if at the end of the day i still gotta pay a dev to look at the code anyway. sure it feels kinda cool while i’m typing, like i’m in some flow state or whatever, but when stuff breaks it’s just dead weight. i cant vibe my way through debugging, i cant ship anything that actually matters, and then i’m back to square one pulling out my wallet for someone who actually knows what they’re doing.
+> ~ [u/AssafMalkiIL, on r/vibecoding](https://www.reddit.com/r/vibecoding/comments/1mu6t8z/whats_the_point_of_vibe_coding_if_i_still_have_to/)
+
+I'm gonna make my own python package to do the same thing!
+
+# using FFMPEG
+
+## test video
+to illustrate the video frame sampling we are going to use a 10-second segment
+from [this Youtube video](https://youtu.be/HFLuduKmnW0?si=xjROrsEXMZdlz0hS&t=17)
+starting at the 00:17 mark:
+
+::: {#fig-test-vid}
+![](https://i.giphy.com/media/DqqPvlGAz5enM0LhyO/giphy.gif)
+
+Our Test Video[^test-vid-note]
+:::
+
+[^test-vid-note]: gif generated using
+```
+yt-dlp -f "bv*[ext=mp4][height<1080]" "https://youtu.be/HFLuduKmnW0?si=O5haMmNlZywV-Grn" -o - \
+    | ffmpeg -i pipe:0 -ss 17 -t 12 -f yuv4mpegpipe - \
+    | gifski -o ~/Downloads/100mWR.gif -
+```
+see the [Youtube Video to Giphy post](youtube2giphy.qmd) for more details
+
+## overlaying timestamp
+overlaying a timestamp can be done using the `drawtext` filter:
+```bash
+ffmpeg -ss 17 -i source.mp4 -t 12 \ # <1>
+    -vf "drawtext=text='Timestamp\:%{pts\:hms} \| Frame Number\: %{frame_num}': x=(w-tw)/2: y=h-(2*lh): fontcolor=white: fontsize=20: box=1: boxcolor=0x00000099: boxborderw=5" \
+    output.mp4
+```
+1. as mentioned [above](#test-video), we are only taking a second segment from the source, therefore the `-ss` and `-t` options are used to specify the start time and duration of the segment.
+
+Here's some details of the key parts to this filter:
+
+* `drawtext=text='Timestamp\:%{pts\:hms} \| Frame Number\: %{frame_num}'` overlays the current timestamp and frame number on the video frame.
+* `x` and `y` specify the position of the text on the video frame (here centered at the bottom of the frame)
+* `fontcolor` specifies the color of the text[^fontfile-note]
+* `fontsize` specifies the size of the text
+* `box=1` and `boxcolor` here add a background box around the text,
+currently it's set to semi-transparent but could be set to a solid color (e.g. `boxcolor=black`)
+* `boxborderw` specifies the width of the border around the box
+
+which produce something like this:
+
+::: {#fig-overlay}
+![](https://i.giphy.com/media/0vl21GPi8Xw23Eri06/giphy.gif)
+
+Video Frames with Timestamp and Frame Number overlay
+:::
+
+[^fontfile-note]: The `fontfile` option in FFmpeg's drawtext filter is not mandatory
+if your FFmpeg build is configured with fontconfig support (`--enable-libfontconfig`)
+
+## adding custom FPS
+Because of memory limitations, context window size, and inference time consideration,
+for video understanding tasks we don't normally sample the real FPS of the video.
+On top of that most VLMs are either trained on videos that are sampled uniformly[^uniform-note]
+with some newer models adopting dynamic FPS sampling[^dynamic-note]
+to ensure robustness and adaptability across a wide range of video content
+and frame rates.
+
+That means that for long video understanding, sampling at 1-2 FPS would most likely
+be sufficient. And for short-form content with fast moving scenes (like our example here)
+perhaps a higher sampling rate of 4-8 FPS would be better.
+
+Therefore, a custom FPS value is a key feature and can be easily added to our filter
+with a `fps=<custom_fps>`:
+```
+ffmpeg -ss 17 -i source.mp4 -t 12 \
+    -vf "fps=2, drawtext=text='Timestamp\:%{pts\:hms} \| Frame Number\: %{frame_num}': x=(w-tw)/2: y=h-(2*lh): fontcolor=white: fontsize=20: box=1: boxcolor=0x00000099: boxborderw=5" \
+    output.mp4
+```
+here's a comparing of two resulting videos sampled at 2 and 8 FPS:
+
+::: {#fig-overlay-fps layout-ncol=2}
+
+![`fps=2`](https://i.giphy.com/media/TW57rQvTiEXv11qXP7/giphy.gif){#fig-fps2}
+
+![`fps=8`](https://i.giphy.com/media/F9s5HIpj4142vBPPw4/giphy.gif){#fig-fps8 .preview-image}
+
+Video Frames with Overlay and Custom FPS
+:::
+
+
+[^uniform-note]: the models are typically trained by sampling a fixed number of frames
+evenly distributed across the input video's length, regardless of the original FPS
+(e.g. InternVL3) or 1 FPS as per the case of Gemma 3 and Gemma 3n
+[^dynamic-note]: meaning the number of frames per second sampled from each video varies
+(e.g. Qwen2.5VL)

@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/notebooks/video_ffmpeg4vlms.html",
       "/notebooks/my-toolchain.html",
       "/notebooks/transformers-models.html",
       "/notebooks/HuggingFace-models-tutorial.html",

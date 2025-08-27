@@ -8,7 +8,7 @@
 
 <meta name="author" content="im@johnho.ca">
 
-<title>Video Keyframe Extraction using FFMPEG – SeekingVega Journal</title>
+<title>Video Frames Extraction for VLM – SeekingVega Journal</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -112,8 +146,12 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">introduction</a></li>
-  <li><a href="#i-frames-extraction" id="toc-i-frames-extraction" class="nav-link" data-scroll-target="#i-frames-extraction">I-frames Extraction</a></li>
-  <li><a href="#using-a-filter-to-select-contextual-scene-change" id="toc-using-a-filter-to-select-contextual-scene-change" class="nav-link" data-scroll-target="#using-a-filter-to-select-contextual-scene-change">using a filter to select “Contextual Scene Change”</a></li>
+  <li><a href="#using-ffmpeg" id="toc-using-ffmpeg" class="nav-link" data-scroll-target="#using-ffmpeg">using FFMPEG</a>
+  <ul class="collapse">
+  <li><a href="#test-video" id="toc-test-video" class="nav-link" data-scroll-target="#test-video">test video</a></li>
+  <li><a href="#overlaying-timestamp" id="toc-overlaying-timestamp" class="nav-link" data-scroll-target="#overlaying-timestamp">overlaying timestamp</a></li>
+  <li><a href="#adding-custom-fps" id="toc-adding-custom-fps" class="nav-link" data-scroll-target="#adding-custom-fps">adding custom FPS</a></li>
+  </ul></li>
   </ul>
 </nav>
 </nav>
@@ -126,10 +164,12 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Video Keyframe Extraction using FFMPEG</h1>
+<h1 class="title">Video Frames Extraction for VLM</h1>
   <div class="quarto-categories">
     <div class="quarto-category">ffmpeg</div>
     <div class="quarto-category">CLI</div>
+    <div class="quarto-category">LLM</div>
+    <div class="quarto-category">micro-project</div>
   </div>
   </div>
 
@@ -147,7 +187,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Thursday, January 30, 2025</p>
+      <p class="date">Thursday, August 28, 2025</p>
     </div>
   </div>
   
@@ -157,7 +197,7 @@ ul.task-list li input[type="checkbox"] {
 <div>
   <div class="abstract">
     <div class="block-title">Abstract</div>
-    using ffmpeg for fast and effective keyframe extraction
+    using ffmpeg for fast and effective frames extraction for VLM
   </div>
 </div>
 
@@ -165,67 +205,132 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">introduction</h2>
-<p>Processing videos are costly because of the large amount of images it contains. But luckily, thanks to video compression algorithm (as explained in much better details in <a href="https://jdhao.github.io/2021/12/25/ffmpeg-extract-key-frame-video/">this post</a>) we can use <code>ffmpeg</code> to quickly get out the keyframes (aka I-frames).</p>
-<div id="fig-demo" class="preview-image quarto-float quarto-figure quarto-figure-center anchored">
+<section id="introduction" class="level1">
+<h1>introduction</h1>
+<p>While some VLM now natively supports video like <a href="https://huggingface.co/docs/transformers/main/en/model_doc/qwen2_5_vl#notes">Qwen2.5VL</a> and <a href="https://huggingface.co/docs/transformers/main/en/model_doc/internvl#video-input">InternVL3</a> when using the <a href="https://huggingface.co/docs/transformers/main/en/index">transformers library</a>, using the same models via a third party provider still requires you to pass in the video frames individually as base64 encoded strings.</p>
+<p>Simon Willison recently added a <a href="https://simonwillison.net/2025/May/5/llm-video-frames/">llm-video-frames plugin</a> to his popular <a href="https://github.com/simonw/llm">llm</a> python package.</p>
+<p>The plugin basically uses ffmpeg to extract frames at the given fps and optionally overlay timestamp on top of each frame. The interesting part is that he built it using <a href="https://simonwillison.net/2025/May/5/llm-video-frames/#how-i-built-the-plugin-with-o4-mini">o4-mini</a>.</p>
+<p>In the spirit of his <a href="https://simonwillison.net/2025/Aug/20/bad-vibes/">bad vibe post</a>:</p>
+<blockquote class="blockquote">
+<dl>
+<dt>what’s the point of vibe coding if at the end of the day i still gotta pay a dev to look at the code anyway. sure it feels kinda cool while i’m typing, like i’m in some flow state or whatever, but when stuff breaks it’s just dead weight. i cant vibe my way through debugging, i cant ship anything that actually matters, and then i’m back to square one pulling out my wallet for someone who actually knows what they’re doing.</dt>
+<dd>
+<a href="https://www.reddit.com/r/vibecoding/comments/1mu6t8z/whats_the_point_of_vibe_coding_if_i_still_have_to/">u/AssafMalkiIL, on r/vibecoding</a>
+</dd>
+</dl>
+</blockquote>
+<p>I’m gonna make my own python package to do the same thing!</p>
+</section>
+<section id="using-ffmpeg" class="level1">
+<h1>using FFMPEG</h1>
+<section id="test-video" class="level2">
+<h2 class="anchored" data-anchor-id="test-video">test video</h2>
+<p>to illustrate the video frame sampling we are going to use a 10-second segment from <a href="https://youtu.be/HFLuduKmnW0?si=xjROrsEXMZdlz0hS&amp;t=17">this Youtube video</a> starting at the 00:17 mark:</p>
+<div id="fig-test-vid" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-demo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*sA0nxYotnQAkBYUiydUwXQ.jpeg" class="preview-image img-fluid figure-img">
+<div aria-describedby="fig-test-vid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://i.giphy.com/media/DqqPvlGAz5enM0LhyO/giphy.gif" class="img-fluid figure-img">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-demo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Visualizing i-frames in a sequence of video frames<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-test-vid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Our Test Video<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>
 </figcaption>
 </figure>
 </div>
-<p>I-frames are basically the highest quality images in a video. The frames surrounding them only stores the “differences” w.r.t. the I-frames.</p>
 </section>
-<section id="i-frames-extraction" class="level2">
-<h2 class="anchored" data-anchor-id="i-frames-extraction">I-frames Extraction</h2>
-<pre><code>ffmpeg -skip_frame nokey -i your_video.mp4 \
-    -vsync 0 -frame_pts true output/dir/iframe_%d.jpg</code></pre>
+<section id="overlaying-timestamp" class="level2">
+<h2 class="anchored" data-anchor-id="overlaying-timestamp">overlaying timestamp</h2>
+<p>overlaying a timestamp can be done using the <code>drawtext</code> filter:</p>
+<div class="sourceCode" id="annotated-cell-1"><pre class="sourceCode bash code-annotation-code code-with-copy code-annotated"><code class="sourceCode bash"><button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1">1</button><span id="annotated-cell-1-1" class="code-annotation-target"><a href="#annotated-cell-1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ffmpeg</span> <span class="at">-ss</span> 17 <span class="at">-i</span> source.mp4 <span class="at">-t</span> 12 <span class="dt">\</span></span>
+<span id="annotated-cell-1-2"><a href="#annotated-cell-1-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">-vf</span> <span class="st">"drawtext=text='Timestamp\:%{pts\:hms} \| Frame Number\: %{frame_num}': x=(w-tw)/2: y=h-(2*lh): fontcolor=white: fontsize=20: box=1: boxcolor=0x00000099: boxborderw=5"</span> <span class="dt">\</span></span>
+<span id="annotated-cell-1-3"><a href="#annotated-cell-1-3" aria-hidden="true" tabindex="-1"></a>    output.mp4</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="1" data-code-annotation="1">as mentioned <a href="#test-video">above</a>, we are only taking a second segment from the source, therefore the <code>-ss</code> and <code>-t</code> options are used to specify the start time and duration of the segment.</span>
+</dd>
+</dl>
+<p>Here’s some details of the key parts to this filter:</p>
 <ul>
-<li><code>skip_frame</code> tells the decoder to process only keyframes</li>
-<li><code>-vsync 0</code> preserves timestamps</li>
-<li><code>-frame_pts</code> set the output file’s <code>%d</code> to each keyframe’s presentation timestamp (PTS)
-<ul>
-<li>so to compute the actual timestamp, for example <code>iframe_75.jpg</code> with a fps of 30, the iframe’s timestamp would be 2.50 seconds</li>
-<li>you can read more about it <a href="https://superuser.com/a/1421195">here</a> and <a href="https://stackoverflow.com/a/56999262">here</a></li>
-</ul></li>
+<li><code>drawtext=text='Timestamp\:%{pts\:hms} \| Frame Number\: %{frame_num}'</code> overlays the current timestamp and frame number on the video frame.</li>
+<li><code>x</code> and <code>y</code> specify the position of the text on the video frame (here centered at the bottom of the frame)</li>
+<li><code>fontcolor</code> specifies the color of the text<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></li>
+<li><code>fontsize</code> specifies the size of the text</li>
+<li><code>box=1</code> and <code>boxcolor</code> here add a background box around the text, currently it’s set to semi-transparent but could be set to a solid color (e.g.&nbsp;<code>boxcolor=black</code>)</li>
+<li><code>boxborderw</code> specifies the width of the border around the box</li>
 </ul>
+<p>which produce something like this:</p>
+<div id="fig-overlay" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-overlay-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://i.giphy.com/media/0vl21GPi8Xw23Eri06/giphy.gif" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-overlay-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Video Frames with Timestamp and Frame Number overlay
+</figcaption>
+</figure>
+</div>
 </section>
-<section id="using-a-filter-to-select-contextual-scene-change" class="level2">
-<h2 class="anchored" data-anchor-id="using-a-filter-to-select-contextual-scene-change">using a filter to select “Contextual Scene Change”</h2>
-<p>no need for OpenCV, ffmpeg can do this too with a little filter action:</p>
-<pre><code>ffmpeg -i your_video.mp4 \
-    -vf "select='gt(scene,0.3)'"
-    -vsync 0 -frame_pts true output/dir/kframe_%d.jpg</code></pre>
-<ul>
-<li>the value for <code>scene</code> should be a float between 0 and 1 and it measures the pixel level difference between two frames. So here our threshold is 30%</li>
-</ul>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<section id="adding-custom-fps" class="level2">
+<h2 class="anchored" data-anchor-id="adding-custom-fps">adding custom FPS</h2>
+<p>Because of memory limitations, context window size, and inference time consideration, for video understanding tasks we don’t normally sample the real FPS of the video. On top of that most VLMs are either trained on videos that are sampled uniformly<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> with some newer models adopting dynamic FPS sampling<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> to ensure robustness and adaptability across a wide range of video content and frame rates.</p>
+<p>That means that for long video understanding, sampling at 1-2 FPS would most likely be sufficient. And for short-form content with fast moving scenes (like our example here) perhaps a higher sampling rate of 4-8 FPS would be better.</p>
+<p>Therefore, a custom FPS value is a key feature and can be easily added to our filter with a <code>fps=&lt;custom_fps&gt;</code>:</p>
+<pre><code>ffmpeg -ss 17 -i source.mp4 -t 12 \
+    -vf "fps=2, drawtext=text='Timestamp\:%{pts\:hms} \| Frame Number\: %{frame_num}': x=(w-tw)/2: y=h-(2*lh): fontcolor=white: fontsize=20: box=1: boxcolor=0x00000099: boxborderw=5" \
+    output.mp4</code></pre>
+<p>here’s a comparing of two resulting videos sampled at 2 and 8 FPS:</p>
+<div id="fig-overlay-fps" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-overlay-fps-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-overlay-fps" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-fps2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-fps2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://i.giphy.com/media/TW57rQvTiEXv11qXP7/giphy.gif" class="img-fluid figure-img" data-ref-parent="fig-overlay-fps">
 </div>
-<div class="callout-title-container flex-fill">
-i-frames already have “Contextual Scene Changing” frames
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-fps2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) <code>fps=2</code>
+</figcaption>
+</figure>
 </div>
 </div>
-<div class="callout-body-container callout-body">
-<p>from personal testing, there are a lot more i-frames than there are “Contextual Scene Changing” frames but they also include them. So there are no need to run both.</p>
-<p>If your want to save downstream processing time, then filter for “Contextual Scene Changing” Frames. Otherwise, just use i-frames to be as inclusive as possible!</p>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-overlay-fps" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-fps8" class="preview-image quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-fps8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://i.giphy.com/media/F9s5HIpj4142vBPPw4/giphy.gif" class="preview-image img-fluid figure-img" data-ref-parent="fig-overlay-fps">
 </div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-fps8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) <code>fps=8</code>
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-overlay-fps-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Video Frames with Overlay and Custom FPS
+</figcaption>
+</figure>
 </div>
 
 
+</section>
 </section>
 
 
 <div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>image <a href="https://medium.com/@publiciscommerce/extracting-i-frames-keyframes-from-a-video-using-ffmpeg-cb7f2ae3add1">source</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>gif generated using</p>
+<pre><code>yt-dlp -f "bv*[ext=mp4][height&lt;1080]" "https://youtu.be/HFLuduKmnW0?si=O5haMmNlZywV-Grn" -o - \
+| ffmpeg -i pipe:0 -ss 17 -t 12 -f yuv4mpegpipe - \
+| gifski -o ~/Downloads/100mWR.gif -</code></pre>
+<p>see the <a href="../notebooks/youtube2giphy.html">Youtube Video to Giphy post</a> for more details<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>The <code>fontfile</code> option in FFmpeg’s drawtext filter is not mandatory if your FFmpeg build is configured with fontconfig support (<code>--enable-libfontconfig</code>)<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>the models are typically trained by sampling a fixed number of frames evenly distributed across the input video’s length, regardless of the original FPS (e.g.&nbsp;InternVL3) or 1 FPS as per the case of Gemma 3 and Gemma 3n<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>meaning the number of frames per second sampled from each video varies (e.g.&nbsp;Qwen2.5VL)<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -593,25 +698,64 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         }
       };
     }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
+      const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+      for (let i=0; i<annoteTargets.length; i++) {
+        const annoteTarget = annoteTargets[i];
+        const targetCell = annoteTarget.getAttribute("data-target-cell");
+        const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+        const contentFn = () => {
+          const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          if (content) {
+            const tipContent = content.cloneNode(true);
+            tipContent.classList.add("code-annotation-tip-content");
+            return tipContent.outerHTML;
           }
-        });
+        }
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          onShow: (instance) => {
+            selectCodeLines(instance.reference);
+            instance.reference.classList.add('code-annotation-active');
+            window.tippy.hideAll();
+          },
+          onHide: (instance) => {
+            unselectCodeLines();
+            instance.reference.classList.remove('code-annotation-active');
+          },
+          maxWidth: 300,
+          delay: [50, 0],
+          duration: [200, 0],
+          offset: [5, 10],
+          arrow: true,
+          appendTo: function(el) {
+            return el.parentElement.parentElement.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'quarto',
+          placement: 'right',
+          popperOptions: {
+            modifiers: [
+            {
+              name: 'flip',
+              options: {
+                flipVariations: false, // true by default
+                allowedAutoPlacements: ['right'],
+                fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+              },
+            },
+            {
+              name: 'preventOverflow',
+              options: {
+                mainAxis: false,
+                altAxis: false
+              }
+            }
+            ]        
+          }      
+        };
+        window.tippy(annoteTarget, config); 
       }
   const findCites = (el) => {
     const parentEl = el.parentElement;
