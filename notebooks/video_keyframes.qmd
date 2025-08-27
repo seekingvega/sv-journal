@@ -31,8 +31,16 @@ But luckily, thanks to video compression algorithm
 (as explained in much better details in [this post](https://jdhao.github.io/2021/12/25/ffmpeg-extract-key-frame-video/))
 we can use `ffmpeg` to quickly get out the keyframes (aka I-frames).
 
+::: {#fig-demo}
+![](https://miro.medium.com/v2/resize:fit:720/format:webp/1*sA0nxYotnQAkBYUiydUwXQ.jpeg){.preview-image}
+
+Visualizing i-frames in a sequence of video frames[^demo-image-note]
+:::
+
 I-frames are basically the highest quality images in a video. The frames
 surrounding them only stores the "differences" w.r.t. the I-frames.
+
+[^demo-image-note]: image [source](https://medium.com/@publiciscommerce/extracting-i-frames-keyframes-from-a-video-using-ffmpeg-cb7f2ae3add1)
 
 ## I-frames Extraction
 ```
