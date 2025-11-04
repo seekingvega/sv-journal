@@ -75,6 +75,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-11c98a4cd10cbe71437da3257ed48a1e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -103,6 +106,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -151,7 +183,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#test-video" id="toc-test-video" class="nav-link" data-scroll-target="#test-video">test video</a></li>
   <li><a href="#overlaying-timestamp" id="toc-overlaying-timestamp" class="nav-link" data-scroll-target="#overlaying-timestamp">overlaying timestamp</a></li>
   <li><a href="#adding-custom-fps" id="toc-adding-custom-fps" class="nav-link" data-scroll-target="#adding-custom-fps">adding custom FPS</a></li>
+  <li><a href="#frame-resolution" id="toc-frame-resolution" class="nav-link" data-scroll-target="#frame-resolution">frame resolution</a></li>
   </ul></li>
+  <li><a href="#dynamic-frame-rate-and-resolution" id="toc-dynamic-frame-rate-and-resolution" class="nav-link" data-scroll-target="#dynamic-frame-rate-and-resolution">dynamic frame rate and resolution</a>
+  <ul class="collapse">
+  <li><a href="#understading-image-token-cost" id="toc-understading-image-token-cost" class="nav-link" data-scroll-target="#understading-image-token-cost">Understading Image Token Cost</a></li>
+  <li><a href="#picking-a-vlm-for-video-understanding" id="toc-picking-a-vlm-for-video-understanding" class="nav-link" data-scroll-target="#picking-a-vlm-for-video-understanding">Picking a VLM for Video Understanding</a></li>
+  <li><a href="#future-proving" id="toc-future-proving" class="nav-link" data-scroll-target="#future-proving">future proving</a></li>
+  </ul></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
   </ul>
 </nav>
 </nav>
@@ -160,7 +200,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -212,14 +252,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The plugin basically uses ffmpeg to extract frames at the given fps and optionally overlay timestamp on top of each frame. The interesting part is that he built it using <a href="https://simonwillison.net/2025/May/5/llm-video-frames/#how-i-built-the-plugin-with-o4-mini">o4-mini</a>.</p>
 <p>In the spirit of his <a href="https://simonwillison.net/2025/Aug/20/bad-vibes/">bad vibe post</a>:</p>
 <blockquote class="blockquote">
-<dl>
-<dt>what’s the point of vibe coding if at the end of the day i still gotta pay a dev to look at the code anyway. sure it feels kinda cool while i’m typing, like i’m in some flow state or whatever, but when stuff breaks it’s just dead weight. i cant vibe my way through debugging, i cant ship anything that actually matters, and then i’m back to square one pulling out my wallet for someone who actually knows what they’re doing.</dt>
-<dd>
-<a href="https://www.reddit.com/r/vibecoding/comments/1mu6t8z/whats_the_point_of_vibe_coding_if_i_still_have_to/">u/AssafMalkiIL, on r/vibecoding</a>
-</dd>
-</dl>
+<p>what’s the point of vibe coding if at the end of the day i still gotta pay a dev to look at the code anyway. sure it feels kinda cool while i’m typing, like i’m in some flow state or whatever, but when stuff breaks it’s just dead weight. i cant vibe my way through debugging, i cant ship anything that actually matters, and then i’m back to square one pulling out my wallet for someone who actually knows what they’re doing. <a href="https://www.reddit.com/r/vibecoding/comments/1mu6t8z/whats_the_point_of_vibe_coding_if_i_still_have_to/">u/AssafMalkiIL, on r/vibecoding</a></p>
 </blockquote>
-<p>I’m gonna make my own python package to do the same thing!</p>
+<p>and how <a href="https://simonwillison.net/2025/Aug/21/matt-garman/">replacing juniors with AI might be a bad idea</a>:</p>
+<blockquote class="blockquote">
+<p>I was at a leadership group and people were telling me “We think that with AI we can replace all of our junior people in our company.” I was like, “That’s the dumbest thing I’ve ever heard. They’re probably the least expensive employees you have, they’re the most leaned into your AI tools, and how’s that going to work when you go 10 years in the future and you have no one that has built up or learned anything? <br><a href="https://www.linkedin.com/in/mattgarman/">Matt Garman</a>, CEO, Amazon Web Services</p>
+</blockquote>
+<p>Let’s build our own solution using FFMPEG!</p>
 </section>
 <section id="using-ffmpeg" class="level1">
 <h1>using FFMPEG</h1>
@@ -229,7 +268,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="fig-test-vid" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-test-vid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://i.giphy.com/media/DqqPvlGAz5enM0LhyO/giphy.gif" class="img-fluid figure-img">
+<a href="https://i.giphy.com/media/DqqPvlGAz5enM0LhyO/giphy.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1: Our Test Video"><img src="https://i.giphy.com/media/DqqPvlGAz5enM0LhyO/giphy.gif" class="img-fluid figure-img" width="650"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-test-vid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1: Our Test Video<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>
@@ -262,7 +301,7 @@ Figure&nbsp;1: Our Test Video<a href="#fn1" class="footnote-ref" id="fnref1" rol
 <div id="fig-overlay" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-overlay-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://i.giphy.com/media/0vl21GPi8Xw23Eri06/giphy.gif" class="img-fluid figure-img">
+<a href="https://i.giphy.com/media/0vl21GPi8Xw23Eri06/giphy.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;2: Video Frames with Timestamp and Frame Number overlay"><img src="https://i.giphy.com/media/0vl21GPi8Xw23Eri06/giphy.gif" class="img-fluid figure-img" width="650"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-overlay-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;2: Video Frames with Timestamp and Frame Number overlay
@@ -275,9 +314,9 @@ Figure&nbsp;2: Video Frames with Timestamp and Frame Number overlay
 <p>Because of memory limitations, context window size, and inference time consideration, for video understanding tasks we don’t normally sample the real FPS of the video. On top of that most VLMs are either trained on videos that are sampled uniformly<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> with some newer models adopting dynamic FPS sampling<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> to ensure robustness and adaptability across a wide range of video content and frame rates.</p>
 <p>That means that for long video understanding, sampling at 1-2 FPS would most likely be sufficient. And for short-form content with fast moving scenes (like our example here) perhaps a higher sampling rate of 4-8 FPS would be better.</p>
 <p>Therefore, a custom FPS value is a key feature and can be easily added to our filter with a <code>fps=&lt;custom_fps&gt;</code>:</p>
-<pre><code>ffmpeg -ss 17 -i source.mp4 -t 12 \
-    -vf "fps=2, drawtext=text='Timestamp\:%{pts\:hms} \| Frame Number\: %{frame_num}': x=(w-tw)/2: y=h-(2*lh): fontcolor=white: fontsize=20: box=1: boxcolor=0x00000099: boxborderw=5" \
-    output.mp4</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ffmpeg</span> <span class="at">-ss</span> 17 <span class="at">-i</span> source.mp4 <span class="at">-t</span> 12 <span class="dt">\</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">-vf</span> <span class="st">"fps=2, drawtext=text='Timestamp\:%{pts\:hms} \| Frame Number\: %{frame_num}': x=(w-tw)/2: y=h-(2*lh): fontcolor=white: fontsize=20: box=1: boxcolor=0x00000099: boxborderw=5"</span> <span class="dt">\</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    output.mp4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>here’s a comparing of two resulting videos sampled at 2 and 8 FPS:</p>
 <div id="fig-overlay-fps" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
@@ -287,7 +326,7 @@ Figure&nbsp;2: Video Frames with Timestamp and Frame Number overlay
 <div id="fig-fps2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-fps2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://i.giphy.com/media/TW57rQvTiEXv11qXP7/giphy.gif" class="img-fluid figure-img" data-ref-parent="fig-overlay-fps">
+<a href="https://i.giphy.com/media/TW57rQvTiEXv11qXP7/giphy.gif" class="lightbox" data-gallery="fig-overlay-fps" title="Figure&nbsp;3&nbsp;(a): fps=2"><img src="https://i.giphy.com/media/TW57rQvTiEXv11qXP7/giphy.gif" class="img-fluid figure-img" data-ref-parent="fig-overlay-fps"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-fps2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) <code>fps=2</code>
@@ -299,7 +338,7 @@ Figure&nbsp;2: Video Frames with Timestamp and Frame Number overlay
 <div id="fig-fps8" class="preview-image quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-fps8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://i.giphy.com/media/F9s5HIpj4142vBPPw4/giphy.gif" class="preview-image img-fluid figure-img" data-ref-parent="fig-overlay-fps">
+<a href="https://i.giphy.com/media/F9s5HIpj4142vBPPw4/giphy.gif" class="lightbox" data-gallery="fig-overlay-fps" title="Figure&nbsp;3&nbsp;(b): fps=8"><img src="https://i.giphy.com/media/F9s5HIpj4142vBPPw4/giphy.gif" class="preview-image img-fluid figure-img" data-ref-parent="fig-overlay-fps"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-fps8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) <code>fps=8</code>
@@ -314,9 +353,192 @@ Figure&nbsp;3: Video Frames with Overlay and Custom FPS
 </figcaption>
 </figure>
 </div>
-
-
 </section>
+<section id="frame-resolution" class="level2">
+<h2 class="anchored" data-anchor-id="frame-resolution">frame resolution</h2>
+<p>aside from frame rate, it’s also worth considering rescaling the frame resolution. For example to 1080p resolution, we can set the short edge to 1080 by adding <code>scale='if(lt(iw, ih), 1080, -2)':'if(lt(ih, iw), 1080, -2)'</code> to the filter <a href="#adding-custom-fps">above</a>:</p>
+<div class="sourceCode" id="annotated-cell-3"><pre class="sourceCode bash code-annotation-code code-with-copy"><code class="sourceCode bash"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ffmpeg</span> <span class="at">-ss</span> 17 <span class="at">-i</span> source.mp4 <span class="at">-t</span> 12 <span class="dt">\</span></span>
+<span id="annotated-cell-3-2"><a href="#annotated-cell-3-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">-vf</span> <span class="st">"scale='if(lt(iw, ih), 1080, -2)':'if(lt(ih, iw), 1080, -2)', fps=2, drawtext=text='Timestamp\:%{pts\:hms} \| Frame Number\: %{frame_num}': x=(w-tw)/2: y=h-(2*lh): fontcolor=white: fontsize=20: box=1: boxcolor=0x00000099: boxborderw=5"</span> <span class="dt">\</span></span>
+<span id="annotated-cell-3-3"><a href="#annotated-cell-3-3" aria-hidden="true" tabindex="-1"></a>    output.mp4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Most VLM these days utilize an “adaptive windowing algorithm”<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> on image inference which effectively enables the model to zoom in on smaller details in the images<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>. So one might be tempted to provide the highest image resolution.</p>
+<p>For instance, Qwen2.5VL’s visual input limit per image is 16,384-token<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>, which means that you could fit a 4k image (~12,000-token) comfortably. This is ideal when working with single (or few images).</p>
+<p>However, when working with videos, we need to consider the model’s context window size. At 32k-token context window<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>, we could only fit about 10 4k images or around 50 1080p images.</p>
+</section>
+</section>
+<section id="dynamic-frame-rate-and-resolution" class="level1 page-columns page-full">
+<h1>dynamic frame rate and resolution</h1>
+<p>So in practice, the right frame rate and resolution to use will depend on the use-case:</p>
+<ul>
+<li><strong>images</strong>: highest resolutions possible to ensure granular details are captured in the images, taking full advantage of the model’s “adaptive windowing algorithm”.</li>
+<li><strong>videos</strong>:
+<ul>
+<li>resolution: max 1080p or maybe even 720p for longer videos since most videos these days are delivered as mobile content</li>
+<li>frame rate: adaptive
+<ul>
+<li>higher (4-8 fps) for shorter, fast pace videos (&lt;1 minutes)</li>
+<li>lower (1-2 fps) for longer videos (&gt;3 minutes)</li>
+</ul></li>
+</ul></li>
+</ul>
+<section id="understading-image-token-cost" class="level2">
+<h2 class="anchored" data-anchor-id="understading-image-token-cost">Understading Image Token Cost</h2>
+<p>To understanding VLM’s image cost, one have to first understand that Vision Transformer process images by dividing it up into patches<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a>.</p>
+<div id="fig-vit-image-patches" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-vit-image-patches-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="https://i.giphy.com/media/VAPCjZQhZprL9WQopv/giphy.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;4: Vision Transformers convert an image to tokens via patch embeddings (source)"><img src="https://i.giphy.com/media/VAPCjZQhZprL9WQopv/giphy.gif" class="img-fluid figure-img" width="650"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-vit-image-patches-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Vision Transformers convert an image to tokens via patch embeddings (<a href="https://www.youtube.com/watch?v=lBicvB4iyYU">source</a>)
+</figcaption>
+</figure>
+</div>
+<p>And so the computation of tokens per image is fairly simple…</p>
+<p>Let:</p>
+<ul>
+<li><span class="math inline">\(W\)</span> = image width (pixels)</li>
+<li><span class="math inline">\(H\)</span> = image height (pixels)</li>
+<li><span class="math inline">\(P\)</span> = patch size (pixels per side, assume square patches)</li>
+<li><span class="math inline">\(T\)</span> = tokens per patch (constant, e.g., 258 for Gemini models)</li>
+</ul>
+<p>Then, the total number of image tokens is: <span class="math display">\[
+\text{Image Tokens} = [\frac{W}{P}] \times [\frac{H}{P}] \times T
+\]</span></p>
+<p>But the complication comes from the fact that each model has its own:</p>
+<ul>
+<li>patch size<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></li>
+<li>tokens per patch<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a></li>
+<li>context windown size<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></li>
+<li>max image size or token limit<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a></li>
+<li>max images<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a></li>
+</ul>
+</section>
+<section id="picking-a-vlm-for-video-understanding" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="picking-a-vlm-for-video-understanding">Picking a VLM for Video Understanding</h2>
+<p>picking a VLM for video understanding then, is a puzzle of optimizing for:</p>
+<ol type="1">
+<li><strong>Capability</strong>: the model has to be capable enough to describe and extract information with temporal awareness</li>
+<li><strong>Context Window and Token Limits</strong>: has to be large enough to handle couple hundreds (short form videos &lt;2-minute) to upward of a thousand frames (longer videos &gt;2-minute)</li>
+<li><strong>Cost</strong>: has to be economical enough to process videos at scale<a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a></li>
+</ol>
+<p>Taking into consideration all three factors, the best model at the time of writing is <a href="https://openrouter.ai/google/gemini-2.0-flash-001"><strong>Gemini 2.0 Flash</strong></a><a href="#fn16" class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a>.</p>
+<p>And here’s a brief comparsion of the cost and frame count against different video lengths for <strong>Gemini 2.0 Flash</strong><a href="#fn17" class="footnote-ref" id="fnref17" role="doc-noteref"><sup>17</sup></a> assuming a dynamic frame sampling strategy:</p>
+<div class="column-page">
+<div id="tbl-res-context-window" class="column striped hover responsive-sm quarto-float quarto-figure quarto-figure-center anchored" style="width:45%;">
+<figure class="quarto-float quarto-float-tbl figure">
+<div aria-describedby="tbl-res-context-window-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="table-responsive-sm">
+<table class="column table-striped table-hover table">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 21%">
+<col style="width: 22%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Resolution</th>
+<th>Tiles per Image</th>
+<th>Tokens per Image</th>
+<th>Images in Context Window</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>4K (3840×2160)</td>
+<td>15</td>
+<td>3,870</td>
+<td>258</td>
+</tr>
+<tr class="even">
+<td>1080p (1920×1080)</td>
+<td>6</td>
+<td>1,548</td>
+<td>646</td>
+</tr>
+<tr class="odd">
+<td>720p (1280×720)</td>
+<td>2</td>
+<td>516</td>
+<td>1,937</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-tbl" id="tbl-res-context-window-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Images-Limit<a href="#fn18" class="footnote-ref" id="fnref18" role="doc-noteref"><sup>18</sup></a> vs Image-resolution
+</figcaption>
+</figure>
+</div>
+<div class="column" style="width:5%;">
+
+</div>
+<div id="tbl-gemini-video-cost" class="column striped hover responsive-sm quarto-float quarto-figure quarto-figure-center anchored" style="width:45%;">
+<figure class="quarto-float quarto-float-tbl figure">
+<div aria-describedby="tbl-gemini-video-cost-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="table-responsive-sm">
+<table class="column table-striped table-hover table">
+<thead>
+<tr class="header">
+<th>Video Duration / FPS</th>
+<th>Number of Frames</th>
+<th>Input Cost ($)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>30 seconds @ 8 fps</td>
+<td>240</td>
+<td>0.00619</td>
+</tr>
+<tr class="even">
+<td>90 seconds @ 4 fps</td>
+<td>360</td>
+<td>0.00929</td>
+</tr>
+<tr class="odd">
+<td>3 minutes @ 1 fps</td>
+<td>180</td>
+<td>0.00464</td>
+</tr>
+<tr class="even">
+<td>9 minutes @ 0.5 fps</td>
+<td>270</td>
+<td>0.00697</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-tbl" id="tbl-gemini-video-cost-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Dynamic FPS vs Cost<a href="#fn19" class="footnote-ref" id="fnref19" role="doc-noteref"><sup>19</sup></a>
+</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section id="future-proving" class="level2">
+<h2 class="anchored" data-anchor-id="future-proving">future proving</h2>
+<p>As of this writing, Gemini just launched <a href="https://www.youtube.com/watch?v=8_GgeASwHwQ">nano banana</a>.</p>
+<p>VLMs are getting more capable, more efficient to run, and cheaper every few weeks.</p>
+<p>And new models are already starting to natively support videos<a href="#fn20" class="footnote-ref" id="fnref20" role="doc-noteref"><sup>20</sup></a>, which might be <a href="https://openrouter.ai/docs/features/multimodal/overview#what-about-video-support">coming soon to OpenRouter</a>. So all these dynamic frame sampling, image tokenization, and context length computation might just be a theoretical exercise in the near future!</p>
+</section>
+</section>
+<section id="resources" class="level1">
+<h1>Resources</h1>
+<ul>
+<li><a href="https://github.com/google-gemini/cookbook/blob/7f4a319dca17a2faeca0af61a5cd7da651458152/quickstarts/Video_understanding.ipynb">Gemini Cookbook</a> and <a href="https://gemini-api.apidog.io/doc-965861">Gemini Vision’s offical doc</a></li>
+<li><a href="https://ai.google.dev/gemma/docs/capabilities/vision/video-understanding">Gemma’s guide to Video Understanding</a></li>
+<li><a href="https://github.com/corenel/today-i-learned/blob/master/generative-ai/20250127-gemini-2.0-flash-thinking-for-audio-transcription/README.md">Using Gemini 2.0 Flash for Audio Transcription</a></li>
+<li><a href="https://www.oranlooney.com/post/gpt-cnn/">Reverse Engineering GPT-4o’s 170 Image Patch Token count number</a></li>
+<li>Simon Willison’s <a href="https://tools.simonwillison.net/jina-embeddings-image-token-calculator">Image Tokens Calculator</a> (part of his <a href="https://github.com/simonw/tools">LLM tools</a>)</li>
+<li><a href="https://jamesmcroft.github.io/openai-image-token-calculator/">An OpenAI Image Tokens Calculator</a></li>
+<li><a href="https://docs.anthropic.com/en/docs/build-with-claude/vision#calculate-image-costs">Anthropic’s guide to calculating image cost</a></li>
+<li>fireworks AI’s <a href="https://docs.fireworks.ai/faq-new/billing-pricing/how-many-tokens-per-image">image tokens guide</a></li>
+</ul>
+
+
 </section>
 
 
@@ -331,6 +553,24 @@ Figure&nbsp;3: Video Frames with Overlay and Custom FPS
 <li id="fn2"><p>The <code>fontfile</code> option in FFmpeg’s drawtext filter is not mandatory if your FFmpeg build is configured with fontconfig support (<code>--enable-libfontconfig</code>)<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>the models are typically trained by sampling a fixed number of frames evenly distributed across the input video’s length, regardless of the original FPS (e.g.&nbsp;InternVL3) or 1 FPS as per the case of Gemma 3 and Gemma 3n<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>meaning the number of frames per second sampled from each video varies (e.g.&nbsp;Qwen2.5VL)<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>see section 2.1 in the <a href="https://storage.googleapis.com/deepmind-media/gemma/Gemma3Report.pdf">Gemma 3 paper</a>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>see details in the Gemma 3 <a href="https://huggingface.co/blog/gemma3#multimodality">release blog post</a><a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>see details <a href="https://www.alibabacloud.com/help/en/model-studio/vision/#da33480805fjh">on alibaba cloud’s doc</a><a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>as is the case for Qwen2.5VL, Gemma 3 and Gemma 3n<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>read more about Vision Transformer Image Tokenization <a href="https://ml-digest.com/computing-vision-transformer-tokens/">here</a> or watch a <a href="https://www.youtube.com/watch?v=vJF3TBI8esQ">5-minute video</a>. The huggingface article, <a href="https://huggingface.co/blog/not-lain/vlms">Visualizing How VLMs work</a> is a great starting point if you want to dive deep into the topic.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p>for example <strong>Gemini 2.X</strong> uses 768x768 (for images short edge &gt;384pixels, see <a href="https://ai.google.dev/gemini-api/docs/image-understanding#technical-details-image">Gemini Docs</a>), <strong>Qwen2.5VL</strong> uses 28x28, and <strong>GPT-4o</strong> uses 512x512 (see <a href="https://www.oranlooney.com/post/gpt-cnn/">this deep dive</a>)<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11"><p><strong>Gemini 2.X</strong> counts 258 tokens per patch, <strong>Qwen2.5VL</strong> counts 1 token per patch, and <strong>GPT-4o</strong> counts 170 tokens per patch (see <a href="https://www.oranlooney.com/post/gpt-cnn/">this deep dive</a>)<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn12"><p><strong>Gemini 2.X</strong> offers 1mm tokens, <strong>Qwen2.5VL</strong> offers 32k tokens (via OpenRouters), and <strong>GPT-4o</strong> offers 128k tokens (via OpenRouters)<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn13"><p><strong>Qwen2.5VL</strong> has 16,384-token (~1.5x 4k resolution, see <a href="https://www.alibabacloud.com/help/en/model-studio/vision/#da33480805fjh">doc</a>), while <strong>Gemini 2.X</strong> and <strong>GPT-4o</strong> just have a max request size of 20MB<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn14"><p><strong>Gemini 2.X</strong> max of <a href="https://ai.google.dev/gemini-api/docs/image-understanding#technical-details-image">3,600 images</a>, <strong>Qwen2.5VL</strong> max of <a href="https://www.alibabacloud.com/help/en/model-studio/vision/#da33480805fjh">~60 HD images</a>, and <strong>GPT-4o</strong> max of <a href="https://genai.stackexchange.com/a/1897">10 images</a><a href="#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn15"><p>here’s a small <a href="https://openrouter-model-zoo.streamlit.app">tool</a> that I vibe coded for comparing cost and context windows on all models available on OpenRouter<a href="#fnref15" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn16"><p>turns out it’s also one of the few models with audio input support on <a href="https://openrouter.ai/docs/features/multimodal/audio">OpenRouter</a> and the audio transcription <a href="https://github.com/corenel/today-i-learned/blob/master/generative-ai/20250127-gemini-2.0-flash-thinking-for-audio-transcription/README.md">looks decent</a>. On Video Understanding it passed my “vibe check”, and as I quote <a href="https://timesofindia.indiatimes.com/technology/tech-news/who-is-rishabh-agarwal-indian-origin-ai-researcher-who-left-million-dollar-job-at-mark-zuckerbergs-meta-after-just-five-months/articleshow/123546019.cms">Rishabh Agarwal</a></p>
+<pre><code>In a world that’s changing so fast, the biggest risk you can take is not taking risks.</code></pre>
+<p>So the best move right now is to build with Gemini 2.0 Flash while keeping the codebase model agnostic (as much as possible)<a href="#fnref16" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn17"><p>interestingly for Gemini 2.0 Flash OpenRouter charges a <a href="https://openrouter.ai/docs/features/multimodal/overview#how-is-multimodal-content-priced">fix cost per image</a> of $0.0258/K input images (as of the time of this writing), instead of charging for image tokens… this means that in theory you could stitch together multiple images to save cost; but who knows when that might change…<a href="#fnref17" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn18"><p>Gemini 2.0 Flash uses 768x768 per image patch, 258 tokens per patch, and 1 million tokens context window.<a href="#fnref18" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn19"><p>interestingly for Gemini 2.0 Flash OpenRouter charges a <a href="https://openrouter.ai/docs/features/multimodal/overview#how-is-multimodal-content-priced">fix cost per image</a> of $0.0258/K input images (as of the time of this writing), instead of charging for image tokens… this means that in theory you could stitch together multiple images to save cost; but who knows when that might change…<a href="#fnref19" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn20"><p>as mentioned <a href="https://huggingface.co/docs/transformers/main/en/model_doc/qwen2_5_vl#notes">Qwen2.5VL</a> and <a href="https://huggingface.co/docs/transformers/main/en/model_doc/internvl#video-input">InternVL3</a> but also <a href="https://gemini-api.apidog.io/doc-965861">Gemini’s video handling</a> is pretty impressive!<a href="#fnref20" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -821,6 +1061,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 
