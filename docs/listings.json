@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/notebooks/guide-to-quarto.html",
       "/notebooks/video_ffmpeg4vlms.html",
       "/notebooks/my-toolchain.html",
       "/notebooks/transformers-models.html",
