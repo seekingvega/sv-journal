@@ -1,0 +1,181 @@
+---
+title: "Quarto in 1-2-3"
+abstract: how to create a website using Quarto and deploy it to GitHub Pages
+image: https://mickael.canouil.fr/posts/2024-12-30-quarto-github-pages/featured.png
+date: 1/24/2026
+date-format: full
+author: im@johnho.ca
+license: "CC BY-NC-SA"
+categories:
+    - guide
+format:
+    html:
+        mermaid:
+            theme: forest
+            securityLevel: loose
+        toc: true
+        toc-depth: 4
+        toc-expand: 3
+        toc-title: Contents
+        toc-location: left
+        link-external-icon: true
+        link-external-newwindow: true
+draft: false
+execute:
+  echo: false
+code-annotations: hover
+lightbox: true
+---
+
+# 1. Quarto
+Quarto is a powerful tool for creating reproducible documents, presentations, and websites.
+It supports a wide range of output formats, including HTML, PDF, and Word.
+And it can run R, Python (including Jupyter notebooks), and Julia code.
+
+**This website is built using Quarto**, and this guide shows how that is done in 3 simple steps!
+
+## Installation
+To install Quarto, you can use the following command:
+
+```bash
+pipx install quarto-cli # <1>
+```
+1. quarto is actually written in Pandoc but there's a python interface around it called [`quarto-cli`](https://github.com/quarto-dev/quarto-cli-pypi)
+
+or
+```bash
+brew install --cask quarto # <2>
+```
+2. if it's already installed, you could update with a `brew upgrade --cask quarto`, use `brew outdated --cask` first to check if there's a newer version available.
+
+# 2. Creating a Website Project
+The official [docs](https://quarto.org/docs/websites/) on how to create a website is actually pretty comprehensive, but there's the TLDR:
+
+## Create
+The following command will create a new directory for your project and setup the scaffolding for a simple website in the `my-awesome-site` directory:
+
+```bash
+quarto create project blog my-awesome-site # <1>
+```
+1. use this to setup a site with a blog built-in
+
+or
+```bash
+quarto create project website my-awesome-site # <2>
+```
+2. use this if you are sure you want a website without a blog and wanna keep things nice and simple
+
+## Blog
+if you have used the `quarto create project blog` option [above](#create),
+you can control the listing of your blogs in your `index.qmd` which will be a listing page[^note-listing-page]
+
+[^note-listing-page]: see [here](https://quarto.org/docs/websites/website-blog.html#home-page) on how to configure it
+
+## Render
+While editing your website/ blog, you can run `quarto preview`[^note-preview] to preview your site in a browser.
+
+[^note-preview]: it's great because the whole site's rendered
+and you can see the changes being applied in real-time. However, for a blog with lots of
+computational heavy pages, it might be better to use `quarto render` instead or
+make sure your posts are [frozen](https://quarto.org/docs/websites/website-blog.html#freezing-posts)
+by default in your `posts/_metadata.yml`
+
+Or use `quarto render` which can give you more granular control.
+You open the pages rendered in `docs`[^note-output-dir] manually to "preview" changes.
+`quarto render` will render the whole site which you might not need to do everytime since it's time consuming.
+You can instead render individual pages or sections of your site for example, just a blog post:
+
+[^note-output-dir]: or whereever you configured your `output-dir` to be in your `_quarto.yaml`
+
+```bash
+quarto render blog/first_post.qmd
+```
+
+by default, Quarto will render the site to the `_site` directory but you should change that to `docs`
+using the `output-dir` variable in your project configuration `_quarto.yaml`:
+
+```{.yml filename="_quarto.yaml"}
+project:
+  type: website
+  output-dir: docs # <1>
+
+website:
+  title: "My Super Awesome Site"
+  favicon: favicon.ico # <6>
+  navbar: # <2>
+    logo: logo.png # <5>
+    left:
+      - href: index.qmd
+        text: Home
+      - about.qmd # <3>
+
+format:
+  html:
+    theme: cosmo # <4>
+    css: styles.css
+    toc: true
+```
+1. need this for Github Pages deployment later
+2. more about setting up website nav [here](https://quarto.org/docs/websites/website-navigation.html)
+3. an about page is create by default, here's a [detailed guide](https://quarto.org/docs/websites/website-about.html) on how to set it up.
+4. these are the [available options for HTML themes](https://quarto.org/docs/output-formats/html-themes.html)
+5. Optional: put your site's logo here, if you have one, which will appear in the navbar.
+6. Optional: put your site's favicon here, if you have one.
+
+# 3. Deploy to Github Pages
+there are [three ways](https://quarto.org/docs/publishing/github-pages.html#overview) to deploy to
+Github Pages but the [Render to `docs`](https://quarto.org/docs/publishing/github-pages.html#render-to-docs)
+method is the simplest and my personal preference. Here's how to set it up step-by-step:
+
+## create github repo
+First create a new repository on Github, then add it as a remote:
+
+```bash
+cd my-awesome-site
+git init
+git remote add origin https://github.com/username/repository.git # <1>
+git pull origin main # <2>
+```
+1. update this to whatever your repo's URL is
+2. pull in things like README.md, .gitignore,LICENSE.md, etc.
+
+## gitignore
+optional but might be good idea to make sure that `_site`[^note-site-ignore] and `.quarto` are ignored:
+```{.txt filename=".gitignore"}
+/.quarto/
+/_site/
+
+# other items to ignore
+...
+```
+
+[^note-site-ignore]: created during `quarto preview`, see more about ignoring output from
+the official [documentation](https://quarto.org/docs/publishing/github-pages.html#ignoring-output)
+
+## init commit
+then just add and commit:
+```bash
+quarto render # <1>
+touch .nojekyll # <2>
+git add docs .gitignore .nojekyll # <3>
+git commit -m "init commit"
+git push origin main
+```
+1. this should create everything in `docs` per [above](#render)
+2. tell Github Pages not to do additional processing of the site's content using Jekyll
+3. this will only add the rendered html files, you of course have the optional to add other files
+
+## configure github repo
+finally, go to your Github repo's settings and enable Github Pages. Choose the `docs` folder as the source:
+
+![Example Github Page settings](https://quarto.org/docs/publishing/images/gh-pages-docs-dir.png){#fig-example .lightbox}
+
+And that's it, your site is live!
+
+Going forward, as you add new content, you just simply:
+```bash
+quarto render
+git add docs
+git commit -m "add new content"
+git push origin main
+```
