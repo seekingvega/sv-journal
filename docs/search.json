@@ -893,7 +893,7 @@
     "href": "notebooks/guide-to-quarto.html",
     "title": "Quarto in 1-2-3",
     "section": "",
-    "text": "Quarto is a powerful tool for creating reproducible documents, presentations, and websites. It supports a wide range of output formats, including HTML, PDF, and Word. And it can run R, Python (including Jupyter notebooks), and Julia code.\nThis website is built using Quarto, and this guide shows how that is done in 3 simple steps!\n\n\nTo install Quarto, you can use the following command:\n1pipx install quarto-cli\n\n1\n\nquarto is actually written in Pandoc but there’s a python interface around it called quarto-cli\n\n\nor\n2brew install --cask quarto\n\n2\n\nif it’s already installed, you could update with a brew upgrade --cask quarto, use brew outdated --cask first to check if there’s a newer version available."
+    "text": "Quarto is a powerful tool for creating reproducible documents, presentations, and websites. It supports a wide range of output formats (HTML, PDF, and Word, etc). It can run R, Python (including Jupyter notebooks), and Julia code. In short, it enables you to publish books, decks, websites, etc.\nIt’s prefect for blogging/ technical writing which has numerious benefits in terms of career develpment:\n\nlearning to writing is learning to think1\nit organize your own knowledge which helps you synthesize new ideas2\nbecome a source of dopamine for future self3\n\nThis website itself is built using Quarto, and this guide shows how that is done in 3 simple steps!\n\n\nTo install Quarto, you can use the following command:\n1pipx install quarto-cli\n\n1\n\nquarto is actually written in Pandoc but there’s a python interface around it called quarto-cli\n\n\nor\n2brew install --cask quarto\n\n2\n\nif it’s already installed, you could update with a brew upgrade --cask quarto, use brew outdated --cask first to check if there’s a newer version available."
   },
   {
     "objectID": "notebooks/guide-to-quarto.html#installation",
@@ -949,21 +949,21 @@
     "href": "notebooks/guide-to-quarto.html#blog",
     "title": "Quarto in 1-2-3",
     "section": "Blog",
-    "text": "Blog\nif you have used the quarto create project blog option above, you can control the listing of your blogs in your index.qmd which will be a listing page1"
+    "text": "Blog\nif you have used the quarto create project blog option above, you can control the listing of your blogs in your index.qmd which will be a listing page4"
   },
   {
     "objectID": "notebooks/guide-to-quarto.html#render",
     "href": "notebooks/guide-to-quarto.html#render",
     "title": "Quarto in 1-2-3",
     "section": "Render",
-    "text": "Render\nWhile editing your website/ blog, you can run quarto preview2 to preview your site in a browser.\nOr use quarto render which can give you more granular control. You open the pages rendered in docs3 manually to “preview” changes. quarto render will render the whole site which you might not need to do everytime since it’s time consuming. You can instead render individual pages or sections of your site for example, just a blog post:\nquarto render blog/first_post.qmd\nby default, Quarto will render the site to the _site directory but you should change that to docs using the output-dir variable in your project configuration _quarto.yaml:\n\n\n_quarto.yaml\n\nproject:\n  type: website\n1  output-dir: docs\n\nwebsite:\n  title: \"My Super Awesome Site\"\n6  favicon: favicon.ico\n2  navbar:\n5    logo: logo.png\n    left:\n      - href: index.qmd\n        text: Home\n3      - about.qmd\n\nformat:\n  html:\n4    theme: cosmo\n    css: styles.css\n    toc: true\n\n\n1\n\nneed this for Github Pages deployment later\n\n2\n\nmore about setting up website nav here\n\n3\n\nan about page is create by default, here’s a detailed guide on how to set it up.\n\n4\n\nthese are the available options for HTML themes\n\n5\n\nOptional: put your site’s logo here, if you have one, which will appear in the navbar.\n\n6\n\nOptional: put your site’s favicon here, if you have one."
+    "text": "Render\nWhile editing your website/ blog, you can run quarto preview5 to preview your site in a browser.\nOr use quarto render which can give you more granular control. You open the pages rendered in docs6 manually to “preview” changes. quarto render will render the whole site which you might not need to do everytime since it’s time consuming. You can instead render individual pages or sections of your site for example, just a blog post:\nquarto render blog/first_post.qmd\nby default, Quarto will render the site to the _site directory but you should change that to docs using the output-dir variable in your project configuration _quarto.yaml:\n\n\n_quarto.yaml\n\nproject:\n  type: website\n1  output-dir: docs\n\nwebsite:\n  title: \"My Super Awesome Site\"\n6  favicon: favicon.ico\n2  navbar:\n5    logo: logo.png\n    left:\n      - href: index.qmd\n        text: Home\n3      - about.qmd\n\nformat:\n  html:\n4    theme: cosmo\n    css: styles.css\n    toc: true\n\n\n1\n\nneed this for Github Pages deployment later\n\n2\n\nmore about setting up website nav here\n\n3\n\nan about page is create by default, here’s a detailed guide on how to set it up.\n\n4\n\nthese are the available options for HTML themes\n\n5\n\nOptional: put your site’s logo here, if you have one, which will appear in the navbar.\n\n6\n\nOptional: put your site’s favicon here, if you have one."
   },
   {
     "objectID": "notebooks/guide-to-quarto.html#footnotes",
     "href": "notebooks/guide-to-quarto.html#footnotes",
     "title": "Quarto in 1-2-3",
     "section": "Footnotes",
-    "text": "Footnotes\n\n\nsee here on how to configure it↩︎\nit’s great because the whole site’s rendered and you can see the changes being applied in real-time. However, for a blog with lots of computational heavy pages, it might be better to use quarto render instead or make sure your posts are frozen by default in your posts/_metadata.yml↩︎\nor whereever you configured your output-dir to be in your _quarto.yaml↩︎\ncreated during quarto preview, see more about ignoring output from the official documentation↩︎"
+    "text": "Footnotes\n\n\nJordan Peterson propose picking a hard problem and write about it. William Zinsser summerized this process even better in his book Writing to Learn↩︎\nJeremy Howard made this case on why you should blog and Rachel Thomas (co-founder of FastAI) advocates writing as personal branding or even alternative to a degree↩︎\nas Chase Hughes defines discipline a price of writing can be thought of then as a stepping stone as you progress towards your higher goal or advance in the field that you are writing about. The act of writing about something, forces you to discover the gaps in your thinking. The filling in of those gaps teaches you to really get a full grasp of the idea that you are writing about. The act of having written, having produced something tangible, having manifested something from the mental field into the physical, creates a small foundation for you to step on or fallback on.↩︎\nsee here on how to configure it↩︎\nit’s great because the whole site’s rendered and you can see the changes being applied in real-time. However, for a blog with lots of computational heavy pages, it might be better to use quarto render instead or make sure your posts are frozen by default in your posts/_metadata.yml↩︎\nor whereever you configured your output-dir to be in your _quarto.yaml↩︎\ncreated during quarto preview, see more about ignoring output from the official documentation↩︎"
   },
   {
     "objectID": "notebooks/guide-to-quarto.html#create-github-repo",
@@ -977,7 +977,7 @@
     "href": "notebooks/guide-to-quarto.html#gitignore",
     "title": "Quarto in 1-2-3",
     "section": "gitignore",
-    "text": "gitignore\noptional but might be good idea to make sure that _site4 and .quarto are ignored:\n\n\n.gitignore\n\n/.quarto/\n/_site/\n\n# other items to ignore\n..."
+    "text": "gitignore\noptional but might be good idea to make sure that _site7 and .quarto are ignored:\n\n\n.gitignore\n\n/.quarto/\n/_site/\n\n# other items to ignore\n..."
   },
   {
     "objectID": "notebooks/guide-to-quarto.html#init-commit",
@@ -992,5 +992,12 @@
     "title": "Quarto in 1-2-3",
     "section": "configure github repo",
     "text": "configure github repo\nfinally, go to your Github repo’s settings and enable Github Pages. Choose the docs folder as the source:\n\n\n\n\n\n\nFigure 1: Example Github Page settings\n\n\n\nAnd that’s it, your site is live!\nGoing forward, as you add new content, you just simply:\nquarto render\ngit add docs\ngit commit -m \"add new content\"\ngit push origin main"
+  },
+  {
+    "objectID": "notebooks/ollama.html#ollama-webui-in-2-simple-steps",
+    "href": "notebooks/ollama.html#ollama-webui-in-2-simple-steps",
+    "title": "Hosting Your Own ChatGPT",
+    "section": "Ollama + WebUI in 2 simple steps",
+    "text": "Ollama + WebUI in 2 simple steps\nfirst you’ll need to have ollama installed:\nbrew update\nbrew install ollama\nollama serve            # might want to run this in a screen\nollama pull llama3.1\nSecondly for the WebUI I prefer to run with Docker (make sure you have that installed also):\ndocker pull ghcr.io/open-webui/open-webui:main\ndocker run --rm -p 3000:8080 -e WEBUI_AUTH=False -v open-webui:/app/backend/data \\\n    --name open-webui ghcr.io/open-webui/open-webui:main\nA few notes:\n\nrun it in the background: I like to see what goes on in the container and would run the above command in a screen. You could add -d to run it in detached mode.\nport mapping: here we mapped the local port 3000 to the WebUI, you can access it by going to http://localhost:3000\nsingle-user mode: if you are running it in your personal laptop, there’s no need for accounts management. The -e WEBUI_AUTH=False turns that off.\nVolume Mount: this will mount the docker volumne open-webui to make sure data (like chat history) persist across sessions"
   }
 ]

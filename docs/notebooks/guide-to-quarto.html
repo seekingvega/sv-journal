@@ -148,7 +148,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#quarto" id="toc-quarto" class="nav-link active" data-scroll-target="#quarto">1. Quarto</a>
+  <li><a href="#what-is-quarto" id="toc-what-is-quarto" class="nav-link active" data-scroll-target="#what-is-quarto">1. What is Quarto?</a>
   <ul>
   <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a></li>
   </ul></li>
@@ -215,10 +215,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="quarto" class="level1">
-<h1>1. Quarto</h1>
-<p>Quarto is a powerful tool for creating reproducible documents, presentations, and websites. It supports a wide range of output formats, including HTML, PDF, and Word. And it can run R, Python (including Jupyter notebooks), and Julia code.</p>
-<p><strong>This website is built using Quarto</strong>, and this guide shows how that is done in 3 simple steps!</p>
+<section id="what-is-quarto" class="level1">
+<h1>1. What is Quarto?</h1>
+<p><a href="https://quarto.org">Quarto</a> is a powerful tool for creating reproducible documents, presentations, and websites. It supports a wide range of output formats (HTML, PDF, and Word, etc). It can run R, Python (including Jupyter notebooks), and Julia code. In short, it enables you to publish books, decks, websites, etc.</p>
+<p>It’s prefect for blogging/ technical writing which has numerious benefits in terms of career develpment:</p>
+<ul>
+<li>learning to writing is learning to think<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
+<li>it organize your own knowledge which helps you synthesize new ideas<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></li>
+<li>become a source of dopamine for future self<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></li>
+</ul>
+<p><strong>This website itself is built using Quarto</strong>, and this guide shows how that is done in 3 simple steps!</p>
 <section id="installation" class="level2">
 <h2 class="anchored" data-anchor-id="installation">Installation</h2>
 <p>To install Quarto, you can use the following command:</p>
@@ -263,12 +269,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="blog" class="level2">
 <h2 class="anchored" data-anchor-id="blog">Blog</h2>
-<p>if you have used the <code>quarto create project blog</code> option <a href="#create">above</a>, you can control the listing of your blogs in your <code>index.qmd</code> which will be a listing page<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>if you have used the <code>quarto create project blog</code> option <a href="#create">above</a>, you can control the listing of your blogs in your <code>index.qmd</code> which will be a listing page<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
 </section>
 <section id="render" class="level2">
 <h2 class="anchored" data-anchor-id="render">Render</h2>
-<p>While editing your website/ blog, you can run <code>quarto preview</code><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> to preview your site in a browser.</p>
-<p>Or use <code>quarto render</code> which can give you more granular control. You open the pages rendered in <code>docs</code><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> manually to “preview” changes. <code>quarto render</code> will render the whole site which you might not need to do everytime since it’s time consuming. You can instead render individual pages or sections of your site for example, just a blog post:</p>
+<p>While editing your website/ blog, you can run <code>quarto preview</code><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> to preview your site in a browser.</p>
+<p>Or use <code>quarto render</code> which can give you more granular control. You open the pages rendered in <code>docs</code><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> manually to “preview” changes. <code>quarto render</code> will render the whole site which you might not need to do everytime since it’s time consuming. You can instead render individual pages or sections of your site for example, just a blog post:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render blog/first_post.qmd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>by default, Quarto will render the site to the <code>_site</code> directory but you should change that to <code>docs</code> using the <code>output-dir</code> variable in your project configuration <code>_quarto.yaml</code>:</p>
 <div class="code-with-filename">
@@ -346,7 +352,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="gitignore" class="level2">
 <h2 class="anchored" data-anchor-id="gitignore">gitignore</h2>
-<p>optional but might be good idea to make sure that <code>_site</code><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> and <code>.quarto</code> are ignored:</p>
+<p>optional but might be good idea to make sure that <code>_site</code><a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> and <code>.quarto</code> are ignored:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>.gitignore</strong></pre>
@@ -409,10 +415,13 @@ Figure&nbsp;1: Example Github Page settings
 <div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>see <a href="https://quarto.org/docs/websites/website-blog.html#home-page">here</a> on how to configure it<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>it’s great because the whole site’s rendered and you can see the changes being applied in real-time. However, for a blog with lots of computational heavy pages, it might be better to use <code>quarto render</code> instead or make sure your posts are <a href="https://quarto.org/docs/websites/website-blog.html#freezing-posts">frozen</a> by default in your <code>posts/_metadata.yml</code><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>or whereever you configured your <code>output-dir</code> to be in your <code>_quarto.yaml</code><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>created during <code>quarto preview</code>, see more about ignoring output from the official <a href="https://quarto.org/docs/publishing/github-pages.html#ignoring-output">documentation</a><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p><a href="https://www.youtube.com/shorts/CPY3dG9dcC8">Jordan Peterson</a> propose picking a hard problem and write about it. William Zinsser summerized this process even better in his book <a href="https://youtu.be/IsQUT9xRYSg?si=YsGyY-Dh7TJb04PM&amp;t=185">Writing to Learn</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p><a href="https://www.fast.ai/posts/2020-01-16-fast_template.html#you-should-blog">Jeremy Howard</a> made this case on why you should blog and Rachel Thomas (co-founder of FastAI) advocates writing as <a href="https://www.fast.ai/posts/2019-05-13-blogging-advice.html#related-posts">personal branding or even alternative to a degree</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>as <a href="https://youtu.be/EDMmGeisx3o?si=Rjb9PrRytpRo4GrG&amp;t=80">Chase Hughes defines discipline</a> a price of writing can be thought of then as a stepping stone as you progress towards your higher goal or advance in the field that you are writing about. The act of writing about something, forces you to discover the gaps in your thinking. The filling in of those gaps teaches you to really get a full grasp of the idea that you are writing about. The act of having written, having produced something tangible, having manifested something from the mental field into the physical, creates a small foundation for you to step on or fallback on.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>see <a href="https://quarto.org/docs/websites/website-blog.html#home-page">here</a> on how to configure it<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>it’s great because the whole site’s rendered and you can see the changes being applied in real-time. However, for a blog with lots of computational heavy pages, it might be better to use <code>quarto render</code> instead or make sure your posts are <a href="https://quarto.org/docs/websites/website-blog.html#freezing-posts">frozen</a> by default in your <code>posts/_metadata.yml</code><a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>or whereever you configured your <code>output-dir</code> to be in your <code>_quarto.yaml</code><a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>created during <code>quarto preview</code>, see more about ignoring output from the official <a href="https://quarto.org/docs/publishing/github-pages.html#ignoring-output">documentation</a><a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

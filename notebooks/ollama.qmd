@@ -33,7 +33,7 @@ and [`llamaindex`](https://docs.llamaindex.ai/en/stable/)
 but to directly interact with it
 like ChatGPT, they offered the [WebUI](https://docs.openwebui.com/getting-started/quick-start/)
 
-## Ollam + WebUI in 2 simple steps
+## Ollama + WebUI in 2 simple steps
 first you'll need to have [ollama installed](https://blog.stackademic.com/installing-and-using-ollama-on-macos-acabe185fa3a):
 ```bash
 brew update

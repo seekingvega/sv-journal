@@ -27,12 +27,35 @@ code-annotations: hover
 lightbox: true
 ---
 
-# 1. Quarto
-Quarto is a powerful tool for creating reproducible documents, presentations, and websites.
-It supports a wide range of output formats, including HTML, PDF, and Word.
-And it can run R, Python (including Jupyter notebooks), and Julia code.
+# 1. What is Quarto?
+[Quarto][url-quarto] is a powerful tool for creating reproducible documents, presentations, and websites.
+It supports a wide range of output formats (HTML, PDF, and Word, etc).
+It can run R, Python (including Jupyter notebooks), and Julia code. In short,
+it enables you to publish books, decks, websites, etc.
 
-**This website is built using Quarto**, and this guide shows how that is done in 3 simple steps!
+It's prefect for blogging/ technical writing which has numerious benefits in terms of career develpment:
+
+* learning to writing is learning to think[^note-jp]
+* it organize your own knowledge which helps you synthesize new ideas[^note-jh]
+* become a source of dopamine for future self[^note-future-self]
+
+[^note-future-self]: as [Chase Hughes defines discipline](https://youtu.be/EDMmGeisx3o?si=Rjb9PrRytpRo4GrG&t=80)
+a price of writing can be thought of then as a stepping stone as you progress towards your higher goal
+or advance in the field that you are writing about.
+The act of writing about something, forces you to discover the gaps in your thinking.
+The filling in of those gaps teaches you to really get a full grasp of the idea that you are writing about.
+The act of having written, having produced something tangible, having manifested something from the
+mental field into the physical, creates a small foundation for you to step on or fallback on.
+[^note-jp]: [Jordan Peterson](https://www.youtube.com/shorts/CPY3dG9dcC8) propose picking
+a hard problem and write about it. William Zinsser summerized this process even better in his book
+[Writing to Learn](https://youtu.be/IsQUT9xRYSg?si=YsGyY-Dh7TJb04PM&t=185)
+[^note-jh]: [Jeremy Howard](https://www.fast.ai/posts/2020-01-16-fast_template.html#you-should-blog)
+made this case on why you should blog and Rachel Thomas (co-founder of FastAI) advocates writing as
+[personal branding or even alternative to a degree](https://www.fast.ai/posts/2019-05-13-blogging-advice.html#related-posts)
+
+[url-quarto]: https://quarto.org
+
+**This website itself is built using Quarto**, and this guide shows how that is done in 3 simple steps!
 
 ## Installation
 To install Quarto, you can use the following command:
