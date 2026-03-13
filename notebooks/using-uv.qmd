@@ -23,6 +23,7 @@ format:
 draft: false
 execute:
   echo: false
+code-annotations: hover
 ---
 
 # why [`uv`](https://docs.astral.sh/uv/)?
@@ -77,11 +78,37 @@ applied in the following order:
 [^uv-venv]: or use `uv venv --python 3.12` to create a virtual environment with python 3.12
 
 # [Tools](https://docs.astral.sh/uv/concepts/tools/#execution-vs-installation)
-Tools are python packages with a CLI
+Tools are python packages that provides a CLI and `uv` has a [dedicated interface](https://docs.astral.sh/uv/concepts/tools/) for invoking them without installation.[^note-pipx]
 
-> In most cases, executing a tool with `uvx` is more appropriate than installing the tool.
+> In most cases, executing a tool with `uvx`[^note-uvx] is more appropriate than installing the tool.
 
-> When running a tool with `uvx`, a virtual environment is stored in the uv cache directory and is treated as disposable, i.e., if you run `uv cache clean` the environment will be deleted.
+[^note-uvx]: `uvx` is an alias for `uv tool run`
+[^note-pipx]: basically trying to cover the same use-case for `pipx`. For tools that are commonly called, in `uv` could [install them](https://docs.astral.sh/uv/guides/tools/#installing-tools).
+
+# Scripts
+when creating scripts, uv supports the [creating and editting of inline script metadata](https://docs.astral.sh/uv/guides/scripts/#creating-a-python-script).
+
+When you `uv run your_script.py` an environment with the specific dependencies will be
+created[^note-script-env]:
+```bash
+uv init --script example.py --python 3.12 # <1>
+uv add --script example.py 'requests<3' 'rich' # <2>
+```
+1. the script `example.py` will be created with inline metadata with `requires-python = ">=3.12"`
+2. the `requests<3` and `rich` dependencies will be added to the inline metadata in `example.py`
+
+[^note-script-env]: even when the script is ran within the project, the project dependencies will be ignored
+(i.e. the inline script metadata has precedence over the project dependencies)
+
+## cleaning cached virtual environments
+
+When running [scripts](#scripts) or calling a tool with [uvx](#tools) virtual environments are stored in the uv cache directory[^note-uv-cache]
+and are treated as disposable. You can clean them out by:
+
+* `uv cache prune`: **safely** removes unused cache entries while respecting locks
+* `uv cache clean`: clears **all** cached entries and have uv rebuilds on the next run
+
+[^note-uv-cache]: run `uv cache dir` to see where that is on your machine.
 
 # Existing Projects
 because of the [tools](#tools) feature, you can call the [migrate-to-uv](https://github.com/mkniewallner/migrate-to-uv)

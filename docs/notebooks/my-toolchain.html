@@ -148,7 +148,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#hardware" id="toc-hardware" class="nav-link active" data-scroll-target="#hardware">hardware</a></li>
   <li><a href="#browser" id="toc-browser" class="nav-link" data-scroll-target="#browser">Browser</a></li>
   <li><a href="#editor" id="toc-editor" class="nav-link" data-scroll-target="#editor">Editor</a></li>
-  <li><a href="#the-toolchain" id="toc-the-toolchain" class="nav-link" data-scroll-target="#the-toolchain">The Toolchain</a></li>
+  <li><a href="#the-toolchain" id="toc-the-toolchain" class="nav-link" data-scroll-target="#the-toolchain">The Toolchain</a>
+  <ul>
+  <li><a href="#coding-agents" id="toc-coding-agents" class="nav-link" data-scroll-target="#coding-agents">coding agents</a></li>
+  </ul></li>
   <li><a href="#python-environments" id="toc-python-environments" class="nav-link" data-scroll-target="#python-environments">python environments</a></li>
   </ul>
 </nav>
@@ -182,7 +185,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Tuesday, August 26, 2025</p>
+      <p class="date">Tuesday, March 10, 2026</p>
     </div>
   </div>
   
@@ -263,10 +266,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>install: <code>pipx install asciinema</code></li>
 </ul></li>
 </ul>
+<section id="coding-agents" class="level2">
+<h2 class="anchored" data-anchor-id="coding-agents">coding agents</h2>
+<ul>
+<li><a href="">Claude Code</a>
+<ul>
+<li>native install using <a href="https://code.claude.com/docs/en/setup#install-claude-code">bash</a></li>
+<li>setup <a href="https://platform.claude.com/settings/keys">API keys</a></li>
+</ul></li>
+<li><a href="https://opencode.ai/docs/#initialize">OpenCode</a><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>: <code>brew install anomalyco/tap/opencode</code></li>
+<li><a href="https://ollama.com/settings">Ollama</a><a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>
+<ul>
+<li><a href="https://docs.ollama.com/cloud">run cloud models</a>: <code>ollama run qwen3.5:397b-cloud</code></li>
+<li><a href="https://docs.ollama.com/quickstart#coding">coding agents</a>: <code>ollama launch claude</code></li>
+<li>and it <a href="https://docs.ollama.com/integrations/zed">also works with zed</a></li>
+</ul></li>
+</ul>
+</section>
 </section>
 <section id="python-environments" class="level1">
 <h1>python environments</h1>
-<p>As of 2025<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>, I manage both python versions and virtual environments with <a href="../notebooks/using-uv.html">uv</a></p>
+<p>As of 2025<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>, I manage both python versions and virtual environments with <a href="../notebooks/using-uv.html">uv</a></p>
 <p>python based CLIs using <a href="https://github.com/pypa/pipx"><code>pipx</code></a>.</p>
 
 
@@ -281,7 +301,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li id="fn3"><p>50 Zed-hosted prompt per month using the latest Claude model. But you could also setup <a href="https://zed.dev/docs/ai/configuration#llm-providers">OpenRouter or Ollama</a> or even use your <a href="https://zed.dev/docs/ai/configuration#github-copilot-chat">Co-pilot</a> quota in zed.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>you will need to upload the created recording, and the <a href="https://docs.asciinema.org/getting-started/#sharing">asciinema player</a> is purpose-built for sharing terminal sessions.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn5"><p>you will need to install <code>agg</code> using <code>brew install agg</code><a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6"><p>I use to manage using <code>pyenv</code> and the <code>virtualenvwrapper</code>, see <a href="https://gist.github.com/ohjho/8e2556d786b132d724b3914728c7c82f">here</a> for an archive of that setup.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>if you don’t <code>/connect</code>, <a href="https://opencode.ai/docs/zen#pricing">zen’s</a> free models will be used as default<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>lots changed with ollama <a href="../notebooks/ollama.html">since 2024</a>, make sure you upgrade it:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> upgrade ollama</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">ollama</span> serve    <span class="co"># need to get the app running before any running any other commands</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">ollama</span> sigin    <span class="co"># for using ollama cloud, you'll need an account first</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></li>
+<li id="fn8"><p>I use to manage using <code>pyenv</code> and the <code>virtualenvwrapper</code>, see <a href="https://gist.github.com/ohjho/8e2556d786b132d724b3914728c7c82f">here</a> for an archive of that setup.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

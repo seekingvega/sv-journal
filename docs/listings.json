@@ -2,9 +2,10 @@
   {
     "listing": "/index.html",
     "items": [
+      "/notebooks/my-toolchain.html",
+      "/notebooks/guide-to-datasette.html",
       "/notebooks/guide-to-quarto.html",
       "/notebooks/video_ffmpeg4vlms.html",
-      "/notebooks/my-toolchain.html",
       "/notebooks/transformers-models.html",
       "/notebooks/HuggingFace-models-tutorial.html",
       "/notebooks/using-uv.html",

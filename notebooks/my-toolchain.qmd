@@ -106,6 +106,25 @@ the [asciinema player](https://docs.asciinema.org/getting-started/#sharing)
 is purpose-built for sharing terminal sessions.
 [^agg-note]: you will need to install `agg` using `brew install agg`
 
+## coding agents
+
+* [Claude Code]()
+    * native install using [bash](https://code.claude.com/docs/en/setup#install-claude-code)
+    * setup [API keys](https://platform.claude.com/settings/keys)
+* [OpenCode](https://opencode.ai/docs/#initialize)[^note-zen]: `brew install anomalyco/tap/opencode`
+* [Ollama](https://ollama.com/settings)[^note-ollama]
+    * [run cloud models](https://docs.ollama.com/cloud): `ollama run qwen3.5:397b-cloud`
+    * [coding agents](https://docs.ollama.com/quickstart#coding): `ollama launch claude`
+    * and it [also works with zed](https://docs.ollama.com/integrations/zed)
+
+[^note-ollama]: lots changed with ollama [since 2024](ollama.qmd), make sure you upgrade it:
+```bash
+brew upgrade ollama
+ollama serve    # need to get the app running before any running any other commands
+ollama sigin    # for using ollama cloud, you'll need an account first
+```
+[^note-zen]: if you don't `/connect`, [zen's](https://opencode.ai/docs/zen#pricing) free models will be used as default
+
 # python environments
 As of 2025[^pre-2024-note], I manage both python versions and virtual environments with [uv](using-uv.qmd)
 

@@ -153,6 +153,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#python-versions" id="toc-python-versions" class="nav-link" data-scroll-target="#python-versions">python versions</a></li>
   <li><a href="#virtual-environments" id="toc-virtual-environments" class="nav-link" data-scroll-target="#virtual-environments">Virtual Environments</a></li>
   <li><a href="#tools" id="toc-tools" class="nav-link" data-scroll-target="#tools">Tools</a></li>
+  <li><a href="#scripts" id="toc-scripts" class="nav-link" data-scroll-target="#scripts">Scripts</a>
+  <ul>
+  <li><a href="#cleaning-cached-virtual-environments" id="toc-cleaning-cached-virtual-environments" class="nav-link" data-scroll-target="#cleaning-cached-virtual-environments">cleaning cached virtual environments</a></li>
+  </ul></li>
   <li><a href="#existing-projects" id="toc-existing-projects" class="nav-link" data-scroll-target="#existing-projects">Existing Projects</a></li>
   <li><a href="#new-projects" id="toc-new-projects" class="nav-link" data-scroll-target="#new-projects">New Projects</a>
   <ul>
@@ -251,20 +255,42 @@ Figure&nbsp;1: installation time for the <a href="https://trio.readthedocs.io/en
 </section>
 <section id="tools" class="level1">
 <h1><a href="https://docs.astral.sh/uv/concepts/tools/#execution-vs-installation">Tools</a></h1>
-<p>Tools are python packages with a CLI</p>
+<p>Tools are python packages that provides a CLI and <code>uv</code> has a <a href="https://docs.astral.sh/uv/concepts/tools/">dedicated interface</a> for invoking them without installation.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
 <blockquote class="blockquote">
-<p>In most cases, executing a tool with <code>uvx</code> is more appropriate than installing the tool.</p>
+<p>In most cases, executing a tool with <code>uvx</code><a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> is more appropriate than installing the tool.</p>
 </blockquote>
-<blockquote class="blockquote">
-<p>When running a tool with <code>uvx</code>, a virtual environment is stored in the uv cache directory and is treated as disposable, i.e., if you run <code>uv cache clean</code> the environment will be deleted.</p>
-</blockquote>
+</section>
+<section id="scripts" class="level1">
+<h1>Scripts</h1>
+<p>when creating scripts, uv supports the <a href="https://docs.astral.sh/uv/guides/scripts/#creating-a-python-script">creating and editting of inline script metadata</a>.</p>
+<p>When you <code>uv run your_script.py</code> an environment with the specific dependencies will be created<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>:</p>
+<div class="sourceCode" id="annotated-cell-1"><pre class="sourceCode bash code-annotation-code code-with-copy code-annotated"><code class="sourceCode bash"><button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1">1</button><span id="annotated-cell-1-1" class="code-annotation-target"><a href="#annotated-cell-1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> init <span class="at">--script</span> example.py <span class="at">--python</span> 3.12</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="2">2</button><span id="annotated-cell-1-2" class="code-annotation-target"><a href="#annotated-cell-1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add <span class="at">--script</span> example.py <span class="st">'requests&lt;3'</span> <span class="st">'rich'</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="1" data-code-annotation="1">the script <code>example.py</code> will be created with inline metadata with <code>requires-python = "&gt;=3.12"</code></span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="2" data-code-annotation="2">the <code>requests&lt;3</code> and <code>rich</code> dependencies will be added to the inline metadata in <code>example.py</code></span>
+</dd>
+</dl>
+<section id="cleaning-cached-virtual-environments" class="level2">
+<h2 class="anchored" data-anchor-id="cleaning-cached-virtual-environments">cleaning cached virtual environments</h2>
+<p>When running <a href="#scripts">scripts</a> or calling a tool with <a href="#tools">uvx</a> virtual environments are stored in the uv cache directory<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> and are treated as disposable. You can clean them out by:</p>
+<ul>
+<li><code>uv cache prune</code>: <strong>safely</strong> removes unused cache entries while respecting locks</li>
+<li><code>uv cache clean</code>: clears <strong>all</strong> cached entries and have uv rebuilds on the next run</li>
+</ul>
+</section>
 </section>
 <section id="existing-projects" class="level1">
 <h1>Existing Projects</h1>
 <p>because of the <a href="#tools">tools</a> feature, you can call the <a href="https://github.com/mkniewallner/migrate-to-uv">migrate-to-uv</a> package on your existing project to have uv manage the dependencies (no installation required ;):</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uvx</span> migrate-to-uv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>you can add the <code>--dry-run</code> flag to see what it would do but basically it will read your <code>requirements.txt</code> (and also removes it) and create a <code>pyproject.toml</code><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> and a <code>uv.lock</code> file<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> for your project.</p>
-<p>and if you need to export the environment back to <code>requirements.txt</code> you could<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>:</p>
+<p>you can add the <code>--dry-run</code> flag to see what it would do but basically it will read your <code>requirements.txt</code> (and also removes it) and create a <code>pyproject.toml</code><a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a> and a <code>uv.lock</code> file<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> for your project.</p>
+<p>and if you need to export the environment back to <code>requirements.txt</code> you could<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a>:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> export <span class="at">--no-hashes</span> <span class="at">--format</span> requirements-txt <span class="op">&gt;</span> requirements.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="new-projects" class="level1">
@@ -319,9 +345,13 @@ Figure&nbsp;1: installation time for the <a href="https://trio.readthedocs.io/en
 <li id="fn3"><p>add <code>export UV_PYTHON_INSTALL_DIR=$HOME/your/custom/home/for/.uv/python/</code> to your <code>~/.bashrc</code> to control where those managed python versions get installed to<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p><code>pyenv</code>’s virutal environment are installed by default to <code>~/.pyenv/versions/&lt;env-name&gt;/</code><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn5"><p>or use <code>uv venv --python 3.12</code> to create a virtual environment with python 3.12<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6"><p>for an existing project, you might want to update the value for <code>name</code> and also add the <code>requires-python</code> field (with a value like <code>&gt;=3.8</code>)<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn7"><p>the <a href="https://docs.astral.sh/uv/concepts/projects/layout/#the-lockfile">lockfile</a> contains the exact resolved versions that are installed in the project environment and is meant to be checked into version control; So that it can be easily recreated else where with a <a href="https://docs.astral.sh/uv/reference/cli/#uv-sync"><code>uv sync</code></a><a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn8"><p>see <a href="https://stackoverflow.com/a/79412852">this stackoverflow answer</a> for details<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>basically trying to cover the same use-case for <code>pipx</code>. For tools that are commonly called, in <code>uv</code> could <a href="https://docs.astral.sh/uv/guides/tools/#installing-tools">install them</a>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p><code>uvx</code> is an alias for <code>uv tool run</code><a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>even when the script is ran within the project, the project dependencies will be ignored (i.e.&nbsp;the inline script metadata has precedence over the project dependencies)<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>run <code>uv cache dir</code> to see where that is on your machine.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p>for an existing project, you might want to update the value for <code>name</code> and also add the <code>requires-python</code> field (with a value like <code>&gt;=3.8</code>)<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11"><p>the <a href="https://docs.astral.sh/uv/concepts/projects/layout/#the-lockfile">lockfile</a> contains the exact resolved versions that are installed in the project environment and is meant to be checked into version control; So that it can be easily recreated else where with a <a href="https://docs.astral.sh/uv/reference/cli/#uv-sync"><code>uv sync</code></a><a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn12"><p>see <a href="https://stackoverflow.com/a/79412852">this stackoverflow answer</a> for details<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -689,25 +719,64 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         }
       };
     }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
+      const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+      for (let i=0; i<annoteTargets.length; i++) {
+        const annoteTarget = annoteTargets[i];
+        const targetCell = annoteTarget.getAttribute("data-target-cell");
+        const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+        const contentFn = () => {
+          const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          if (content) {
+            const tipContent = content.cloneNode(true);
+            tipContent.classList.add("code-annotation-tip-content");
+            return tipContent.outerHTML;
           }
-        });
+        }
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          onShow: (instance) => {
+            selectCodeLines(instance.reference);
+            instance.reference.classList.add('code-annotation-active');
+            window.tippy.hideAll();
+          },
+          onHide: (instance) => {
+            unselectCodeLines();
+            instance.reference.classList.remove('code-annotation-active');
+          },
+          maxWidth: 300,
+          delay: [50, 0],
+          duration: [200, 0],
+          offset: [5, 10],
+          arrow: true,
+          appendTo: function(el) {
+            return el.parentElement.parentElement.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'quarto',
+          placement: 'right',
+          popperOptions: {
+            modifiers: [
+            {
+              name: 'flip',
+              options: {
+                flipVariations: false, // true by default
+                allowedAutoPlacements: ['right'],
+                fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+              },
+            },
+            {
+              name: 'preventOverflow',
+              options: {
+                mainAxis: false,
+                altAxis: false
+              }
+            }
+            ]        
+          }      
+        };
+        window.tippy(annoteTarget, config); 
       }
   const findCites = (el) => {
     const parentEl = el.parentElement;

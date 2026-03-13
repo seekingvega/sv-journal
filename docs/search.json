@@ -214,7 +214,7 @@
     "href": "index.html",
     "title": "Research",
     "section": "",
-    "text": "Quarto in 1-2-3\n\n\n\n\n\n\nguide\n\n\n\nhow to create a website using Quarto and deploy it to GitHub Pages\n\n\n\n\n\nJan 24, 2026\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nVideo Frames Extraction for VLM\n\n\n\n\n\n\nffmpeg\n\n\nCLI\n\n\nLLM\n\n\nmicro-project\n\n\n\nusing ffmpeg for fast and effective frames extraction for VLM\n\n\n\n\n\nAug 28, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nToolchain of a GADA Scientist\n\n\n\n\n\n\nguide\n\n\n\ndigital EDC of a GADA scientist\n\n\n\n\n\nAug 27, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nLoading Transformers Models\n\n\n\n\n\n\nguide\n\n\nLLM\n\n\nHuggingFace\n\n\n\nand a github template you can use to quickly create HuggingFace Spaces\n\n\n\n\n\nAug 5, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nAI at the Gate\n\n\n\n\n\n\nHuggingFace\n\n\nguide\n\n\n\n3 different ways to access the latest AI models on the HuggingFace community\n\n\n\n\n\nJul 12, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nUV for python dependencies\n\n\n\n\n\n\nguide\n\n\nPython\n\n\n\nthe GOAT of python dependencies management, at least as of 2025\n\n\n\n\n\nMay 2, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nYoutube Video to Giphy\n\n\n\n\n\n\nffmpeg\n\n\nYoutube\n\n\nCLI\n\n\n\nhow to use yt-dlp with ffmpeg to create a gif and host it for free\n\n\n\n\n\nApr 16, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nETF Search Party\n\n\n\n\n\n\ntradingview\n\n\ntrading\n\n\nETFs\n\n\n\nusing tradingview-screener to search for a low risk safe investment\n\n\n\n\n\nApr 10, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nEvaluating Investment Performance\n\n\n\n\n\n\ntrading\n\n\nETFs\n\n\n\nbeyond returns and applying the Market Wizard’s Evaluation Metrics\n\n\n\n\n\nApr 7, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\ninterpolation (and data smoothing) made easy\n\n\n\n\n\n\nPandas\n\n\ntutorial\n\n\n\nusing Pandas to easily interplate and smooth data\n\n\n\n\n\nMar 17, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nPlotly Timeline for non-date-type series\n\n\n\n\n\n\nplotly\n\n\ndata visualization\n\n\n\nhighly customizable timeline/ gantt chart for small time-scale events\n\n\n\n\n\nFeb 17, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nTradingView Screener in Python\n\n\n\n\n\n\ntradingview\n\n\n\nPythonic TradingView Screener as pandas dataframe using tradingview-screener\n\n\n\n\n\nFeb 4, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nHuggingFace Freebie: Automatic Speech Recognition\n\n\n\n\n\n\nHuggingFace\n\n\nspeech recognition\n\n\n\nzero-cost Automatic Speech Recognition using HuggingFace’s serverless inference API\n\n\n\n\n\nFeb 3, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nVideo Keyframe Extraction using FFMPEG\n\n\n\n\n\n\nffmpeg\n\n\nCLI\n\n\n\nusing ffmpeg for fast and effective keyframe extraction\n\n\n\n\n\nJan 30, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nNo OpenAI API key, No Problem!\n\n\n\n\n\n\nLLM\n\n\nlangchain\n\n\nOllama\n\n\nHuggingFace\n\n\n\nthree different ways to load up a ChatOpenAI model in Langchain without an OpenAI API Key\n\n\n\n\n\nJan 24, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nLLM app with langchain\n\n\n\n\n\n\nLLM\n\n\nlangchain\n\n\nOllama\n\n\n\nbeginner guide on loading up a LLM for app development\n\n\n\n\n\nJan 9, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nWhisper vs Youtube Transcript API\n\n\n\n\n\n\nspeech recognition\n\n\nCLI\n\n\nYoutube\n\n\n\ncomparing Youtube Transcript API vs OpenAI Whisper in Speech Recognition accuracy\n\n\n\n\n\nJan 4, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nHosting Your Own ChatGPT\n\n\n\n\n\n\nguide\n\n\nLLM\n\n\nOllama\n\n\n\nrunning Ollama and it’s WebUI locally\n\n\n\n\n\nDec 29, 2024\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nOpenAI Whisper\n\n\n\n\n\n\nspeech recognition\n\n\nCLI\n\n\n\nan open-source speech recognition model CLI (and python package) that actually works\n\n\n\n\n\nDec 28, 2024\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nChat with Backtrader\n\n\n\n\n\n\nRAG\n\n\nbacktrader\n\n\nlangchain\n\n\nLLM\n\n\nOllama\n\n\n\nbuilding a RAG using langchain and ollama\n\n\n\n\n\nDec 21, 2024\n\n\nim@johnho.ca\n\n\n\n\n\n\nNo matching items"
+    "text": "Toolchain of a GADA Scientist\n\n\n\n\n\n\nguide\n\n\n\ndigital EDC of a GADA scientist\n\n\n\n\n\nMar 10, 2026\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nDatasette in 1-2-3\n\n\n\n\n\n\nguide\n\n\ndata visualization\n\n\n\nhow to visualize your data and maybe even (continuously) publish them\n\n\n\n\n\nFeb 24, 2026\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nQuarto in 1-2-3\n\n\n\n\n\n\nguide\n\n\n\nhow to create a website using Quarto and deploy it to GitHub Pages\n\n\n\n\n\nJan 24, 2026\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nVideo Frames Extraction for VLM\n\n\n\n\n\n\nffmpeg\n\n\nCLI\n\n\nLLM\n\n\nmicro-project\n\n\n\nusing ffmpeg for fast and effective frames extraction for VLM\n\n\n\n\n\nAug 28, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nLoading Transformers Models\n\n\n\n\n\n\nguide\n\n\nLLM\n\n\nHuggingFace\n\n\n\nand a github template you can use to quickly create HuggingFace Spaces\n\n\n\n\n\nAug 5, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nAI at the Gate\n\n\n\n\n\n\nHuggingFace\n\n\nguide\n\n\n\n3 different ways to access the latest AI models on the HuggingFace community\n\n\n\n\n\nJul 12, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nUV for python dependencies\n\n\n\n\n\n\nguide\n\n\nPython\n\n\n\nthe GOAT of python dependencies management, at least as of 2025\n\n\n\n\n\nMay 2, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nYoutube Video to Giphy\n\n\n\n\n\n\nffmpeg\n\n\nYoutube\n\n\nCLI\n\n\n\nhow to use yt-dlp with ffmpeg to create a gif and host it for free\n\n\n\n\n\nApr 16, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nETF Search Party\n\n\n\n\n\n\ntradingview\n\n\ntrading\n\n\nETFs\n\n\n\nusing tradingview-screener to search for a low risk safe investment\n\n\n\n\n\nApr 10, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nEvaluating Investment Performance\n\n\n\n\n\n\ntrading\n\n\nETFs\n\n\n\nbeyond returns and applying the Market Wizard’s Evaluation Metrics\n\n\n\n\n\nApr 7, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\ninterpolation (and data smoothing) made easy\n\n\n\n\n\n\nPandas\n\n\ntutorial\n\n\n\nusing Pandas to easily interplate and smooth data\n\n\n\n\n\nMar 17, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nPlotly Timeline for non-date-type series\n\n\n\n\n\n\nplotly\n\n\ndata visualization\n\n\n\nhighly customizable timeline/ gantt chart for small time-scale events\n\n\n\n\n\nFeb 17, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nTradingView Screener in Python\n\n\n\n\n\n\ntradingview\n\n\n\nPythonic TradingView Screener as pandas dataframe using tradingview-screener\n\n\n\n\n\nFeb 4, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nHuggingFace Freebie: Automatic Speech Recognition\n\n\n\n\n\n\nHuggingFace\n\n\nspeech recognition\n\n\n\nzero-cost Automatic Speech Recognition using HuggingFace’s serverless inference API\n\n\n\n\n\nFeb 3, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nVideo Keyframe Extraction using FFMPEG\n\n\n\n\n\n\nffmpeg\n\n\nCLI\n\n\n\nusing ffmpeg for fast and effective keyframe extraction\n\n\n\n\n\nJan 30, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nNo OpenAI API key, No Problem!\n\n\n\n\n\n\nLLM\n\n\nlangchain\n\n\nOllama\n\n\nHuggingFace\n\n\n\nthree different ways to load up a ChatOpenAI model in Langchain without an OpenAI API Key\n\n\n\n\n\nJan 24, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nLLM app with langchain\n\n\n\n\n\n\nLLM\n\n\nlangchain\n\n\nOllama\n\n\n\nbeginner guide on loading up a LLM for app development\n\n\n\n\n\nJan 9, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nWhisper vs Youtube Transcript API\n\n\n\n\n\n\nspeech recognition\n\n\nCLI\n\n\nYoutube\n\n\n\ncomparing Youtube Transcript API vs OpenAI Whisper in Speech Recognition accuracy\n\n\n\n\n\nJan 4, 2025\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nHosting Your Own ChatGPT\n\n\n\n\n\n\nguide\n\n\nLLM\n\n\nOllama\n\n\n\nrunning Ollama and it’s WebUI locally\n\n\n\n\n\nDec 29, 2024\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nOpenAI Whisper\n\n\n\n\n\n\nspeech recognition\n\n\nCLI\n\n\n\nan open-source speech recognition model CLI (and python package) that actually works\n\n\n\n\n\nDec 28, 2024\n\n\nim@johnho.ca\n\n\n\n\n\n\n\n\n\n\n\n\nChat with Backtrader\n\n\n\n\n\n\nRAG\n\n\nbacktrader\n\n\nlangchain\n\n\nLLM\n\n\nOllama\n\n\n\nbuilding a RAG using langchain and ollama\n\n\n\n\n\nDec 21, 2024\n\n\nim@johnho.ca\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "notebooks/my-toolchain.html",
@@ -718,7 +718,7 @@
     "href": "notebooks/my-toolchain.html#footnotes",
     "title": "Toolchain of a GADA Scientist",
     "section": "Footnotes",
-    "text": "Footnotes\n\n\nthe sync feature only started to work in 2024, the browser do crash unexpectedly on startup from time to time, and the RAM management is just okay… although I do use tons of tabs. The built in ProtonVPN is kinda cool.↩︎\nbecause I ❤️ mindfulness, the built in Aria AI is pretty good, and it basically have all the features above↩︎\n50 Zed-hosted prompt per month using the latest Claude model. But you could also setup OpenRouter or Ollama or even use your Co-pilot quota in zed.↩︎\nyou will need to upload the created recording, and the asciinema player is purpose-built for sharing terminal sessions.↩︎\nyou will need to install agg using brew install agg↩︎\nI use to manage using pyenv and the virtualenvwrapper, see here for an archive of that setup.↩︎"
+    "text": "Footnotes\n\n\nthe sync feature only started to work in 2024, the browser do crash unexpectedly on startup from time to time, and the RAM management is just okay… although I do use tons of tabs. The built in ProtonVPN is kinda cool.↩︎\nbecause I ❤️ mindfulness, the built in Aria AI is pretty good, and it basically have all the features above↩︎\n50 Zed-hosted prompt per month using the latest Claude model. But you could also setup OpenRouter or Ollama or even use your Co-pilot quota in zed.↩︎\nyou will need to upload the created recording, and the asciinema player is purpose-built for sharing terminal sessions.↩︎\nyou will need to install agg using brew install agg↩︎\nif you don’t /connect, zen’s free models will be used as default↩︎\nlots changed with ollama since 2024, make sure you upgrade it:\nbrew upgrade ollama\nollama serve    # need to get the app running before any running any other commands\nollama sigin    # for using ollama cloud, you'll need an account first\n↩︎\nI use to manage using pyenv and the virtualenvwrapper, see here for an archive of that setup.↩︎"
   },
   {
     "objectID": "notebooks/my-toolchain.html#using-uv",
@@ -739,7 +739,7 @@
     "href": "notebooks/using-uv.html#footnotes",
     "title": "UV for python dependencies",
     "section": "Footnotes",
-    "text": "Footnotes\n\n\nabout 115x faster than pip, in the time it takes to run pip install on your next project you can probabaly read this post and learn all the basics to get started.↩︎\nwhen you uv remove something, no dangling packages are left behind, you can inspect after with uv tree↩︎\nadd export UV_PYTHON_INSTALL_DIR=$HOME/your/custom/home/for/.uv/python/ to your ~/.bashrc to control where those managed python versions get installed to↩︎\npyenv’s virutal environment are installed by default to ~/.pyenv/versions/&lt;env-name&gt;/↩︎\nor use uv venv --python 3.12 to create a virtual environment with python 3.12↩︎\nfor an existing project, you might want to update the value for name and also add the requires-python field (with a value like &gt;=3.8)↩︎\nthe lockfile contains the exact resolved versions that are installed in the project environment and is meant to be checked into version control; So that it can be easily recreated else where with a uv sync↩︎\nsee this stackoverflow answer for details↩︎"
+    "text": "Footnotes\n\n\nabout 115x faster than pip, in the time it takes to run pip install on your next project you can probabaly read this post and learn all the basics to get started.↩︎\nwhen you uv remove something, no dangling packages are left behind, you can inspect after with uv tree↩︎\nadd export UV_PYTHON_INSTALL_DIR=$HOME/your/custom/home/for/.uv/python/ to your ~/.bashrc to control where those managed python versions get installed to↩︎\npyenv’s virutal environment are installed by default to ~/.pyenv/versions/&lt;env-name&gt;/↩︎\nor use uv venv --python 3.12 to create a virtual environment with python 3.12↩︎\nbasically trying to cover the same use-case for pipx. For tools that are commonly called, in uv could install them.↩︎\nuvx is an alias for uv tool run↩︎\neven when the script is ran within the project, the project dependencies will be ignored (i.e. the inline script metadata has precedence over the project dependencies)↩︎\nrun uv cache dir to see where that is on your machine.↩︎\nfor an existing project, you might want to update the value for name and also add the requires-python field (with a value like &gt;=3.8)↩︎\nthe lockfile contains the exact resolved versions that are installed in the project environment and is meant to be checked into version control; So that it can be easily recreated else where with a uv sync↩︎\nsee this stackoverflow answer for details↩︎"
   },
   {
     "objectID": "notebooks/using-uv.html#a-minimal-project",
@@ -999,5 +999,103 @@
     "title": "Hosting Your Own ChatGPT",
     "section": "Ollama + WebUI in 2 simple steps",
     "text": "Ollama + WebUI in 2 simple steps\nfirst you’ll need to have ollama installed:\nbrew update\nbrew install ollama\nollama serve            # might want to run this in a screen\nollama pull llama3.1\nSecondly for the WebUI I prefer to run with Docker (make sure you have that installed also):\ndocker pull ghcr.io/open-webui/open-webui:main\ndocker run --rm -p 3000:8080 -e WEBUI_AUTH=False -v open-webui:/app/backend/data \\\n    --name open-webui ghcr.io/open-webui/open-webui:main\nA few notes:\n\nrun it in the background: I like to see what goes on in the container and would run the above command in a screen. You could add -d to run it in detached mode.\nport mapping: here we mapped the local port 3000 to the WebUI, you can access it by going to http://localhost:3000\nsingle-user mode: if you are running it in your personal laptop, there’s no need for accounts management. The -e WEBUI_AUTH=False turns that off.\nVolume Mount: this will mount the docker volumne open-webui to make sure data (like chat history) persist across sessions"
+  },
+  {
+    "objectID": "notebooks/using-uv.html#cleaning-cached-virtual-environments",
+    "href": "notebooks/using-uv.html#cleaning-cached-virtual-environments",
+    "title": "UV for python dependencies",
+    "section": "cleaning cached virtual environments",
+    "text": "cleaning cached virtual environments\nWhen running scripts or calling a tool with uvx virtual environments are stored in the uv cache directory9 and are treated as disposable. You can clean them out by:\n\nuv cache prune: safely removes unused cache entries while respecting locks\nuv cache clean: clears all cached entries and have uv rebuilds on the next run"
+  },
+  {
+    "objectID": "notebooks/guide-to-datasette.html",
+    "href": "notebooks/guide-to-datasette.html",
+    "title": "Datasette in 1-2-3",
+    "section": "",
+    "text": "Datasette is a tool for exploring and publishing data. It helps people take data of any shape or size and publish that as an interactive, explorable website and accompanying API.\n\nAnd build specifically to serve SQLite databases. While your data might not be in SQLite databases, the companion sqlite-util1 tool will make sure that it is.\n\n\nmy favorite way to install datasette is with pipx:\n1pipx install datasette sqlite-utils\n\n1\n\nto upgrade run pipx upgrade datasette sqlite-utils\n\n\n\n\n\nsay you got a dataframe in table1.csv, here’s how to start a web server to view it:\n1sqlite-utils insert mydata.db tbl_awesome table1.csv --csv\n2datasette mydata.db -o\n\n1\n\nthis inserts the data in table1.csv into the tbl_awesome table in the mydata.db sqlite database\n\n2\n\nthis is basically a datasette serve since the serve command is the default; the -o flag opens a browser tab to the web UI on http://localhost:8001/\n\n\nand say you got more data to add to tbl_awesome from table2.csv and table3.csv and table4.csv:\n3cat first.csv &lt;(tail +2 second.csv ) &lt;(tail +2 third.csv ) | \\\n4    sqlite-utils insert mydata.db tbl_awesome - --csv --pk=primary_key_id --alter\n5sqlite-utils rows mydata.db tbl_awesome | wc -l\n\n3\n\nunfortunately the sqlite-utils insert command does NOT support multiple files. So make sure that all these CSVs have the same columns\n\n4\n\nthe --pk flag control the upsert with a primary key column which in this case is primary_key_id and --alter option automatically creates the missing columns if the incoming table has columns that don’t yet exist in tbl_awesome\n\n5\n\nuse this command to confirm that more rows are added:\n\n\n\n\n\none of the key feature of datasette is plugins. Most of these are written by Simon himself. Here are a few essential ones:\n\ndatasette-vega: good for added simple data visualization\ndatasette-render-image-tags: render image urls as images instead of links\ndatasette-publish-vercel: publish your datasette instance to Vercel with one command (see more below)\ndatasette-auth-passwords: add password-based authentication to your datasette instance\n\nTo see what plugins are installed, run datasette plugins or go to the /-/plugins page of your datasette instance.\nAnd to install a plugin, run datasette install &lt;plugin-name&gt;."
+  },
+  {
+    "objectID": "notebooks/guide-to-datasette.html#installation",
+    "href": "notebooks/guide-to-datasette.html#installation",
+    "title": "Datasette in 1-2-3",
+    "section": "",
+    "text": "my favorite way to install datasette is with pipx:\n1pipx install datasette sqlite-utils\n\n1\n\nto upgrade run pipx upgrade datasette sqlite-utils"
+  },
+  {
+    "objectID": "notebooks/guide-to-datasette.html#create",
+    "href": "notebooks/guide-to-datasette.html#create",
+    "title": "Datasette in 1-2-3",
+    "section": "Create",
+    "text": "Create\nThe following command will create a new directory for your project and setup the scaffolding for a simple website in the my-awesome-site directory:\n1quarto create project blog my-awesome-site\n\n1\n\nuse this to setup a site with a blog built-in\n\n\nor\n2quarto create project website my-awesome-site\n\n2\n\nuse this if you are sure you want a website without a blog and wanna keep things nice and simple"
+  },
+  {
+    "objectID": "notebooks/guide-to-datasette.html#blog",
+    "href": "notebooks/guide-to-datasette.html#blog",
+    "title": "Datasette in 1-2-3",
+    "section": "Blog",
+    "text": "Blog\nif you have used the quarto create project blog option above, you can control the listing of your blogs in your index.qmd which will be a listing page2"
+  },
+  {
+    "objectID": "notebooks/guide-to-datasette.html#render",
+    "href": "notebooks/guide-to-datasette.html#render",
+    "title": "Datasette in 1-2-3",
+    "section": "Render",
+    "text": "Render\nWhile editing your website/ blog, you can run quarto preview3 to preview your site in a browser.\nOr use quarto render which can give you more granular control. You open the pages rendered in docs4 manually to “preview” changes. quarto render will render the whole site which you might not need to do everytime since it’s time consuming. You can instead render individual pages or sections of your site for example, just a blog post:\nquarto render blog/first_post.qmd\nby default, Quarto will render the site to the _site directory but you should change that to docs using the output-dir variable in your project configuration _quarto.yaml:\n\n\n_quarto.yaml\n\nproject:\n  type: website\n1  output-dir: docs\n\nwebsite:\n  title: \"My Super Awesome Site\"\n6  favicon: favicon.ico\n2  navbar:\n5    logo: logo.png\n    left:\n      - href: index.qmd\n        text: Home\n3      - about.qmd\n\nformat:\n  html:\n4    theme: cosmo\n    css: styles.css\n    toc: true\n\n\n1\n\nneed this for Github Pages deployment later\n\n2\n\nmore about setting up website nav here\n\n3\n\nan about page is create by default, here’s a detailed guide on how to set it up.\n\n4\n\nthese are the available options for HTML themes\n\n5\n\nOptional: put your site’s logo here, if you have one, which will appear in the navbar.\n\n6\n\nOptional: put your site’s favicon here, if you have one."
+  },
+  {
+    "objectID": "notebooks/guide-to-datasette.html#create-github-repo",
+    "href": "notebooks/guide-to-datasette.html#create-github-repo",
+    "title": "Datasette in 1-2-3",
+    "section": "create github repo",
+    "text": "create github repo\nFirst create a new repository on Github, then add it as a remote:\ncd my-awesome-site\ngit init\n1git remote add origin https://github.com/username/repository.git\n2git pull origin main\n\n1\n\nupdate this to whatever your repo’s URL is\n\n2\n\npull in things like README.md, .gitignore,LICENSE.md, etc."
+  },
+  {
+    "objectID": "notebooks/guide-to-datasette.html#gitignore",
+    "href": "notebooks/guide-to-datasette.html#gitignore",
+    "title": "Datasette in 1-2-3",
+    "section": "gitignore",
+    "text": "gitignore\noptional but might be good idea to make sure that _site5 and .quarto are ignored:\n\n\n.gitignore\n\n/.quarto/\n/_site/\n\n# other items to ignore\n..."
+  },
+  {
+    "objectID": "notebooks/guide-to-datasette.html#init-commit",
+    "href": "notebooks/guide-to-datasette.html#init-commit",
+    "title": "Datasette in 1-2-3",
+    "section": "init commit",
+    "text": "init commit\nthen just add and commit:\n1quarto render\n2touch .nojekyll\n3git add docs .gitignore .nojekyll\ngit commit -m \"init commit\"\ngit push origin main\n\n1\n\nthis should create everything in docs per above\n\n2\n\ntell Github Pages not to do additional processing of the site’s content using Jekyll\n\n3\n\nthis will only add the rendered html files, you of course have the optional to add other files"
+  },
+  {
+    "objectID": "notebooks/guide-to-datasette.html#configure-github-repo",
+    "href": "notebooks/guide-to-datasette.html#configure-github-repo",
+    "title": "Datasette in 1-2-3",
+    "section": "configure github repo",
+    "text": "configure github repo\nfinally, go to your Github repo’s settings and enable Github Pages. Choose the docs folder as the source:\n\n\n\n\n\n\nFigure 1: Example Github Page settings\n\n\n\nAnd that’s it, your site is live!\nGoing forward, as you add new content, you just simply:\nquarto render\ngit add docs\ngit commit -m \"add new content\"\ngit push origin main"
+  },
+  {
+    "objectID": "notebooks/guide-to-datasette.html#footnotes",
+    "href": "notebooks/guide-to-datasette.html#footnotes",
+    "title": "Datasette in 1-2-3",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nthe middleman who convert your data format (e.g. .csv) to sqlite since↩︎"
+  },
+  {
+    "objectID": "notebooks/guide-to-datasette.html#very-quick-start",
+    "href": "notebooks/guide-to-datasette.html#very-quick-start",
+    "title": "Datasette in 1-2-3",
+    "section": "",
+    "text": "say you got a dataframe in table1.csv, here’s how to start a web server to view it:\n1sqlite-utils insert mydata.db tbl_awesome table1.csv --csv\n2datasette mydata.db -o\n\n1\n\nthis inserts the data in table1.csv into the tbl_awesome table in the mydata.db sqlite database\n\n2\n\nthis is basically a datasette serve since the serve command is the default; the -o flag opens a browser tab to the web UI on http://localhost:8001/\n\n\nand say you got more data to add to tbl_awesome from table2.csv and table3.csv and table4.csv:\n3cat first.csv &lt;(tail +2 second.csv ) &lt;(tail +2 third.csv ) | \\\n4    sqlite-utils insert mydata.db tbl_awesome - --csv --pk=primary_key_id --alter\n5sqlite-utils rows mydata.db tbl_awesome | wc -l\n\n3\n\nunfortunately the sqlite-utils insert command does NOT support multiple files. So make sure that all these CSVs have the same columns\n\n4\n\nthe --pk flag control the upsert with a primary key column which in this case is primary_key_id and --alter option automatically creates the missing columns if the incoming table has columns that don’t yet exist in tbl_awesome\n\n5\n\nuse this command to confirm that more rows are added:"
+  },
+  {
+    "objectID": "notebooks/guide-to-datasette.html#plugins",
+    "href": "notebooks/guide-to-datasette.html#plugins",
+    "title": "Datasette in 1-2-3",
+    "section": "",
+    "text": "one of the key feature of datasette is plugins. Most of these are written by Simon himself. Here are a few essential ones:\n\ndatasette-vega: good for added simple data visualization\ndatasette-render-image-tags: render image urls as images instead of links\ndatasette-publish-vercel: publish your datasette instance to Vercel with one command (see more below)\ndatasette-auth-passwords: add password-based authentication to your datasette instance\n\nTo see what plugins are installed, run datasette plugins or go to the /-/plugins page of your datasette instance.\nAnd to install a plugin, run datasette install &lt;plugin-name&gt;."
+  },
+  {
+    "objectID": "notebooks/my-toolchain.html#coding-agents",
+    "href": "notebooks/my-toolchain.html#coding-agents",
+    "title": "Toolchain of a GADA Scientist",
+    "section": "coding agents",
+    "text": "coding agents\n\nClaude Code\n\nnative install using bash\nsetup API keys\n\nOpenCode6: brew install anomalyco/tap/opencode\nOllama7\n\nrun cloud models: ollama run qwen3.5:397b-cloud\ncoding agents: ollama launch claude\nand it also works with zed"
   }
 ]
