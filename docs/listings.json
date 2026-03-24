@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/notebooks/writeup_tldw.html",
       "/notebooks/my-toolchain.html",
       "/notebooks/guide-to-datasette.html",
       "/notebooks/guide-to-quarto.html",

@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.39">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="im@johnho.ca">
+
+<title>TLDW: Too Long; Didn’t Watch – SeekingVega Journal</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../assets/images/sv-favicon-v2.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-d166b450ba5a8e9f7a0ab969bf6592c1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-11c98a4cd10cbe71437da3257ed48a1e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<meta name="mermaid-theme" content="forest">
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../assets/images/sv-favicon-v2-white.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">SeekingVega Journal</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#transcript-retrieval" id="toc-transcript-retrieval" class="nav-link" data-scroll-target="#transcript-retrieval">Transcript Retrieval</a>
+  <ul class="collapse">
+  <li><a href="#how-it-works" id="toc-how-it-works" class="nav-link" data-scroll-target="#how-it-works">How It Works</a></li>
+  <li><a href="#serpapi-transcript-format" id="toc-serpapi-transcript-format" class="nav-link" data-scroll-target="#serpapi-transcript-format">SerpAPI Transcript Format</a></li>
+  <li><a href="#srt-conversion" id="toc-srt-conversion" class="nav-link" data-scroll-target="#srt-conversion">SRT Conversion</a></li>
+  <li><a href="#video-metadata" id="toc-video-metadata" class="nav-link" data-scroll-target="#video-metadata">Video Metadata</a></li>
+  <li><a href="#url-based-auto-loading" id="toc-url-based-auto-loading" class="nav-link" data-scroll-target="#url-based-auto-loading">URL-Based Auto-Loading</a></li>
+  </ul></li>
+  <li><a href="#ai-analysis" id="toc-ai-analysis" class="nav-link" data-scroll-target="#ai-analysis">AI Analysis</a>
+  <ul class="collapse">
+  <li><a href="#analysis-pipeline" id="toc-analysis-pipeline" class="nav-link" data-scroll-target="#analysis-pipeline">Analysis Pipeline</a></li>
+  <li><a href="#prompt-construction" id="toc-prompt-construction" class="nav-link" data-scroll-target="#prompt-construction">Prompt Construction</a></li>
+  <li><a href="#caching-strategy" id="toc-caching-strategy" class="nav-link" data-scroll-target="#caching-strategy">Caching Strategy</a></li>
+  <li><a href="#clickable-timestamps" id="toc-clickable-timestamps" class="nav-link" data-scroll-target="#clickable-timestamps">Clickable Timestamps</a></li>
+  </ul></li>
+  <li><a href="#rag-chat-interface" id="toc-rag-chat-interface" class="nav-link" data-scroll-target="#rag-chat-interface">RAG Chat Interface</a>
+  <ul class="collapse">
+  <li><a href="#rag-architecture" id="toc-rag-architecture" class="nav-link" data-scroll-target="#rag-architecture">RAG Architecture</a></li>
+  <li><a href="#chunking-the-transcript" id="toc-chunking-the-transcript" class="nav-link" data-scroll-target="#chunking-the-transcript">Chunking the Transcript</a></li>
+  <li><a href="#two-retrieval-strategies" id="toc-two-retrieval-strategies" class="nav-link" data-scroll-target="#two-retrieval-strategies">Two Retrieval Strategies</a></li>
+  <li><a href="#context-injection" id="toc-context-injection" class="nav-link" data-scroll-target="#context-injection">Context Injection</a></li>
+  <li><a href="#streaming" id="toc-streaming" class="nav-link" data-scroll-target="#streaming">Streaming</a></li>
+  <li><a href="#session-state-rebuilding" id="toc-session-state-rebuilding" class="nav-link" data-scroll-target="#session-state-rebuilding">Session State &amp; Rebuilding</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">TLDW: Too Long; Didn’t Watch</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Youtube</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>im@johnho.ca </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Tuesday, March 24, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+<div>
+  <div class="abstract">
+    <div class="block-title">Abstract</div>
+    Building a YouTube Transcript Analyzer with Streamlit, LLMs, and RAG
+  </div>
+</div>
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+This post is 100% written by Claude Code
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>the <a href="https://github.com/ohjho/st-tldw">TLDW project</a> is my personal project for learning agentic coding as such I’m also testing Claude’s codebase understanding and teaching abilities with this write-up that’s completely written by Claude</p>
+</div>
+</div>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p><strong>TLDW</strong> (Too Long; Didn’t Watch) is a Streamlit application that extracts YouTube video transcripts, generates AI-powered summaries with clickable timestamps, and provides a RAG-based chat interface for asking questions about the video content.</p>
+<p>The app is built around three core capabilities:</p>
+<ol type="1">
+<li><strong>Transcript retrieval</strong> — fetching timestamped transcripts from YouTube via SerpAPI</li>
+<li><strong>AI analysis</strong> — generating summaries and key points using LLMs through LiteLLM</li>
+<li><strong>RAG chat</strong> — a retrieval-augmented chat interface for conversational Q&amp;A over the transcript</li>
+</ol>
+<p>This post walks through how each of these pieces works under the hood.</p>
+</section>
+<section id="transcript-retrieval" class="level2">
+<h2 class="anchored" data-anchor-id="transcript-retrieval">Transcript Retrieval</h2>
+<p>The first step in the pipeline is obtaining a timestamped transcript for a given YouTube video. TLDW uses SerpAPI’s YouTube transcript engine as its primary source, with video metadata enriched via the YouTube Data API.</p>
+<section id="how-it-works" class="level3">
+<h3 class="anchored" data-anchor-id="how-it-works">How It Works</h3>
+<p>When a user enters a YouTube URL (or the app loads one from the <code>?v=</code> query parameter), the app:</p>
+<ol type="1">
+<li>Extracts the video ID from the URL using regex patterns that handle standard, short, and embed URL formats</li>
+<li>Calls SerpAPI’s <code>youtube_video_transcript</code> engine to fetch the raw transcript</li>
+<li>Fetches video metadata (title, description, tags, view counts) via the YouTube Data API v3</li>
+<li>Converts the raw transcript into SRT subtitle format for downstream use</li>
+</ol>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+    A[User enters YouTube URL] --&gt; B[extract_video_id]
+    B --&gt; C{Valid video ID?}
+    C --&gt;|No| D[Show error]
+    C --&gt;|Yes| E[get_youtube_transcript_serpapi]
+    E --&gt; F{Success?}
+    F --&gt;|No| D
+    F --&gt;|Yes| G[Store raw transcript in session state]
+    G --&gt; H[get_video_metadata_youtube_api]
+    H --&gt; I[Store metadata in session state]
+    I --&gt; J[serp_transcript_to_srt]
+    J --&gt; K[SRT-formatted transcript ready]
+    K --&gt; L[Display transcript + video player]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="serpapi-transcript-format" class="level3">
+<h3 class="anchored" data-anchor-id="serpapi-transcript-format">SerpAPI Transcript Format</h3>
+<p>SerpAPI returns the transcript as a list of segments, each with millisecond-precision timing:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"start_ms"</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"end_ms"</span><span class="fu">:</span> <span class="dv">5040</span><span class="fu">,</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"snippet"</span><span class="fu">:</span> <span class="st">"Welcome to the video..."</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"start_ms"</span><span class="fu">:</span> <span class="dv">5040</span><span class="fu">,</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"end_ms"</span><span class="fu">:</span> <span class="dv">10200</span><span class="fu">,</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"snippet"</span><span class="fu">:</span> <span class="st">"Today we're going to talk about..."</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="ot">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The <code>get_youtube_transcript_serpapi()</code> function is cached with a one-day TTL using <code>@st.cache_data(ttl="1d")</code>, so repeated requests for the same video hit the cache instead of consuming API quota.</p>
+</section>
+<section id="srt-conversion" class="level3">
+<h3 class="anchored" data-anchor-id="srt-conversion">SRT Conversion</h3>
+<p>The raw transcript is converted to SRT format by <code>serp_transcript_to_srt()</code>, which maps each segment’s millisecond timestamps to the standard <code>HH:MM:SS,mmm</code> format:</p>
+<pre><code>1
+00:00:00,000 --&gt; 00:00:05,040
+Welcome to the video...
+
+2
+00:00:05,040 --&gt; 00:00:10,200
+Today we're going to talk about...</code></pre>
+<p>SRT format is used throughout the app because it preserves timing information in a human-readable way that LLMs can parse and reference in their output.</p>
+</section>
+<section id="video-metadata" class="level3">
+<h3 class="anchored" data-anchor-id="video-metadata">Video Metadata</h3>
+<p>TLDW enriches the transcript with video metadata from the YouTube Data API v3 (<code>get_video_metadata_youtube_api()</code>). This provides the video title, description, channel name, publish date, tags, and view/like counts. The title and description are passed into the AI analysis prompt so the LLM has full context about the video’s topic.</p>
+<p>For environments without a YouTube API key, a lightweight fallback uses the free oEmbed endpoint (<code>get_video_metadata_oembed()</code>) which returns basic info (title, author, thumbnail) without authentication.</p>
+</section>
+<section id="url-based-auto-loading" class="level3">
+<h3 class="anchored" data-anchor-id="url-based-auto-loading">URL-Based Auto-Loading</h3>
+<p>The app supports deep linking via query parameters. A URL like <code>?v=dQw4w9WgXcQ</code> will automatically load the transcript on page load, and <code>?t=90</code> will seek the embedded video player to the 1:30 mark. This enables shareable links and powers the clickable timestamp feature in AI analysis output.</p>
+</section>
+</section>
+<section id="ai-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="ai-analysis">AI Analysis</h2>
+<p>Once a transcript is loaded, TLDW can generate an AI-powered analysis that combines a concise summary with a numbered list of key points — each annotated with clickable timestamps that link back to the relevant moment in the video.</p>
+<section id="analysis-pipeline" class="level3">
+<h3 class="anchored" data-anchor-id="analysis-pipeline">Analysis Pipeline</h3>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+    A[SRT transcript in session state] --&gt; B[Build context block]
+    C[Video metadata: title + description] --&gt; B
+    B --&gt; D[Construct system prompt]
+    B --&gt; E[Construct analysis prompt]
+    D --&gt; F[LiteLLM completion call]
+    E --&gt; F
+    F --&gt; G[LLM generates markdown with timestamps]
+    G --&gt; H[render_markdown_with_timestamps]
+    H --&gt; I[Regex finds HH:MM:SS patterns]
+    I --&gt; J[Convert to clickable YouTube links]
+    J --&gt; K[Render HTML with st.markdown]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="prompt-construction" class="level3">
+<h3 class="anchored" data-anchor-id="prompt-construction">Prompt Construction</h3>
+<p>The analysis uses a two-message prompt structure — a system message that establishes the role and timestamp citation requirements, and a user message containing the full context:</p>
+<p><strong>System prompt:</strong></p>
+<blockquote class="blockquote">
+<p>You are a helpful assistant that analyzes YouTube video transcripts. The transcript is provided in SRT format with timestamps in HH:MM:SS,mmm format. Always cite the relevant timestamp (HH:MM:SS format) next to each point or claim so the reader can jump to that moment in the video.</p>
+</blockquote>
+<p><strong>User prompt:</strong></p>
+<blockquote class="blockquote">
+<p>Analyze the following YouTube video transcript. First, provide a concise summary highlighting the main points and key takeaways. Then, list the key points as a numbered list with the timestamp (HH:MM:SS) where each idea is discussed in the video.</p>
+<p>Video title: {title} Video description: {description}</p>
+<p>Transcript (SRT format with timestamps): {srt_string}</p>
+</blockquote>
+<p>By explicitly instructing the LLM to cite timestamps in <code>HH:MM:SS</code> format, the output becomes machine-parseable for the next step — turning those timestamps into clickable links.</p>
+</section>
+<section id="caching-strategy" class="level3">
+<h3 class="anchored" data-anchor-id="caching-strategy">Caching Strategy</h3>
+<p>The <code>_cached_analysis()</code> function wraps the LiteLLM call with <code>@st.cache_data</code>. The cache key is <code>(video_id, analysis_type, model, temperature, max_tokens)</code> — notably excluding the actual prompt strings (which are passed as underscore-prefixed parameters that Streamlit’s caching ignores). This avoids hashing large transcript strings while still invalidating the cache when the user changes model settings.</p>
+</section>
+<section id="clickable-timestamps" class="level3">
+<h3 class="anchored" data-anchor-id="clickable-timestamps">Clickable Timestamps</h3>
+<p>After the LLM returns its markdown response, <code>render_markdown_with_timestamps()</code> post-processes the output:</p>
+<ol type="1">
+<li>A regex <code>\b(\d{1,2}:\d{2}:\d{2})\b</code> finds all timestamp patterns like <code>1:23:45</code> or <code>00:05:30</code></li>
+<li>Each match is converted to seconds via <code>srt_timestamp_to_seconds()</code></li>
+<li>The timestamp text is wrapped in an <code>&lt;a&gt;</code> tag linking to <code>https://www.youtube.com/watch?v={video_id}&amp;t={seconds}</code></li>
+<li>The result is rendered with <code>st.markdown(unsafe_allow_html=True)</code></li>
+</ol>
+<p>The links open in a new tab, so the user can jump to any cited moment in the video without leaving the app.</p>
+</section>
+</section>
+<section id="rag-chat-interface" class="level2">
+<h2 class="anchored" data-anchor-id="rag-chat-interface">RAG Chat Interface</h2>
+<p>Beyond one-shot analysis, TLDW provides a conversational chat interface powered by Retrieval-Augmented Generation (RAG). Users can ask follow-up questions about the video, and the system retrieves relevant transcript chunks to ground the LLM’s responses.</p>
+<section id="rag-architecture" class="level3">
+<h3 class="anchored" data-anchor-id="rag-architecture">RAG Architecture</h3>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+    A[SRT transcript] --&gt; B[_split_srt]
+    B --&gt; C[Document chunks]
+    C --&gt; D{Retrieval method?}
+    D --&gt;|BM25 Keyword| E[_build_bm25_retriever]
+    D --&gt;|Semantic| F[_build_faiss_retriever]
+    E --&gt; G[BM25Retriever]
+    F --&gt; H[FAISS vector store]
+    H --&gt; G2[FAISS Retriever]
+
+    I[User question] --&gt; J[retriever.invoke]
+    G --&gt; J
+    G2 --&gt; J
+    J --&gt; K[Top-k relevant chunks]
+    K --&gt; L[Build system prompt with context]
+    M[Chat history] --&gt; N[Build message stack]
+    L --&gt; N
+    I --&gt; N
+    N --&gt; O[ChatLiteLLM.stream]
+    O --&gt; P[Stream response to UI]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="chunking-the-transcript" class="level3">
+<h3 class="anchored" data-anchor-id="chunking-the-transcript">Chunking the Transcript</h3>
+<p>The <code>_split_srt()</code> function splits the SRT transcript into overlapping chunks using LangChain’s <code>RecursiveCharacterTextSplitter</code>:</p>
+<ul>
+<li><strong>Chunk size:</strong> 1,000 characters</li>
+<li><strong>Overlap:</strong> 200 characters</li>
+<li><strong>Separators:</strong> <code>["\n\n", "\n"]</code> — prioritizes splitting on double newlines (SRT block boundaries) before falling back to single newlines</li>
+</ul>
+<p>The overlap ensures that context isn’t lost at chunk boundaries — if a topic spans two chunks, the overlapping region preserves continuity.</p>
+</section>
+<section id="two-retrieval-strategies" class="level3">
+<h3 class="anchored" data-anchor-id="two-retrieval-strategies">Two Retrieval Strategies</h3>
+<p>Users choose between two retrieval methods via a radio toggle:</p>
+<section id="bm25-keyword" class="level4">
+<h4 class="anchored" data-anchor-id="bm25-keyword">BM25 (Keyword)</h4>
+<p><code>_build_bm25_retriever()</code> creates a <code>BM25Retriever</code> from LangChain. BM25 (Best Matching 25) is a probabilistic ranking function based on term frequency and inverse document frequency. It’s fast (no model download required) and effective for queries that use the same terminology as the transcript.</p>
+</section>
+<section id="semantic-faiss-bge" class="level4">
+<h4 class="anchored" data-anchor-id="semantic-faiss-bge">Semantic (FAISS + BGE)</h4>
+<p><code>_build_faiss_retriever()</code> builds a vector store using:</p>
+<ul>
+<li><strong>Embeddings:</strong> <code>BAAI/bge-small-en-v1.5</code> — a compact 384-dimensional embedding model (~130MB download on first run)</li>
+<li><strong>Vector store:</strong> FAISS (Facebook AI Similarity Search) — an in-memory approximate nearest neighbor index</li>
+</ul>
+<p>Semantic retrieval understands meaning rather than just keywords, so it can match questions about “revenue growth” to transcript segments discussing “increased sales by 40%.”</p>
+<p>Both retrievers return a configurable number of chunks (default 5, adjustable from 1–10 via a slider).</p>
+</section>
+</section>
+<section id="context-injection" class="level3">
+<h3 class="anchored" data-anchor-id="context-injection">Context Injection</h3>
+<p>When the user sends a message, the retriever fetches the top-k most relevant chunks. These are joined and injected into the system prompt:</p>
+<blockquote class="blockquote">
+<p>You are a helpful assistant answering questions about a YouTube video transcript. Use the following transcript excerpts to answer the user’s question. If the answer is not in the provided context, say so.</p>
+<p>Context: {retrieved chunks}</p>
+</blockquote>
+<p>The full message stack sent to the LLM includes:</p>
+<ol type="1">
+<li>The system message (with retrieved context)</li>
+<li>The conversation history (previous user/assistant turns)</li>
+<li>The current user question</li>
+</ol>
+<p>This preserves multi-turn context while grounding each response in the relevant transcript excerpts.</p>
+</section>
+<section id="streaming" class="level3">
+<h3 class="anchored" data-anchor-id="streaming">Streaming</h3>
+<p>The chat uses LangChain’s <code>ChatLiteLLM</code> wrapper with <code>streaming=True</code>. The <code>_stream_text()</code> generator extracts <code>.content</code> from each <code>AIMessageChunk</code>, and <code>st.write_stream()</code> renders tokens to the UI in real-time as they arrive.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">sequenceDiagram
+    participant User
+    participant Streamlit
+    participant Retriever
+    participant LLM
+
+    User-&gt;&gt;Streamlit: Ask question
+    Streamlit-&gt;&gt;Retriever: retriever.invoke(question)
+    Retriever--&gt;&gt;Streamlit: Top-k transcript chunks
+    Streamlit-&gt;&gt;LLM: System prompt + context + chat history + question
+    loop Token streaming
+        LLM--&gt;&gt;Streamlit: AIMessageChunk
+        Streamlit--&gt;&gt;User: Render token
+    end
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="session-state-rebuilding" class="level3">
+<h3 class="anchored" data-anchor-id="session-state-rebuilding">Session State &amp; Rebuilding</h3>
+<p>The retriever is stored in <code>st.session_state.rag_retriever</code> and only rebuilt when the transcript, retrieval method, or chunk count changes. This avoids re-indexing on every message. When the retriever is rebuilt, the chat history is cleared since the context basis has changed.</p>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>TLDW chains together three layers — transcript extraction, LLM analysis, and retrieval-augmented chat — to make long-form video content quickly navigable. SerpAPI provides the raw transcript data, LiteLLM abstracts away model routing, and LangChain handles the RAG plumbing. Streamlit ties it all together with caching, session state, and streaming to keep the interface responsive.</p>
+<p>The clickable timestamp feature is a small detail that makes a big difference: by instructing the LLM to cite timestamps and then post-processing its output with regex, the AI summary becomes a direct navigation tool for the video itself.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+          // default icon
+          link.classList.add("external");
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="seekingvega/sv-journal" data-repo-id="R_kgDOMj9caQ" data-category="General" data-category-id="DIC_kwDOMj9cac4CmnwB" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="noborder_gray" data-lang="en" crossorigin="anonymous" async="">
+</script>
+<input type="hidden" id="giscus-base-theme" value="noborder_gray">
+<input type="hidden" id="giscus-alt-theme" value="noborder_gray">
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Code licensed under MIT. Blog posts © SeekingVega 2024, licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0.</a></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/seekingvega/sv-journal">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
