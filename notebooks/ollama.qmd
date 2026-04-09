@@ -24,6 +24,8 @@ format:
 draft: false
 execute:
   echo: false
+code-annotations: hover
+image: https://assets.apidog.com/blog-next/2025/05/How-to-use-Open-Web-UI-with-Ollama.webp
 ---
 
 ## introduction
@@ -58,6 +60,14 @@ by going to `http://localhost:3000`
 for accounts management. The `-e WEBUI_AUTH=False` turns that off.
 * **Volume Mount**: this will mount the docker volumne `open-webui` to make sure
 data (like chat history) persist across sessions
+
+To make launch it event easier, you could add the following aliases to your `~/.zshrc`:
+```{.sh filename="~/.zshrc"}
+alias openwebui='docker run --rm -p 3000:8080 -e WEBUI_AUTH=False -v open-webui:/app/backend/data --name open-webui ghcr.io/open-webui/open-webui:main'
+
+alias openwebui-update='docker stop open-webui 2>/dev/null || true; docker rm open-webui 2>/dev/null || true; docker pull ghcr.io/open-webui/open-webui:main && openwebui' # <1>
+```
+1. update the image before launching openwebui
 
 ## Learn More
 * [Configuring Ollama for Local Environments](https://www.arsturn.com/blog/configuring-ollama-for-local-environments) by Arsturn (chatbot platform)
