@@ -106,7 +106,13 @@ And that gives us this reference audio file:
 :::
 
 ## transcription
-Reference text is required for the reference audio for the [Qwen3TTS model](#qwen3tts).
+
+::: {.callout-tip}
+## optional: skip if using [Chatterbox Turbo](#chatterbox-turbo)
+reference text is not needed for Chatterbox Turbo
+:::
+
+Reference text is required for the reference audio for the [Qwen3TTS model](#qwen3-tts).
 So `whisper`[^2] will do the work:
 ```bash
 whisper morgan_freeman_final.mp3 --output_format txt -o . # <1>
