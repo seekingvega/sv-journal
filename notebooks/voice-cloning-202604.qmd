@@ -1,9 +1,10 @@
 ---
 title: "Voice Cloning in April 2026"
-abstract: how to use `yt-dlp` with `ffmpeg` to create a gif and host it for free
+abstract: testing out two open source Voice Cloning TTS models that could rival ElevenLabs
 date: 4/30/2026
 date-format: full
 author: im@johnho.ca
+image: https://github.com/resemble-ai/chatterbox/raw/master/Chatterbox-Turbo.jpg
 categories:
     - voice
     - TTS
