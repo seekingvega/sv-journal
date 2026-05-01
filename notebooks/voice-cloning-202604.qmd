@@ -1,0 +1,184 @@
+---
+title: "Voice Cloning in April 2026"
+abstract: how to use `yt-dlp` with `ffmpeg` to create a gif and host it for free
+date: 4/30/2026
+date-format: full
+author: im@johnho.ca
+categories:
+    - voice
+    - TTS
+    - ffmpeg
+    - Youtube
+    - HuggingFace
+format:
+    html:
+        mermaid:
+            theme: forest
+            securityLevel: loose
+        toc: true
+        toc-depth: 3
+        toc-expand: 2
+        toc-title: Contents
+        toc-location: left
+        link-external-icon: true
+        link-external-newwindow: true
+draft: false
+execute:
+  echo: false
+crossref:
+    custom:
+    - kind: float
+      reference-prefix: Video
+      key: vid
+code-annotations: hover
+---
+
+# Introduction
+
+ElevenLabs' probably the gold standard in voice cloning and TTS right now but it is a paid service and may not be accessible to everyone.
+
+Luckily in early 2026, two open source alternatives emerged:
+
+::: {.column-page layout-ncol=2}
+
+::: {#vid-chatterbox}
+{{<video https://youtu.be/chH2tlh_Vvk >}}
+
+Option 1 - Chatterbox Turbo
+:::
+
+::: {#vid-qwen3tts}
+{{<video https://youtu.be/dQ841Pd6YvQ >}}
+
+Option 2 - Qwen3 TTS
+:::
+
+:::
+
+So let's try these two models out...
+
+# Reference Audio
+
+Arguably the most important part of voice cloning is the reference audio.
+The better the quality and the more representative of the target voice, the better the cloning results will be.
+For this demo, we'll use Morgan Freeman's voice from this video:
+
+::: {#vid-refaudio}
+{{<video https://youtu.be/9cixE4DAmBw >}}
+
+Reference Audio from Morgan Freeman
+:::
+
+## getting audio file from YouTube
+As with most data science projects, the getting data part oftens takes the most effort.
+
+To pull the audio, we'll use `yt-dlp`[^1]:
+```bash
+pipx upgrade yt-dlp # <4>
+yt-dlp -x --audio-format mp3 \ # <1>
+    --download-sections "*00:00:15.00-00:00:29.00" \ # <2>
+    --audio-quality 0 \ # <3>
+    -o "morgan_freeman.mp3" "https://www.youtube.com/watch?v=9cixE4DAmBw"
+```
+1. tells `yt-dlp` to extract the audio and convert it to mp3 format
+2. this option allows you to specify a time range for the audio you want to download but might not be precise enough for our needs. We'll use `ffmpeg` to trim the audio a bit more precisely in the next step.
+3. this option sets the audio quality to the highest possible (0 is the best quality for mp3)
+4. make sure to upgrade `yt-dlp` to the latest version to ensure that you have access to all the latest features and bug fixes.
+
+::: {.callout-note}
+##  trimming audio file
+This part is crucial because the reference audio should ideally be as clean and representative of the target voice as possible.
+Any background noise, music, or other voices can interfere with the cloning process and result in a less accurate clone.
+
+While `yt-dlp`'s `--download-sections` option allows you to specify a time range for the audio you want to download,
+I personally found it to not be precise enough even after trying different time ranges.
+
+Luckily we got `ffmpeg` to handle this:
+```bash
+ffmpeg -i morgan_freeman.mp3 -ss 00:00:05 -c copy "morgan_freeman_final.mp3"
+```
+
+And that gives us this reference audio file:
+<audio controls style="width: 80%;">
+  <source src="https://cropgif.net/audio/1777573939994-265e6ab8-27f8-407c-a2ab-7d6c9b5a551a.mp3" type="audio/mp3">
+  Your browser does not support the audio element.
+</audio>
+:::
+
+## transcription
+Reference text is required for the reference audio for the [Qwen3TTS model](#qwen3tts).
+So `whisper`[^2] will do the work:
+```bash
+whisper morgan_freeman_final.mp3 --output_format txt -o . # <1>
+```
+1. this will generate a `morgan_freeman_final.txt` file in the current directory with the transcribed text of the audio. The `--output_format txt` flag specifies that we want the output in plain text format, and the `-o .` flag specifies that we want to save the output in the current directory.
+
+The resulting transcript looks like this:
+```{.txt filename="morgan_freeman_final.txt"}
+it tells me what's right and what's not when to leave and where to go it's not shakespeare
+it does not speak in memorable lines my inner voice always gives it to me straight
+```
+
+[^1]: `yt-dlp` was covered previously [here](youtube2giphy.qmd)
+[^2]: whisper was covered previously [here](whisper_vs_ytranscript.qmd)
+
+# Results
+for simplicity, I used both models' HuggingFace Space demo to read the following passage
+from Mark Carney's [speech at Davos](https://www.cbc.ca/news/politics/mark-carney-speech-davos-rules-based-order-9.7053350):
+```{.txt filename="passage.txt"}
+We know the old order is not coming back. We shouldn't mourn it. Nostalgia is not a strategy.
+
+But we believe that from the fracture, we can build something better, stronger, more just.
+
+This is the task of the middle powers. The countries that have the most to lose from a world of fortresses and the most to gain from genuine co-operation.
+
+The powerful have their power. But we have something too — the capacity to stop pretending, to name reality, to build our strength at home and to act together.
+```
+
+Then hosted the generated audio files on [CropGif](https://www.cropgif.net/ca/tools/audio-to-url)[^note-cropgif] for embedding here.
+
+[^note-cropgif]: since it's free, no account required, and the generated url is permanent
+
+## [Chatterbox Turbo](https://huggingface.co/spaces/ResembleAI/chatterbox-turbo-demo)
+Chatterbox Turbo was easier to since it only requires reference audio and text to read.
+**Reference text is not required**, which saves the extra step of transcribing the reference audio.
+It also seems to be able to handle longer text input with the following was generated in one go.
+
+<audio controls style="width: 80%;">
+  <source src="https://cropgif.net/audio/1777571198690-8a8c76df-8687-4a2d-a99c-16d3e06de3fb.wav" type="audio/wav">
+  Your browser does not support the audio element.
+</audio>
+
+## [Qwen3 TTS](https://huggingface.co/spaces/Qwen/Qwen3-TTS)
+Subjectively the Qwen3 TTS's output sounds more natural and have more "emotion"
+but I did have to split the generation into two parts then stitch the output audios back together[^note-stitch]
+
+<audio controls style="width: 80%;">
+  <source src="https://cropgif.net/audio/1777571819409-6440d6fa-9627-4f19-b4bc-793b3f4dcd9b.mp3" type="audio/wav">
+  Your browser does not support the audio element.
+</audio>
+
+[^note-stitch]: ran something like this:
+```bash
+ffmpeg -i part1.wav -i part2.wav \
+    -filter_complex "[0][1]concat=n=2:v=0:a=1" \
+    final.mp3
+```
+
+# Takeaway
+
+:::{.callout-tip}
+## Chatterbox Turbo would be my goto Choice
+Chatterbox Turbo is more straightforward to use and can handle longer text input.
+While the output quality might not as good as Qwen3 TTS[^note-tuning],
+you only really need to send the reference audio and the text to the model
+and it can generate the output in one go.
+
+This makes it a lot easier to turn it into an agentic tool for whatever voice application you are building.
+
+Furthermore, it supports [paralinguistic tags](https://huggingface.co/ResembleAI/chatterbox-turbo/discussions/21)
+and the model's suppose to be small and fast enough to run locally.
+:::
+
+[^note-tuning]: subjectively speaking but you could play around with the `cfg_weight` and `exaggeration` params
+per the [tips & tricks](https://github.com/resemble-ai/chatterbox#original-chatterbox-tips)
