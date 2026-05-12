@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/notebooks/ollama_claude.html",
       "/notebooks/voice-cloning-202604.html",
       "/notebooks/writeup_tldw.html",
       "/notebooks/my-toolchain.html",

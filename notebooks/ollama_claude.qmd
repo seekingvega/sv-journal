@@ -1,0 +1,56 @@
+---
+title: "ollama x claude code"
+abstract: free access to claude code anywhere
+date: 5/12/2026
+date-format: full
+author: im@johnho.ca
+image: https://i.ibb.co/N6g50JST/1-Wv-W-Ml-Er-At-Ka-HXp4akw-Kg.webp
+categories:
+    - Ollama
+    - Claude
+format:
+    html:
+        mermaid:
+            theme: forest
+            securityLevel: loose
+        toc: true
+        toc-depth: 3
+        toc-expand: 2
+        toc-title: Contents
+        toc-location: left
+        link-external-icon: true
+        link-external-newwindow: true
+draft: false
+execute:
+  echo: false
+crossref:
+    custom:
+    - kind: float
+      reference-prefix: Video
+      key: vid
+code-annotations: hover
+---
+
+with [skills](https://claude.com/blog/skills-explained) being introduced,
+you might find yourself needing to run an agent on a remote/ disposible instance.
+
+Since Ollama cloud is providing free cloud models (at the time of this writing),
+you can actually access Claude Code with it anywhere without any cost nor GPU.
+
+On your remote instance (or any machine):
+```bash
+# install claude
+curl -fsSL https://claude.ai/install.sh | bash # <1>
+# install ollama
+curl -fsSL https://ollama.com/install.sh | sh # <2>
+# download a free cloud model
+ollama pull nemotron-3-super:cloud # <3>
+ollama signin # <4>
+ollama launch claude --model nemotron-3-super:cloud
+```
+1. this is the [official installation method](https://code.claude.com/docs/en/setup#install-claude-code)
+2. this also is [Ollama's official installation method](https://ollama.com/download)
+3. the list of available models for the free tier will change, check [here](https://letsgada.github.io/ollama-cloud-free-models-list/models.json) for an updated list
+4. you'll need to signin to use the cloud model
+
+And that's it! You are welcome ;)
